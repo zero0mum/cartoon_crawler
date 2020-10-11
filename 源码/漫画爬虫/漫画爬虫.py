@@ -4,9 +4,7 @@ from pydub.playback import play
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.ie.options import Options
-# from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -33,7 +31,6 @@ filepath = fpath[0].replace("/","\\")
 def song(path):
   global filepath
   song = AudioSegment.from_wav(filepath+"\\"+"assets\\"+path)
-  #print(filepath+"\\"+"assets\\"+path)
   play(song)
 #重启程序
 def restart_program():
@@ -87,7 +84,7 @@ def wbd():
   # #PhantomJS(r'D:\HK\python3.82\Scripts\phantomjs-2.1.1-windows\bin\phantomjs.exe')
 os.system("cls")
 print('建议先在浏览器内打开这几个漫画网站进行漫画的搜索选择，再进行爬取')
-webcho = ['【1】百年漫画网: https://www.bnmanhua.com/','【2】漫画呗: https://www.manhuabei.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】动漫之家']
+webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】漫画呗: https://www.manhuabei.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】动漫之家']
 for x in range(3):
   print(webcho[x])
 webchoice = int (input('请输入想使用的漫画网站的序号：'))
@@ -167,6 +164,15 @@ def remove_file(path):
   if os.path.exists(path):
     shutil.rmtree(path)
   else:print('文件已不存在！')
+def remove_list():
+  global chapter,names
+  for i in range(j):
+    rm.append(i)
+  # print(rm)
+  chapter = [ chapter[i] for i in range(len(chapter)) if (i not in rm)]#按索引删除章节list
+  names = [ names[i] for i in range(len(names)) if (i not in rm)]#按索引删除章节list
+  # [ names.remove(cElement) for cElement in [names[k] for k in rm]]#按索引删除章节名称list
+
 def create_file(path,msg):#内容写成文本文件
     f=open(path,'a',encoding="utf-8")
     f.write(msg)
@@ -177,11 +183,7 @@ def create_filewb(path,msg):#图片内容写文件
     f.close
 def first_chaperro():#起始章节数报错
   global i,j,chapter,filepath,names,web
-  if (j<len(chapter)):
-    for i in range(j):
-      rm.append(i)
-    [ chapter.remove(cElement) for cElement in [chapter[i] for i in rm]]#按索引删除章节list
-  else:
+  if (j>len(chapter)):
     print('起始章节数输入错误！！,因该漫画收录不全,只收录了从 {}，{}...到 {} 的内容\n(比如网站只收集了123~500话的内容(缺失前123话),而你想爬取200话之后的所有内容,则应该输入200-123=77,即77作为起始章节数输入,而非200。)'.format(chapter[0],chapter[1],chapter[-1]))
     remove_file(filepath+"\\"+names[i-2]+web)
     bro.quit()
@@ -342,15 +344,7 @@ rm=[]
 rm1=[]
 j=0
 d=0
-upgrage = (input('爬取起始章节数 就是你想从第几话开始爬取\n输入爬取的起始章节数(直接回车从第一话开始爬取):'))
-if upgrage=="":j=upgrage=0
-else:
-  upgrage = int(upgrage)-1
-  j = upgrage = upgrage-1
 
-ifdownload = (input('是否将漫画下载到本地观看(输入1代表是，或直接回车否)：')) 
-if ifdownload=="":ifdownload=0
-else:ifdownload = int(ifdownload)
 
 fpath = sys.argv[0]
 fpath = os.path.split(fpath)#获取当前.py文件工作目录
@@ -373,6 +367,7 @@ html = """
     <meta charset="utf-8" />
     <meta name="referrer" content="never">
     <title>"""+names[i-1]+"""</title>
+    <link rel="icon" type="image/x-icon/" href="assets/title.png"/>
 	<link rel="stylesheet" type="text/css" href="assets/waifu.min.css?v=1.4.2"/>
 	<style>
 #load {
@@ -789,11 +784,14 @@ color: #FFFFFF;
 			for(var i=0;i<pages[y-1]-1;i++)
 			image[i].setAttribute('style','width:'+wid+'px');
 		}
-
+    function image_error(image){
+		  image.style.display='none';
+    }
 		function createimg(n){
 			var img = document.createElement('img');
 			img.setAttribute('src-data',Uclass+URL[n]);
 			img.setAttribute('class','image');
+      img.setAttribute('onerror','image_error(this)');
 			img.setAttribute('style','width:'+wid+'px;vertical-align:middle;height:auto');
 			img.id = n;
 			var div = document.getElementById('div');
@@ -972,11 +970,6 @@ var path = decodeURI(path).replace(/com.html/g,"");
 """
 
 create_file(html_path,"{}".format(html))#漫画html写入txt文件
-print("\n漫画相关文件保存在：")
-print(html_path)
-print(img_path)
-print(name_path)
-print('\n')
 
 if(webchoice==1):
   for str2 in list2:#获取漫画章节链接
@@ -1003,6 +996,24 @@ else:
     chapter.append(str2.select('li>a>span')[0].get_text())
     hrefs1.append(str2.select('li>a')[0]['href'])
   first_chaperro()
+
+print("\n {} 总共有 {} 话".format(names[i-1],len(chapter)))
+upgrage = (input('爬取起始章节数 就是你想从第几话开始爬取\n输入爬取的起始章节数(直接回车从第一话开始爬取):'))
+if upgrage=="":j=upgrage=0
+else:
+  upgrage = int(upgrage)-1
+  j = upgrage
+remove_list()
+
+ifdownload = (input('是否将漫画下载到本地观看(输入1代表是，或直接回车否)：')) 
+if ifdownload=="":ifdownload=0
+else:ifdownload = int(ifdownload)
+
+print("\n漫画相关文件保存在：")
+print(html_path)
+print(img_path)
+print(name_path)
+print('\n')
 
 try:
     with tqdm(range(len(chapter)),ascii=True) as t:
@@ -1055,23 +1066,7 @@ if(webchoice==1):
       if img_src:continue
       else:break
   r.close()#关闭连接
-  # check()
 
-      # html_url=soup2.head.select('[name="mobile-agent"]')
-      
-      # html_url=[str(i) for i in html_url]#使用列表推导式把列表中的单个元素全部转化为str类型
-      # html_url="".join(html_url)#把列表中的元素放在空串中，元素间用空格隔开
-      # begin=html_url.find('comic')
-      # end=html_url.find('.html')
-      # html_url=html_url[begin:end+5]#获取当前页面url
-
-      # page_sum = soup2.p#.select('[id="k_tota"]')
-      
-      # page_sum=[str(i) for i in page_sum]#使用列表推导式把列表中的单个元素全部转化为str类型
-      # page_sum="".join(page_sum)#把列表中的元素放在空串中，元素间用空格隔开
-      # begin=page_sum.find('k_total')
-      # end=page_sum.find('</span>',45)
-      # #print("总页数",page_sum[79:80])
 elif(webchoice==2):
   image_src=[]
   img_src=[]
@@ -1087,8 +1082,8 @@ elif(webchoice==2):
 
     try:
         res3 = bro.get(url_mh3)
-        bro.set_script_timeout(4)
-        bro.set_page_load_timeout(4)
+        bro.set_script_timeout(8)
+        bro.set_page_load_timeout(8)
     except Exception:
         ActionChains(bro).send_keys(Keys.ESCAPE).perform()
     # res3 = bro.get(url_mh3)
@@ -1137,6 +1132,7 @@ elif(webchoice==2):
     for i in range(len(images)):
       images[i]="https://img01.eshanyao.com/showImage.php?url="+str(images[i])
     #print(images)
+    images = []
 
     #print(img_src)
     img_src=[str(i) for i in img_src]
@@ -1240,42 +1236,7 @@ else:
           i+=1
     else:
       img_src.append('https://img01.eshanyao.com/images/default/common.png')
-      # print('tiao chu le!!!')
-      # print(img_src)
-    # s = soup2.select('p.img_info')#获取每章总页数
-    # sum_page = s[0].get_text()
-    # bounder = sum_page.find('/')
-    # sum_page = str(sum_page[bounder+1:].strip().lstrip().rstrip(')'))
-    # print(sum_page)
-    # print(type(sum_page))
-    # torf = True
-    # while torf:#判断是否加载完成
-    #     if torf:
-    #         if 'data-index="'+sum_page in res3:
-    #             ActionChains(bro).send_keys(Keys.ESCAPE).perform()
-    #             print('停了')
-    #             break
-    #         else:
-    #             res3 = bro.page_source
-    #             time.sleep(2)
-    #             print('顿一下')
-    #             continue
 
-    # res3 = bro.page_source
-    # soup2 = BeautifulSoup(res3,'lxml')
-    # for p in soup2.find_all('p'):
-    #     p.decompose()
-    # list3 = soup2.select('#images>img')#['src']
-    # #print(len(list3))
-    # for str3 in list3:#获取漫画名字与链接
-    #     img_src.append(str3.get('src'))
-    
-    # img_src=[str(i) for i in img_src]#列表推导列表变字符串
-    # img_src=''.join(img_src)
-    #print(img_src)
-    # if(j==len(chapter)):
-    #   check()
-    # img_src = img_src[0]
     img_src = [str(i) for i in img_src]
     img_src=''.join(img_src)
     create_file(img_path,img_src+'--#--')#保存漫画图片地址
