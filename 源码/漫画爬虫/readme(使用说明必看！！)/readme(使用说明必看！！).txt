@@ -2,14 +2,13 @@
 【1】“百年漫画：https://www.bnmanhua.com/”
 【2】“漫画呗：https://www.manhuabei.com/”
 【3】“武侠漫画网：https://www.wuxiamh.com/list/rexue/”
-【4】“动漫之家：https://www.dmzj.com/”
 
 1.安装python3 不会的看  https://blog.csdn.net/weixin_43790276/article/details/89439352(安装时记得勾选添加PATH环境变量)，
 如果之前装过python3没有添加PATH的可以自行手动添加(不会的看 https://www.jianshu.com/p/986c1d04c5bf)，
 或者重装一次，并记得安装时勾选上添加PATH环境变量。
 
-2.点击python-3.8.3-amd64.exe安装好python3后点击  点我依赖库下载.bat ，下载成功一次就好了，以后不用再点了。
-来安装 漫画爬虫.py所需四个依赖库requests，beautifulsoup，tqmp，lxml。
+2.安装好python3后点击  点我依赖库下载.bat ，运行成功一次就好了，以后不用再点了。
+来安装 漫画爬虫.py所需几个依赖库BeautifulSoup, tqdm, requests ,lxml, selenium, pydub, ffmpeg, simpleaudio。
 
 3.
 可以先到漫画网站上寻找想看的漫画再来打开爬虫爬取。
