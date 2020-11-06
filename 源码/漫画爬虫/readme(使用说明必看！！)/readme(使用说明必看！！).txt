@@ -11,7 +11,7 @@
 来安装 漫画爬虫.py所需几个依赖库BeautifulSoup, tqdm, requests ,lxml, selenium, pydub, ffmpeg, simpleaudio。
 
 3.
-可以先到漫画网站上寻找想看的漫画再来打开爬虫爬取。
+可以先到漫画网站上寻找想看的漫画再来打开爬虫爬取
 双击打开 漫画爬虫.py 
 	(1)先输入你想看的漫画名称。
 	(2)输入漫画序号 如输入数字 2	   //不建议输入太长的名称。
