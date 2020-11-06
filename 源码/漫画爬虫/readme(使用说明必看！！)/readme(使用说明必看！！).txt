@@ -21,7 +21,7 @@
 	(5)选择完后 点击两次 读取全部文件按钮即可。
 
 //浏览器驱动程序默认下载好的对应 浏览器版本号（如果和你的浏览器版本与默认不同请到浏览器驱动文件夹的下载地址中下载对应版本驱动替换该文件夹中驱动程序）： 
- msedgedriver.exe>新Edge 84.0.522.44；   chromedriver.exe>谷歌Chrome 84.0.4147；   MicrosoftWebDriver.exe>旧Edge 6.17134
+ msedgedriver.exe>新Edge 84.0.522.44；   chromedriver.exe>谷歌Chrome 86.0.4240.183；   MicrosoftWebDriver.exe>旧Edge 6.17134
 
 //在漫画爬虫爬取过程中不要点击正在加载的进度条，点了进度条会停住不动。
 //方向键盘左右键分别控制翻向上一章和下一张，如果左右键翻页失效，点一下漫画图片，再试试。

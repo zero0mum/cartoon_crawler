@@ -975,8 +975,8 @@ if(webchoice==1):
   for str2 in list2:#获取漫画章节链接
       chapter.append(str2.select('li>a')[0].get_text())
       hrefs1.append(str2.select('li>a')[0]['href'])
-  for i in range(len(hrefs1)):
-    hrefs1[i] = "https://www.bnmanhua.com"+str(hrefs1[i])
+  for j in range(len(hrefs1)):
+    hrefs1[j] = "https://www.bnmanhua.com"+str(hrefs1[j])
   chapter.reverse()
   first_chaperro()
 elif(webchoice==2):
@@ -996,7 +996,7 @@ else:
     chapter.append(str2.select('li>a>span')[0].get_text())
     hrefs1.append(str2.select('li>a')[0]['href'])
   first_chaperro()
-
+# print(i,len(chapter),names)
 print("\n {} 总共有 {} 话".format(names[i-1],len(chapter)))
 upgrage = (input('爬取起始章节数 就是你想从第几话开始爬取\n输入爬取的起始章节数(直接回车从第一话开始爬取):'))
 if upgrage=="":j=upgrage=0
