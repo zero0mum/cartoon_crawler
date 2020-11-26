@@ -10,6 +10,7 @@ A Python crawler that crawls and downloads comics
 4. Local comics can be read and downloaded from local websites
 Software architecture
 Software Architecture Description
+5. Through the cartoon packaging tool, each chapter of the downloaded cartoon can be packed into a zip compression package, which is convenient to use in the local cartoon function of (布卡漫画app)Buka comics.
 
 
 #### Software Architecture
@@ -32,6 +33,10 @@ Double click to open comic crawler.py
 Cartoon address.txt; chapter name.txt; cartoon name.html
  4. After entering the comic folder, click the comic name to read the comic, respectively click the two select file buttons in the upper left corner of the open web page to select the two corresponding.txt file.
  5. After the selection, ** click ** to read all files twice. 
+ 
+ 4. Cartoon packaging tool program:
+You need to put the cartoon packing tool program in the same directory as the comic address. Txt and chapter name. Txt files in the comics to be packed, and then double-click to execute. After execution, a file called "packed up!" will be generated in the "downloaded comics" folder Each chapter of the downloaded comics is packaged into a zip package, which is convenient to read in other software, such as the local cartoon function of 布卡漫画app(Buka comic app).
+
 Google chrome is recommended for crawling. IE11 is unstable.
 If you are using IE browser during crawling, please enter the Settings of IE before crawling;>
 Safety>All four items in security check the start protection mode and apply
@@ -46,6 +51,7 @@ Safety>All four items in security check the start protection mode and apply
 2.  Create Feat_xxx branch
 3.  Commit your code
 4.  Create Pull Request
+5.  Give your valuable advice
 
 
 #### Gitee Feature
