@@ -84,7 +84,7 @@ def wbd():
   # #PhantomJS(r'D:\HK\python3.82\Scripts\phantomjs-2.1.1-windows\bin\phantomjs.exe')
 os.system("cls")
 print('建议先在浏览器内打开这几个漫画网站进行漫画的搜索选择，再进行爬取')
-webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】漫画呗: https://www.manhuabei.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】动漫之家']
+webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】漫画呗: https://www.manhuadai.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】动漫之家']
 for x in range(3):
   print(webcho[x])
 webchoice = int (input('请输入想使用的漫画网站的序号：'))
@@ -129,7 +129,7 @@ else:
 
 url_bn = "https://www.bnmanhua.com"
 url_bn1 = "https://www.bnmanhua.com/search.html"
-url_mh1 = 'https://www.manhuabei.com/search/?keywords='
+url_mh1 = 'https://www.manhuadai.com/search/?keywords='
 url_dm1 = 'https://www.dmzj.com/dynamic/o_search/index'
 url_gf1 = 'https://www.gufengmh8.com/search/?keywords='
 
@@ -144,7 +144,7 @@ headers_bn1 = {
     'Referer': 'https://www.bnmanhua.com/search.html',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 headers_mh1 = {
-    'Referer': 'https://www.manhuabei.com/',
+    'Referer': 'https://www.manhuadai.com/',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 headers_dm = {
     'Cookie': '__music_index__=2; history=0%7C%E5%96%9C%E6%AC%A2%E7%9A%84; show_tip_1=0; PHPSESSID=5069f828d6ac62762c53b7b910393a38; KLBRSID=7c8f49a0a4b09e102426ab9ef05e7c0a|1595471217|1595471101',
@@ -1019,7 +1019,7 @@ try:
     with tqdm(range(len(chapter)),ascii=True) as t:
         for k in t:
             create_file(name_path,"{}".format(chapter[k]+"--#--"))#章节目录名称写入txt文件
-            #create_file(hrefs1_path,"{}".format('https://www.manhuabei.com'+hrefs1[k+j]+"--#--"))#章节链接写入txt文件
+            #create_file(hrefs1_path,"{}".format('https://www.manhuadai.com'+hrefs1[k+j]+"--#--"))#章节链接写入txt文件
 except KeyboardInterrupt:
     t.close()
     raise
@@ -1071,11 +1071,11 @@ elif(webchoice==2):
   image_src=[]
   img_src=[]
   for x in tqdm(range(len(chapter)),ascii=True):
-    url_mh3 = 'https://www.manhuabei.com'+hrefs1[j]
+    url_mh3 = 'https://www.manhuadai.com'+hrefs1[j]
     if j==0:
         url_mh4 = h
     else:
-        url_mh4 = 'https://www.manhuabei.com'+hrefs1[j-1]
+        url_mh4 = 'https://www.manhuadai.com'+hrefs1[j-1]
     headers2 = {
         'Referer': url_mh4,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
