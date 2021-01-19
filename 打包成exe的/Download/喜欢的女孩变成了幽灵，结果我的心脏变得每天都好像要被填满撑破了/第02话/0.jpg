@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Error>
-  <Code>AccessDenied</Code>
-  <Message>The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.</Message>
-  <RequestId>6006B4D5BDFBF2353752C49C</RequestId>
-  <HostId>img.yaoyaoliao.com</HostId>
-  <Bucket>zhang</Bucket>
-  <Endpoint>oss-cn-beijing.aliyuncs.com</Endpoint>
-</Error>

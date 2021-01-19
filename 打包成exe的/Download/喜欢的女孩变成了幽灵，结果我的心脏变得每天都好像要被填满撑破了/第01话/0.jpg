@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Error>
-  <Code>AccessDenied</Code>
-  <Message>You have no right to access this object because of bucket acl.</Message>
-  <RequestId>6006B4D2146F383137E6224A</RequestId>
-  <HostId>img.yaoyaoliao.com</HostId>
-</Error>
