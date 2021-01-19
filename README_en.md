@@ -1,6 +1,7 @@
 # Cartoon crawler
 
 #### Description
+When you see it, click watch, star and like it on the blog to encourage me(๑•̀ㅂ•́)و✧
 [CSDN blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 A Python crawler that crawls and downloads comics
 
@@ -8,9 +9,8 @@ A Python crawler that crawls and downloads comics
 2. The web page can adjust the width of the cartoon
 3. Scroll down and read
 4. Local comics can be read and downloaded from local websites
-Software architecture
-Software Architecture Description
-5. Through the cartoon packaging tool, each chapter of the downloaded cartoon can be packed into a zip compression package, which is convenient to use in the local cartoon function of (布卡漫画app)Buka comics.
+5. Each chapter of the downloaded comics can be packaged into a zip zip package through the comic packaging tool, which is convenient for use in local comic functions of Comics ++, Buka Comics, Tachiyomi and other software.
+6. The web page can automatically record the progress of comics reading (stored through the browser localStorage)
 
 
 #### Software Architecture
@@ -23,19 +23,23 @@ Python3.8 and related dependent libraries need to be installed in the source fol
 The packaged exE file does not need to be installed, download the comic crawler. Zip unzip click the comic crawler.exe to run.
 
 #### Instructions
-
+Please see:[CSDN Blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 You can go to the comic website to find the comic you want to see and then open the crawler to crawl.
 Double click to open comic crawler.py
-
+ONE.
  1. First enter the name of the comic you want to see.// Long names are not recommended.
- 2. Enter the comic serial number, such as the number 2
- 3. It is suggested to put the extracted entire folder in a convenient place for viewing, comic crawler.py will generate a folder named the name of your selected comic in its own directory after running. The folder contains three files for the cartoon address.
-Cartoon address.txt; chapter name.txt; cartoon name.html
- 4. After entering the comic folder, click the comic name to read the comic, respectively click the two select file buttons in the upper left corner of the open web page to select the two corresponding.txt file.
- 5. After the selection, ** click ** to read all files twice. 
+ 2. Enter the comic serial number, such as the number 2, and select......
+ Some options wait after the crawl
+ 3. Click to open the bookshelf to start reading (you can also read by climbing)
+ 4. It is recommended to put the whole folder in a place convenient to view and use.
+ (After running comic crawler. Py, the crawled directory, comic image address, and page number of each chapter will be stored in *dist* directory in the chapter name. Json, comic address. Json, pages.json* file.
+ It is then merged into *data.json* for the browser to read.
  
- 4. Cartoon packaging tool program:
-You need to put the cartoon packing tool program in the same directory as the comic address. Txt and chapter name. Txt files in the comics to be packed, and then double-click to execute. After execution, a file called "packed up!" will be generated in the "downloaded comics" folder Each chapter of the downloaded comics is packaged into a zip package, which is convenient to read in other software, such as the local cartoon function of 布卡漫画app(Buka comic app).
+ TWO. Cartoon packaging tool program:
+Selecting the downloaded manga to be packaged will generate a "Packaged!" folder in the corresponding manga name folder in "Download".
+Folder, and each chapter of the manga downloaded into a zip package into it, so that it is easy to read in other software, such as Comics ++;
+tachiyomi app; 
+The local cartoon function of the Buka Comics App.
 
 Google chrome is recommended for crawling. IE11 is unstable.
 If you are using IE browser during crawling, please enter the Settings of IE before crawling;>
