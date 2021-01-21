@@ -698,7 +698,7 @@ if(webchoice==1):
       pages.append(len(img_src))
       create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
 
-      img_src=[str(i) for i in img_src]
+      img_src=[str(i).replace('\\','') for i in img_src]
       img_src=''.join(img_src)
       if (os.path.exists(img_path)):
         with open(img_path,"r",encoding='utf-8') as jsonFile:
