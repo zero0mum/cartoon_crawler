@@ -4,6 +4,7 @@
 When you see it, click watch, star and like it on the blog to encourage me(๑•̀ㅂ•́)و✧
 [CSDN blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 A Python crawler that crawls and downloads comics
+My email is mumuwyyx@163.com. You are welcome to comment.
 
 1. Comic books can be downloaded locally in chapters
 2. The web page can adjust the width of the cartoon

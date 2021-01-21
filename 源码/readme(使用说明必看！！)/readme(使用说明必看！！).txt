@@ -1,6 +1,6 @@
 详细使用教程：https://blog.csdn.net/zero_mumu/article/details/107852060
 码云项目地址：https://gitee.com/mumu_zero/cartoon_crawler
-欢迎你来评论，提意见。
+我的邮箱：mumuwyyx@163.com欢迎你来评论，提意见。
 
 本爬虫爬取的网站为 
 【1】“百年漫画：https://www.bnmanhua.com/”

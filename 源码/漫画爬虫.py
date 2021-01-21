@@ -694,7 +694,7 @@ if(webchoice==1):
       img_src = res3[img_begin+9:img_end+4]
       img_src = img_src.split('","')
       for i in range(len(img_src)):
-        img_src[i]="https://img.yaoyaoliao.com/"+img_src[i]
+        img_src[i]="https://img.weitianhou.com/"+img_src[i]
       pages.append(len(img_src))
       create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
 
