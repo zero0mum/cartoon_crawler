@@ -7,7 +7,7 @@ A Python crawler that crawls and downloads comics
 My email is mumuwyyx@163.com. You are welcome to comment.
 
 1. Comic books can be downloaded locally in chapters
-2. The web page can adjust the width of the cartoon
+2. The web page can adjust the width of the cartoon, Adjustable brightness
 3. Scroll down and read
 4. Local comics can be read and downloaded from local websites
 5. Each chapter of the downloaded comics can be packaged into a zip zip package through the comic packaging tool, which is convenient for use in local comic functions of Comics ++, Buka Comics, Tachiyomi and other software.
@@ -21,13 +21,14 @@ Software architecture description
 
 Python3.8 and related dependent libraries need to be installed in the source folder (as described in the file)
 
-The packaged exE file does not need to be installed, download the comic crawler. Zip unzip click the comic crawler.exe to run.
+The packaged exe file does not need to be installed, download the comic crawler. Zip unzip click the comic crawler.exe to run.
 
 #### Instructions
 Please see:[CSDN Blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 You can go to the comic website to find the comic you want to see and then open the crawler to crawl.
 Double click to open comic crawler.py
 ONE.
+
  1. First enter the name of the comic you want to see.// Long names are not recommended.
  2. Enter the comic serial number, such as the number 2, and select......
  Some options wait after the crawl
@@ -35,7 +36,7 @@ ONE.
  4. It is recommended to put the whole folder in a place convenient to view and use.
  (After running comic crawler. Py, the crawled directory, comic image address, and page number of each chapter will be stored in *dist* directory in the chapter name. Json, comic address. Json, pages.json* file.
  It is then merged into *data.json* for the browser to read.
- 
+
  TWO. Cartoon packaging tool program:
 Selecting the downloaded manga to be packaged will generate a "Packaged!" folder in the corresponding manga name folder in "Download".
 Folder, and each chapter of the manga downloaded into a zip package into it, so that it is easy to read in other software, such as Comics ++;
@@ -48,7 +49,7 @@ Safety>All four items in security check the start protection mode and apply
 
 // The browser version number of the downloaded browser driver by default is as follows (if the browser version is different from the default version, please download the corresponding version driver from the download address of the browser driver folder and replace the driver in this folder) 
 
-* IEDriverServer.exe>Internet Explorer 11;   Chromedriver.exe>Google Chrome 84.0.4147;*
+* IEDriverServer.exe>Internet Explorer 11;   Chromedriver.exe>Google Chrome 88.0.4324.150;*
 
 #### Contribution
 

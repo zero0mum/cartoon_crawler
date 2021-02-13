@@ -292,7 +292,7 @@ def Multichapter_select(chap_index,res):#多章节选择
     print('【{}】'.format(y+1),chapterName[y])
     id.append(res[position[y]:position[y]+16].strip('"! '))
   num = len(id)
-  if num >= 1:
+  if num > 1:
     id_select = int(input("有{}种目录，想选择哪一个：".format(count)))-1
   else:
     id_select = 0
@@ -443,7 +443,8 @@ if(webchoice==1):
   res2 = res2.text
   soup1=BeautifulSoup(res2,'lxml')
   cover_src = soup1.select('div.bpic>img')[0]['src']
-  print(cover_src)
+  img_domain_index = cover_src.find('.com')
+  img_domain = cover_src[0:img_domain_index]+'.com'
   list2=soup1.select('ul.jslist01>li')
 elif(webchoice==2):
   h = hrefs[i-1]
@@ -517,7 +518,7 @@ comic_download = filepath+"\\Download\\"+names[Serial_number-1]+"\\"#下载漫�
 res_cover = requests.session().get(url=cover_src)
 create_filewb(cover_path,res_cover.content)
 
-cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class='mdui-ripple mdui-hoverable mdui-card mdui-col-md-2 mdui-col-xs-6'><div class='mdui-ripple mdui-hoverable mdui-card-media'><a href='阅读.html?"""+names[i-1]+"""'><img src='assets\\封面\\"""+names[i-1]+"""cover.jpg'/></a><div class='mdui-card-media-covered'><div class='mdui-card-primary'><div style='font-weight:900;font-size: large;'>"""+names[i-1]+"""</div></div></div></div></div>"""
+cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class='mdui-ripple mdui-hoverable mdui-card mdui-col-md-2 mdui-col-xs-6'><div class='mdui-ripple mdui-hoverable mdui-card-media'><a href='阅读.html?"""+names[i-1]+"""' target="_blank"><img src='assets\\封面\\"""+names[i-1]+"""cover.jpg'/></a><div class='mdui-card-media-covered'><div class='mdui-card-primary'><div style='font-weight:900;font-size: large;'>"""+names[i-1]+"""</div></div></div></div></div>"""
 if (os.path.exists(coverjson_path)):
   with open(coverjson_path,"r",encoding='utf-8') as jsonFile:
     jcover = json.load(jsonFile)
@@ -593,7 +594,7 @@ if(webchoice==1):
       chapter.append(str2.select('li>a')[0].get_text())
       hrefs1.append(str2.select('li>a')[0]['href'])
   for j in range(len(hrefs1)):
-    hrefs1[j] = "https://www.bnmanhua.com"+str(hrefs1[j])
+    hrefs1[j] = img_domain +str(hrefs1[j])
   chapter.reverse()
   first_chaperro()
 elif(webchoice==2):
@@ -694,7 +695,7 @@ if(webchoice==1):
       img_src = res3[img_begin+9:img_end+4]
       img_src = img_src.split('","')
       for i in range(len(img_src)):
-        img_src[i]="https://img.weitianhou.com/"+img_src[i]
+        img_src[i]= img_domain +'/'+img_src[i]
       pages.append(len(img_src))
       create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
 
