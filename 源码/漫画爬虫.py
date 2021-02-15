@@ -192,7 +192,7 @@ def remove_list():
     rm.append(i)
   # print(rm)
   chapter = [ chapter[i] for i in range(len(chapter)) if (i not in rm)]#按索引删除章节list
-  names = [ names[i] for i in range(len(names)) if (i not in rm)]#按索引删除章节list
+  # names = [ names[i] for i in range(len(names)) if (i not in rm)]#按索引删除章节list
   # [ names.remove(cElement) for cElement in [names[k] for k in rm]]#按索引删除章节名称list
 def save_json(fpath,msg):
   if (os.path.exists(fpath)):
@@ -522,13 +522,13 @@ cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class=
 if (os.path.exists(coverjson_path)):
   with open(coverjson_path,"r",encoding='utf-8') as jsonFile:
     jcover = json.load(jsonFile)
-    jcover = "{" + str(jcover)[1:-1] + ","+"'"+names[i-1]+"'"+ ':""}'
+    jcover = "{" + str(jcover)[1:-1] + ","+"'"+names[Serial_number-1]+"'"+ ':""}'
     jcover = eval(jcover)
-    jcover[names[i-1]] = cover
+    jcover[names[Serial_number-1]] = cover
 else:
     jcover = {}
-    # print(i-1)
-    jcover[names[i-1]] = cover
+    # print(i-1)1
+    jcover[names[Serial_number-1]] = cover
 create_file(coverjson_path,json.dumps(jcover,ensure_ascii=False),"w")#保存漫画封面地址
 
 comicbook1 = []

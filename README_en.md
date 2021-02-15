@@ -2,6 +2,7 @@
 
 #### Description
 When you see it, click watch, star and like it on the blog to encourage me(๑•̀ㅂ•́)و✧
+[Cartoon crawler page preview address：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
 [CSDN blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 A Python crawler that crawls and downloads comics
 My email is mumuwyyx@163.com. You are welcome to comment.
@@ -24,6 +25,7 @@ Python3.8 and related dependent libraries need to be installed in the source fol
 The packaged exe file does not need to be installed, download the comic crawler. Zip unzip click the comic crawler.exe to run.
 
 #### Instructions
+[Cartoon crawler page preview address：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
 Please see:[CSDN Blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 You can go to the comic website to find the comic you want to see and then open the crawler to crawl.
 Double click to open comic crawler.py

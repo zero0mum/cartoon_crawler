@@ -2,6 +2,7 @@
 
 #### 介绍
 看到的点个watch, star还有博客上点个赞啥的鼓励一下我吧(๑•̀ㅂ•́)و✧
+[漫画爬虫网页 预览地址：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
 详细图文介绍请看：
 [CSDN博文地址](https://blog.csdn.net/zero_mumu/article/details/107852060)
 一个阅读，爬取和下载还有打包漫画的python爬虫
@@ -23,6 +24,7 @@
 打包好的exe内文件不需要安装，下载其中漫画爬虫.zip解压点击漫画爬虫.exe运行即可。
 
 #### 使用说明
+[漫画爬虫网页 预览地址：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
 详细请看：[CSDN博文地址](https://blog.csdn.net/zero_mumu/article/details/107852060)
 一.爬取
 可以先到漫画网站上寻找想看的漫画再来打开爬虫爬取。
