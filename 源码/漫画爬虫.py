@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import requests,time,os,shutil,sys,shutil,urllib,json
+import requests,time,os,shutil,sys,shutil,urllib,json,execjs
 from pydub import AudioSegment
 from pydub.playback import play
 from bs4 import BeautifulSoup
@@ -95,7 +95,7 @@ title = """
 """
 print(title)
 print('建议先在浏览器内打开这几个漫画网站进行漫画的搜索选择，再进行爬取')
-webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】漫画呗: https://www.manhuadai.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】动漫之家','【5】MangaPanda：http://mangapanda.cc/']
+webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】优酷漫画: https://www.ykmh.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】Xmanhua(X漫画)：http://www.xmanhua.com/','【5】动漫之家','【6】MangaPanda：http://mangapanda.cc/']
 for x in range(3):
   print(webcho[x])
 webchoice = int (input('请输入想使用的漫画网站的序号：'))
@@ -109,7 +109,7 @@ elif(webchoice==2):
   pclass="+'.jpg'"
   pclass1="https"
   uclass="https"
-  web="(漫画呗)"
+  web="(优酷漫画)"
   wc1=1
   wbd()
   wbd1()
@@ -121,12 +121,22 @@ elif(webchoice==4):
   pclass="+'.jpg'"
   pclass1="https"
   uclass="https"
+  web="(Xmanhua)"
+  # wc1=1
+  # wbd()
+  # wbd1()
+  # wbd1.a.minimize_window()
+
+elif(webchoice==5):
+  pclass="+'.jpg'"
+  pclass1="https"
+  uclass="https"
   web="(动漫之家)"
   wc1=1
   wbd()
   wbd1()
   wbd1.a.minimize_window()
-elif(webchoice==5):
+elif(webchoice==6):
   pclass="+'.jpg'"
   pclass1="http"
   uclass="http"
@@ -150,7 +160,10 @@ else:
 
 url_bn = "https://www.bnmanhua.com"
 url_bn1 = "https://www.bnmanhua.com/search.html"
-url_mh1 = 'https://www.manhuadai.com/search/?keywords='
+url_yk = "https://www.ykmh.com"
+url_yk1 = 'https://www.ykmh.com/search/?keywords='
+url_xm = 'http://www.xmanhua.com'
+url_xm1 = 'http://www.xmanhua.com/search?title='
 url_dm1 = 'https://www.dmzj.com/dynamic/o_search/index'
 url_mp1 = 'http://mangapanda.cc/search?s='
 url_gf1 = 'https://www.gufengmh8.com/search/?keywords='
@@ -165,9 +178,16 @@ headers_bn1 = {
     'Content-Type': 'text/html; charset=utf-8',
     'Referer': 'https://www.bnmanhua.com/search.html',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
-headers_mh1 = {
-    'Referer': 'https://www.manhuadai.com/',
+headers_yk1 = {
+    'Referer': 'https://www.ykmh.com/',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
+headers_gf = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4371.0 Safari/537.36',
+    'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+    'referer': 'https://www.bnmanhua.com/comic/',
+    'Connection': 'close',
+    'Upgrade-Insecure-Requests': '1'
+}
 headers_dm = {
     'Cookie': '__music_index__=2; history=0%7C%E5%96%9C%E6%AC%A2%E7%9A%84; show_tip_1=0; PHPSESSID=5069f828d6ac62762c53b7b910393a38; KLBRSID=7c8f49a0a4b09e102426ab9ef05e7c0a|1595471217|1595471101',
     'Referer': 'https://www.dmzj.com/',
@@ -357,9 +377,13 @@ if(webchoice==1):
   res1 = res1.text
 elif(webchoice==2):
   r = requests.session()
-  res1 = r.get(url=url_mh1+name_,headers=headers_mh1)
+  res1 = r.get(url=url_yk1+name_,headers=headers_yk1)
   res1 = res1.text
 elif(webchoice==4):
+  r = requests.session()
+  res1 = r.get(url=url_xm1+name_)
+  res1 = res1.text
+elif(webchoice==5):
   r = requests.session()
   res1 = r.post(url=url_dm1,headers=headers_dm,data=data_dm)
   res1 = res1.text
@@ -369,13 +393,14 @@ elif(webchoice==5):
   res1 = res1.text
 else:
   r = requests.session()
-  res1 = r.get(url=url_gf1+name_)
+  res1 = r.get(url=url_gf1+name_, headers = headers_gf)
   res1 = res1.text
   # create_file(r"C:\Users\HASEE\Desktop\漫画爬虫\gf_res1.html",res1,"w")
   # res1 = wbd1.a.get(url=url_gf1+name_)
 
 names=[]
 hrefs=[]
+pages=[]
 if(webchoice==1):
   soup=BeautifulSoup(res1,'lxml')
   list1=soup.select('#list_img>li')
@@ -390,6 +415,13 @@ elif(webchoice==2):
     hrefs.append(str1.select('li>a')[0]['href'])
   #print(list1)
 elif(webchoice==4):
+  soup = BeautifulSoup(res1,'lxml')
+  list1 = soup.select('.title>a')
+  for str1 in list1:#获取漫画名字与链接
+    names.append(str1.get_text())
+    hrefs.append(str1['href'])
+
+elif(webchoice==5):
   soup=BeautifulSoup(res1,'lxml')
   list1 = soup.select('div.tab-con>ul>li')
   for str1 in list1:#获取漫画名字与链接
@@ -448,12 +480,22 @@ if(webchoice==1):
   list2=soup1.select('ul.jslist01>li')
 elif(webchoice==2):
   h = hrefs[i-1]
-  url_mh2 = h
-  res2 = r.get(url=url_mh2)
+  url_yk2 = h
+  res2 = r.get(url=url_yk2)
   res2 = res2.text
   soup1=BeautifulSoup(res2,'lxml')
+  cover_src = soup1.select('.comic_i_img>img')[0]['src']
   list2=soup1.select('div.zj_list_con>ul>li')
 elif(webchoice==4):
+  url_xm2 = url_xm+hrefs[i-1]
+  mid = str(hrefs[i-1][1:-3])
+  res2 = r.get(url=url_xm2)
+  res2 = res2.text
+  soup1 = BeautifulSoup(res2,'lxml')
+  cover_src = soup1.select('.detail-info-cover')[0]['src']
+  list2 = soup1.select('#chapterlistload>a')
+  listpage = soup.select('.title>a')
+elif(webchoice==5):
   h = 'https:'+hrefs[i-1]
   url_dm2 = h
   res2 = r.get(url=url_dm2)
@@ -516,7 +558,7 @@ html_path = filepath+'\\书架.html'#漫画html文件路径
 comic_download = filepath+"\\Download\\"+names[Serial_number-1]+"\\"#下载漫画地址
 
 res_cover = requests.session().get(url=cover_src)
-create_filewb(cover_path,res_cover.content)
+create_filewb(cover_path,res_cover.content)#封面下载
 
 cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class='mdui-ripple mdui-hoverable mdui-card mdui-col-md-2 mdui-col-xs-6'><div class='mdui-ripple mdui-hoverable mdui-card-media'><a href='阅读.html?"""+names[i-1]+"""' target="_blank"><img src='assets\\封面\\"""+names[i-1]+"""cover.jpg'/></a><div class='mdui-card-media-covered'><div class='mdui-card-primary'><div style='font-weight:900;font-size: large;'>"""+names[i-1]+"""</div></div></div></div></div>"""
 if (os.path.exists(coverjson_path)):
@@ -597,28 +639,51 @@ if(webchoice==1):
     hrefs1[j] = img_domain +str(hrefs1[j])
   chapter.reverse()
   first_chaperro()
+
 elif(webchoice==2):
   for str2 in list2:#获取漫画章节链接
-    chapter.append(str2.select('li>a')[0]['title'])
+    chapter.append(str2.select('.list_con_zj')[0].get_text().replace(' ',''))
     hrefs1.append(str2.select('li>a')[0]['href'])
+  
   first_chaperro()
-  # for i in range(j):
-  #   rm.append(i)
-  # [ hrefs1.remove(cElement) for cElement in [hrefs1[i] for i in rm]]#按索引删除章节list
 elif(webchoice==4):
+  for str2 in list2:#获取漫画章节链接
+      t = 0
+      print(str2.get_text())
+      temt = str2.get_text()
+      tem = str2.get_text().split(' ')
+      print(tem)
+      tem = [tem[0],tem[-2]]
+      chapter.append(tem[0])
+      hrefs1.append(str2['href'])
+      pages.append(tem[1][1:-2])
+      tem = []
+      t += 1
+  for j in range(len(hrefs1)):
+    hrefs1[j] = url_xm +str(hrefs1[j])
+  pages.reverse()
+  chapter.reverse()
+  first_chaperro()
+
+elif(webchoice==5):
   for str2 in list2:#获取漫画章节链接
     chapter.append(str2.select('li>a')[0]['title'])
     hrefs1.append(str2.select('li>a')[0]['href'])
+
 elif(webchoice==5):
   for str2 in list2:#获取漫画章节链接
     chapter.append(str2.select('li>span>a')[0]['title'])
     hrefs1.append(str2.select('li>span>a')[0]['href'])
+
 else:
   for str2 in list2:#获取漫画章节链接
     chapter.append(str2.select('li>a>span')[0].get_text())
     hrefs1.append(str2.select('li>a')[0]['href'])
+    print('666666')
+
   first_chaperro()
 # print(i,len(chapter),names)
+
 print("\n {} 总共有 {} 话".format(names[i-1],len(chapter)))
 upgrage = (input('爬取起始章节数 就是你想从第几话开始爬取\n输入爬取的起始章节数(直接回车从第一话开始爬取):'))
 if upgrage=="":j=upgrage=0
@@ -645,6 +710,8 @@ list_t = []
 for x in range(len(chapter)):
     list_t.append(x)
 chapter_t = dict(zip(list_t,chapter))
+if(webchoice==4):
+  create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
 
 if (os.path.exists(name_path)):
   with open(name_path, "r",encoding='utf-8') as jsonFile:
@@ -749,13 +816,13 @@ elif(webchoice==2):
   image_src=[]
   img_src=[]
   for x in tqdm(range(len(chapter)),ascii=True):
-    url_mh3 = 'https://www.manhuadai.com'+hrefs1[j]
+    url_mh3 = url_yk + hrefs1[j]
     if j==0:
-        url_mh4 = h
+        url_yk4 = h
     else:
-        url_mh4 = 'https://www.manhuadai.com'+hrefs1[j-1]
+        url_yk4 = url_yk + hrefs1[j-1]
     headers2 = {
-        'Referer': url_mh4,
+        'Referer': url_yk4,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 
     try:
@@ -770,6 +837,8 @@ elif(webchoice==2):
     return url;
     """
     images = bro.execute_script(js3)
+    # pages[x] = len(images)
+    # print(pages)
     while True:
       if images:
         ActionChains(bro).send_keys(Keys.ESCAPE).perform()
@@ -804,22 +873,29 @@ elif(webchoice==2):
           img_src.append(image_src+images[i])
           i+=1
     else:
-      img_src.append('https://img01.eshanyao.com/images/default/common.png')
+      img_src.append('http://bujianle/bujianle.png')
       # print('tiao chu le!!!')
     
-    for i in range(len(images)):
-      images[i]="https://img01.eshanyao.com/showImage.php?url="+str(images[i])
-    #print(images)
-    images = []
-
     pages.append(len(img_src))
     create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
-    img_src=[str(i) for i in img_src]
+    img_src = [str(i) for i in img_src]
     img_src=''.join(img_src)
-    #print(img_src)
     create_file(img_path,json.dumps(imgjson_write(),ensure_ascii=False),"w")#保存漫画图片地址
     combine()
-    # create_file(img_path,names[i-1]+":"+json.dumps(img_src))#保存漫画图片地址
+
+    # for i in range(len(images)):
+    #   images[i]="https://img01.eshanyao.com/showImage.php?url="+str(images[i])
+    # #print(images)
+    # images = []
+
+    # pages.append(len(img_src))
+    # create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
+    # img_src=[str(i) for i in img_src]
+    # img_src=''.join(img_src)
+    # #print(img_src)
+    # create_file(img_path,json.dumps(imgjson_write(),ensure_ascii=False),"w")#保存漫画图片地址
+    # combine()
+    # # create_file(img_path,names[i-1]+":"+json.dumps(img_src))#保存漫画图片地址
 
     if j%7==0:time.sleep(20*speed)
     j+=1
@@ -830,6 +906,94 @@ elif(webchoice==2):
   bro.quit()
 
 elif(webchoice==4):
+  i=0
+  j=len(chapter)
+  for x in tqdm(range(len(chapter)),ascii=True):
+      url_xm3=hrefs1[j-1]
+      req_count1 = int(pages[j-1])-2
+      req_count2 = 3
+      if(req_count1>15):
+        req_count = int(req_count1/15)
+      else:
+        req_count = 1
+      cid = str(hrefs1[j-1][23:-1])
+      if i==0:
+          url_bn4 = h
+      else:
+          url_bn4 = hrefs1[j]
+      headers2 = {
+          'Host': 'www.bnmanhua.com',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+          'Accept-Encoding': 'gzip, deflate',
+          'Referer': url_bn4,
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
+      headers_xm = {
+          'Host': 'www.xmanhua.com',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4371.0 Safari/537.36',
+          'Accept': '*/*',
+          'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+          'Accept-Encoding': 'gzip, deflate',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Connection': 'close',
+          'Referer': hrefs1[j-1],#http://www.xmanhua.com/m91735/
+          'Content-Length': '2'
+      }
+      #print("第几话网址：",url_bn3)
+      i+=1
+      j-=1
+      res3 = r.get(url_xm3+"chapterimage.ashx?cid="+cid+"&page=1&key=&_cid="+cid+"&_mid="+mid, headers = headers_xm)
+      img_src.append(execjs.eval(res3.text))
+      for y in range(req_count):
+        res3 = r.get(url_xm3+"chapterimage.ashx?cid="+cid+"&page="+str(req_count2)+"&key=&_cid="+cid+"&_mid="+mid, headers = headers_xm)
+        req_count2 = int(req_count2)
+        req_count2 += 15
+
+      if (os.path.exists(img_path)):
+        with open(img_path,"r",encoding='utf-8') as jsonFile:
+          data = json.load(jsonFile)
+          if(x==0):
+            data = "{" + str(data)[1:-1] + ","+"'"+names[Serial_number-1]+"'"+ ':""}'
+            data = eval(data)
+            data[names[Serial_number-1]] = data[names[Serial_number-1]] + img_src
+
+            # print(data[names[Serial_number-1]])
+            # print(type(data[names[Serial_number-1]]))
+          else:
+            # print(Serial_number-1)
+            # print(type(data))
+            data[names[Serial_number-1]] = data[names[Serial_number-1]] + img_src
+      else:
+        data = {}
+        # print(Serial_number-1)
+        data[names[Serial_number-1]] = img_src
+
+      create_file(img_path,json.dumps(data,ensure_ascii=False),"w")#保存漫画图片
+      combine()
+      if j%13==0:time.sleep(12*speed)
+      time.sleep(speed)
+      if img_src:continue
+      else:break
+# def paegs_write():
+#   pages = dict(zip(list_t,pages))
+#   if (os.path.exists(pages_path)):
+#     with open(pages_path,"r",encoding='utf-8') as jsonFile:
+#       jdata = json.load(jsonFile)
+#       jdata = "{" + str(jdata)[1:-1] + ","+"'"+names[Serial_number-1]+"'"+ ':""}'
+#       jdata = eval(jdata)
+#       jdata[names[Serial_number-1]] = pages.copy()
+#       create_file(pages_path,json.dumps(jdata,ensure_ascii=False),"w")#保存漫画图片页数
+
+#       # print(jdata[names[Serial_number-1]])
+#       # print(type(jdata[names[Serial_number-1]]))
+#   else:
+#     jdata = {}
+#     # print(Serial_number-1)
+#     jdata[names[Serial_number-1]] = pages
+#     create_file(pages_path,json.dumps(jdata,ensure_ascii=False),"w")#保存漫画图片页数
+  r.close()#关闭连接
+
+elif(webchoice==5):
   bro = wbd1.a
   img_src=[]
   for x in tqdm(range(len(chapter)),ascii=True):
@@ -963,7 +1127,7 @@ else:
           img_src.append(image_src+images[i])
           i+=1
     else:
-      img_src.append('https://img01.eshanyao.com/images/default/common.png')
+      img_src.append('http://bujianle.com/bujianle.png')
 
     pages.append(len(img_src))
     create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
