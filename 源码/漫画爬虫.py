@@ -479,13 +479,23 @@ if(webchoice==1):
   img_domain = cover_src[0:img_domain_index]+'.com'
   list2=soup1.select('ul.jslist01>li')
 elif(webchoice==2):
+  chapterName=[]
   h = hrefs[i-1]
   url_yk2 = h
+  chap_index = 'chapter-list-'
   res2 = r.get(url=url_yk2)
   res2 = res2.text
   soup1=BeautifulSoup(res2,'lxml')
   cover_src = soup1.select('.comic_i_img>img')[0]['src']
-  list2=soup1.select('div.zj_list_con>ul>li')
+
+  listchap = soup1.select('.zj_list_head')
+  for strchap in listchap:
+    chapterName.append(strchap.select('div>h2')[0].get_text())#多章节选择章节名称获取
+  chap_id = Multichapter_select(chap_index,res2)
+  id = chap_id[0]
+  # list2=soup1.select('#'+chap_id[1][id]+'>li')
+  list2 = soup1.select('div.zj_list_con')[id]
+  list2 = list2.select('div>ul>li')
 elif(webchoice==4):
   url_xm2 = url_xm+hrefs[i-1]
   mid = str(hrefs[i-1][1:-3])
@@ -554,7 +564,7 @@ pages_path = filepath+'\\dist\\pages.json'#漫画每章页数文件路径
 data_path = filepath+'\\dist\\data.json'
 cover_path = filepath+'\\assets\\封面\\'+names[i-1]+'cover.jpg'#漫画封面路径
 coverjson_path = filepath+'\\dist\\cover.json'#漫画封面json路径
-html_path = filepath+'\\书架.html'#漫画html文件路径
+html_path = filepath+'\\index.html'#漫画html文件路径
 comic_download = filepath+"\\Download\\"+names[Serial_number-1]+"\\"#下载漫画地址
 
 res_cover = requests.session().get(url=cover_src)

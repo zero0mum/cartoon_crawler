@@ -31,6 +31,64 @@
 /* 		body{
 			cursor: url("assets/normal-select.cur"),text;
 		} */
+		.function_button.hide{
+			visibility: hidden;
+		}
+		#action_all{
+			visibility: visible;
+			position: fixed;
+			top: 15%;
+			right: 1%;
+			transform:translateX(0%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
+		}
+		#action_all.allout{
+			visibility: visible;
+			position: fixed;
+			display: inline-block;
+			top: 15%;
+			right: 1%;
+			transform:translateX(-600%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
+		}
+		#action_all.hide{
+			visibility: hidden;
+		}
+		#wymusic{
+/* 			transform:translateX(0%);
+			transition: transform 1s;
+			transition-timing-function:ease;
+			position: fixed;
+			user-select:none; */
+			
+			transform:translateX(-98%);
+			transition: transform 1s;
+			transition-timing-function:ease;
+			position: fixed;
+			user-select:none;
+		}
+		#wymusic.out{
+/* 			transform:translateX(-95%);
+			transition: transform 1s;
+			transition-timing-function:ease;
+			position: fixed;
+			user-select:none; */
+			
+			transform:translateX(0%);
+			transition: transform 1s;
+			transition-timing-function:ease;
+			position: fixed;
+			user-select:none;
+		}
+		#wymusic.show{
+					transform:translateX(-98%);
+					transition: transform 1s;
+					transition-timing-function:ease;
+					position: fixed;
+					user-select:none;
+				}
 		#control_1{
 			user-select: none;
 		}
@@ -53,32 +111,125 @@
 
 		/*滑条*/
 		#slidera{
-			visibility: hidden;
+			position: fixed;
+			top: 20%;
+			right: 1%;
+			transform:translateX(110%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
 		}
 		#slidera.slider{
 			position: fixed;
-			top: 96px;
-			visibility: visible;
+			top: 20%;
+			right: 1%;
+			transform:translateX(0%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
 		}
 		#sliderb{
-			visibility: hidden;
+			position: fixed;
+			top: 10%;
+			right: 1%;
+			transform:translateX(110%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
 		}
 		#sliderb.slider{
 			position: fixed;
+			top: 10%;
 			right: 1%;
-			top: 70px;
-			visibility: visible;
+			transform:translateX(0%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
+		}
+		/*自动下一页开关*/
+/* 		#autonext_switch{
+			position: fixed;
+			right: 20%;
+			top: 30%;
+			transform:translateX(120%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
+		}
+		#autonext_switch.out{
+			position: fixed;
+			right: 20%;
+			top: 30%;
+			transform:translateX(0%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
+		} */
+		.switchs {
+		  position: relative;
+		  display: inline-block;
+		  width: 60px;
+		  height: 34px;
 		}
 		
+		.switchs input {display:none;}
+		
+		.sliders {
+		  position: absolute;
+		  cursor: pointer;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-color: #ccc;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+		
+		.sliders:before {
+		  position: absolute;
+		  content: "";
+		  height: 26px;
+		  width: 26px;
+		  left: 4px;
+		  bottom: 4px;
+		  background-color: white;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+		
+		input:checked + .sliders {
+		  background-color: #2196F3;
+		}
+		
+		input:focus + .sliders {
+		  box-shadow: 0 0 1px #2196F3;
+		}
+		
+		input:checked + .sliders:before {
+		  -webkit-transform: translateX(26px);
+		  -ms-transform: translateX(26px);
+		  transform: translateX(26px);
+		}
+		
+		/* Rounded sliders */
+		.sliders.round {
+		  border-radius: 34px;
+		}
+		
+		.sliders.round:before {
+		  border-radius: 50%;
+		}
 		/*阅读模式切换开关*/
 		.toggle-button-wrapper{
-			visibility: hidden;
+			position: fixed;
+			top: 30%;
+			right: 1%;
+			transform:translateX(120%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
 		}
 		.toggle-button-wrapper.switch{
 			position: fixed;
-			top: 130px;
-			right: 10px;
-			visibility: visible;
+			top: 30%;
+			right: 1%;
+			transform:translateX(0%);
+			transition: transform 0.7s;
+			transition-timing-function:ease;
 		}
 		#toggle-button{
 		            display: none;
@@ -143,6 +294,7 @@
 	<script type="text/javascript" src="dist/bootstrap-3.3.7-dist/js/buttons.js"></script>
 	<script src="dist/mdui-v1.0.1/js/mdui.min.js"></script>
 	<script type="text/javascript" src="dist/data.json"></script>
+	<script type="text/javascript" src="dist/网易音乐.json"></script>
 	<script id="l2d"></script>
 	<!-- <link rel="stylesheet" type="text/css" href="dist/fontawesome-free-5.15.1-web/css/fontawesome.min.css"/> -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
@@ -159,10 +311,19 @@
 			<div class="mdui-toolbar-spacer"></div>
 			<!-- <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a> -->
 			<a href="javascript:;" style="position: relative;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '切换黑暗/明亮主题'}" id="tgns"><i style="position: absolute;top: 50%;left: 50%;width: 24px;line-height: 24px;-webkit-transform: translate(-12px, -12px);transform: translate(-12px, -12px);display: inline-block;width: 24px;height: 24px;background-image: url(assets/taichi.png);background-size: 100% 100%;background-position: center center;"></i></a>
-			<a href="javascript:;"  onclick="action_sliderlight()" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '亮度调节(快捷键:ALT+↓:降低亮度 ALT+↑:增加亮度)'}"><i class="mdui-icon material-icons">brightness_4</i></a>
+			<a href="javascript:;"  onclick="action_setting(false),action_sliderlight()" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '亮度调节(快捷键:ALT+↓:降低亮度 ALT+↑:增加亮度)'}"><i class="mdui-icon material-icons">brightness_4</i></a>
 			<a href="javascript:;" mdui-tooltip="{content: '全屏'}" onclick="fullClick()" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon material-icons">fullscreen</i></a>
 		  </div>
 		</header>
+		<!-- 网易音乐插件 -->
+		<div id = 'wymusic' class="function_button">
+			<div id='music' style="position: relative;">
+				<div style="position: absolute;top: 10px;right: 2%; height:20%;;width: 10px">
+					<a id='wy_inout' style="position: absolute; height:50%;" onclick="action_inout()" href="javascript:;" mdui-tooltip="{content: '收起/弹出', position: 'right'}" class="function_button mdui-btn mdui-btn-icon mdui-ripple"><i  id="wymusic_icon" class="mdui-icon material-icons">keyboard_arrow_right</i></a>
+					<a style="position: absolute; top: 50%; height:50%;" onclick="switch_music()" href="javascript:;" mdui-tooltip="{content: '切换歌单', position: 'right'}" class="function_button mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon material-icons">music_note</i></a>
+				</div>
+			</div>
+		</div>
 		<!-- 侧边目录 -->
 		<div class="mdui-drawer mdui-drawer-close mdui-appbar-with-toolbar" id="drawer">
 			<ul class="mdui-list" id="drawer_ul">
@@ -172,16 +333,28 @@
 
 	<!-- 滑条 -->
 <!-- 	<input id="sliderlight" type="text" data-slider-min="0" data-slider-max="0.95" data-slider-value="0" data-slider-step="0.01"/>
- -->	<div class="mdui-container-fluid">
-		<div class="mdui-row">
+ -->	<!-- <div class="mdui-container-fluid">
+			<!-- 设置菜单 -->
+		<div class="function_button">
+			<div id='action_all' class="function_button">
+				<button onclick="action_all()" class=" mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon material-icons">settings</i></button>
+			</div>
 			<div id="sliderb">
+				<div class="mdui-chip">
+					<span class="mdui-chip-icon"><i class="mdui-icon material-icons">brightness_4</i></span>
+					<span class="mdui-chip-title">亮度:</span>
+				</div><br/>
 				<input id="sliderlight" type="text" data-slider-min="0" data-slider-max="0.95" data-slider-value="0" data-slider-step="0.01"/>
 			</div>
-			<div class="hidden-xs mdui-col-offset-xs-5 mdui-col-offset-md-10" id="slidera">
+			<div id="slidera">
+				<div class="mdui-chip">
+					<span class="mdui-chip-icon"><i class="mdui-icon material-icons">build</i></span>
+					<span class="mdui-chip-title">宽度:</span>
+				</div><br/>
 				<input id="slider1" type="text" data-slider-max="1077" data-slider-min="217" data-slider-step="1"/>
 			</div>
 		</div>
-	</div>
+<!-- 	</div> -->
 
 	<div class="col-md-offset-4 col-lg-offset-4col-xl-offset-4">
 		<input type="text" style="visibility:hidden;" id="001" value="" >
@@ -198,12 +371,12 @@
 				当前第<input data-toggle="tooltip" mdui-tooltip="{content: '在这输入要跳转的章节后点击跳转'}" type="text" id="chaps" style="width: 60px;" class="form-control" value="1">章
 			</label>
 			<button data-toggle="tooltip" type="button" onclick=pre() mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction() mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=next() mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
+			<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction(true) mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
+			<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
 <!-- 			<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-light-green-a700s">Button</button> -->
 		</div>
 	</form>
-	
+
 	<div id="topage" class="mdui-container-fluid" style="display: none;">
 			<div class="mdui-row">
 				<div style="position: fixed;top: 50%;width: 10%;right: 8%;" class="mdui-textfield mdui-textfield-floating-label">
@@ -222,26 +395,42 @@
 	  <i id='the_over'>漫画加载中......</i>
 	</div>
 
-	<div id="action"></div>
-	<div class="mdui-fab-wrapper" id="fab1">
-		<button class="mdui-fab mdui-ripple mdui-color-pink-accent">
-		  <i class="mdui-icon material-icons">add</i>
-		  <i class="mdui-icon mdui-fab-opened material-icons">mode_edit</i>
-		</button>
-		<div class="mdui-fab-dial">
-		  <button onclick="action_switch()" mdui-tooltip="{content: '切换阅读模式(本地/在线)'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red"><i class="mdui-icon material-icons">cloud</i>
-		  </button>
-		  <button mdui-tooltip="{content: '跳转到某页'}" onclick="show_textfield()" id='page_to' class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">low_priority</i>
-		  </button>
-		  <button onclick="action_slider()" mdui-tooltip="{content: '调整漫画尺寸'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">build</i>
-		  </button>
-		  <button onclick="topFunction()" mdui-tooltip="{content: '到顶部'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">vertical_align_top</i>
-		  </button>
+	<div id="fabs" style="display: block;">
+		<div class="mdui-fab-wrapper" id="fab1">
+			<button class="mdui-fab mdui-ripple mdui-color-pink-accent">
+			  <i class="mdui-icon material-icons">add</i>
+			  <i class="mdui-icon mdui-fab-opened material-icons">mode_edit</i>
+			</button>
+			<div class="mdui-fab-dial">
+			  <button onclick="action_setting(false),action_switch()" mdui-tooltip="{content: '切换阅读模式(本地/在线)'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red"><i class="mdui-icon material-icons">cloud</i>
+			  </button>
+			  <button mdui-tooltip="{content: '隐藏所有功能键'}" onclick="hide_button()" id='hide_button' class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">visibility_off</i>
+			  </button>
+			  <button onclick="action_setting(false),action_slider()" mdui-tooltip="{content: '调整漫画尺寸'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">build</i>
+			  </button>
+			  <button onclick="topFunction(true)" mdui-tooltip="{content: '到顶部'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">vertical_align_top</i>
+			  </button>
+			</div>
 		</div>
 	</div>
-
 	<!--切换开关-->
-	<div class="toggle-button-wrapper">
+	<div class="function_button toggle-button-wrapper">	
+		<div class="mdui-chip">
+			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">linear_scale</i></span>
+			<span class="mdui-chip-title">自动下一章:</span>
+		</div>
+		<div class="mdui-chip">
+			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">cloud</i></span>
+			<span class="mdui-chip-title">模式:</span>
+		</div><br/>
+		<!-- 自动下一页开关 -->
+		<div id="autonext_switch" style="display: inline-block;">
+			<label class="switchs">
+				<input type="checkbox" checked>
+				<div onclick="autonext_switch()" class="sliders round"></div>
+			</label>
+		</div>
+		
 	    <!-- 注意：label的for属性 要与其对应的input的id相对应 -->
 	    <input type="checkbox" id="toggle-button" name="switch">
 	    <label for="toggle-button" class="button-label">
@@ -249,7 +438,13 @@
 	        <span class="text on" onclick="switchto_online()">本地模式</span>
 	        <span class="text off" onclick="switchto_local()">在线观看</span>
 	    </label>
+		<!-- 帮助和返回书架 -->
+		<div id="home">
+			<a href="javascript:;" onclick="bookshelf()" style="position: relative;" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '返回书架'}"><i style="position: absolute;top: 50%;left: 50%;width: 24px;line-height: 24px;-webkit-transform: translate(-12px, -12px);transform: translate(-12px, -12px);display: inline-block;width: 24px;height: 24px;background-image: url(assets/书架.png);background-size: 100% 100%;background-position: center center;"></i></a>
+			<button onclick="help()" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip="{content: '帮助'}"><i class="mdui-icon material-icons">live_help</i></button>
+		</div>
 	</div>
+
 	<form id="control_2">
 		<div class="form-group col-md-offset-4 col-lg-offset-4col-xl-offset-4">
 			<label for="sumchaps" class="form-inline"/>
@@ -259,13 +454,13 @@
 				当前第<input type="text" id="chaps1" style="width: 60px;" class="form-control" value="1">章
 			</label>
 			<button data-toggle="tooltip" type="button" onclick=pre() mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction() mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=next() mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
+			<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction(true) mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
+			<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
 		</div>
 	</form>
 	<div class="mdui-container">
 		<div align="center" style="position: fixed;bottom: 0%;left: 46%;" class="mdui-chip mdui-bottom-nav-scroll-hide">
-		  <span id="nav" class="mdui-chip-title">Example Chip</span>
+		  <span id="nav" onclick="show_textfield()" class="mdui-chip-title">Example Chip</span>
 		</div>
 	</div>
 	<!-- 进度指示器 -->
@@ -287,6 +482,10 @@
 		var brightness = 0.01;
 		var brightness0 = 0
 		var Switch = true
+		var sign = 80
+		var music_boole = false
+		var auto_boole = true
+		var switch_boole = false
 		var comic_name = GetUrlPara()
 		var path = window.location.href;
 		var path = decodeURI(path).replace(/com.html/g,"");
@@ -320,6 +519,7 @@
 
 
 		if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){//设定漫画默认尺寸
+			var machine = 'android'
 			if(localStorage.getItem("wid")){
 				var wid = wid1 = localStorage.getItem("wid")
 				document.getElementById("slider1").setAttribute("data-slider-value",wid)
@@ -328,15 +528,10 @@
 				var wid = wid1 = 348
 			}
 		}else {
+			var machine = 'other'
 			live2d = document.getElementById("l2d")
 			live2d.setAttribute("type", "text/javascript");
 			live2d.setAttribute("src","dist/live2d-widget-0.8.3/autoload.js")
-			var timer = setInterval(function(){myTimer()},1000);
-			function myTimer(){
-				var d=new Date();
-				var t=d.toLocaleTimeString();
-				document.getElementById("time").innerHTML=t;
-			}
 			// more = document.getElementById("action")
 			// more.setAttribute("style","bottom: 350px;left: 2%;")
 			if(localStorage.getItem("wid")){
@@ -348,7 +543,57 @@
 			}
 
 		}
-		
+		//功能键隐藏
+		function hide_button(){
+			var action = document.querySelectorAll('.function_button');
+			for(var i=0;i<action.length;i++){action[i].classList.toggle('hide')}
+		}
+		function show_button(){
+			var action = document.querySelector('#wymusic');
+			action.classList.toggle('show')
+		}
+		//加载网易音乐插件
+		function randomNum(minNum,maxNum){//生成随机数
+		    switch(arguments.length){ 
+		        case 1: 
+		            return parseInt(Math.random()*minNum+1,10); 
+		        break; 
+		        case 2: 
+		            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+		        break; 
+		            default: 
+		                return 0; 
+		            break; 
+		    } 
+		}
+		function wymusic(){
+			var tem = Object.keys(musics)
+			document.getElementById('music').innerHTML += musics[randomNum(0,tem.length-1)]
+		}
+		function action_inout(){
+			var action = document.querySelector('#wymusic');
+			action.classList.toggle('out')
+			var icon = document.getElementById('wymusic_icon')
+			var icon_dad = document.getElementById('wy_inout')
+			if(music_boole){
+				icon_dad.innerHTML = '<i id="wymusic_icon" class="function_button mdui-icon material-icons">keyboard_arrow_right</i>'
+				music_boole = false
+			}else{
+				icon_dad.innerHTML = '<i id="wymusic_icon" class="function_button mdui-icon material-icons">keyboard_arrow_left</i>'
+				music_boole = true
+			}
+		}
+		function switch_music(){
+			var tem = document.getElementById('music')
+			tem.getElementsByTagName('iframe')[0].remove()
+			wymusic()
+		}
+		function folder(){
+			var e = document.createEvent("MouseEvents");
+			e.initEvent("click", true, true);
+			document.querySelector("iframe").querySelector(".bg open").dispatchEvent(e);
+			// document.getElementsByClassName("bg open")[0].dispatchEvent(e);
+		}
 		//初始化加载漫画
 		if(localStorage.getItem(comic_name+"chapter")){
 			setTimeout(function(){history_goto()},100)
@@ -364,8 +609,21 @@
 		for(c=0;c<chaplen;c++){
 			catalogCreate(c);//生成目录
 		}
+		var timer = setInterval(function(){myTimer()},1000);//时间
 		lazyload();
+		wymusic()//加载网易音乐
+		// window.onload = folder()
 		
+		//时间：
+		function myTimer(){
+			var d=new Date();
+			var t=d.toLocaleTimeString();
+			document.getElementById("time").innerHTML=t;
+			if(auto_boole){var tem = sum_temn}else{var tem = 0}
+			if(count==parseInt(pages[y-1]-1 + tem)){
+			document.getElementById('the_over').innerHTML='本章节已结束';
+			}else{document.getElementById('the_over').innerHTML='漫画加载中......'}
+		}
 		//获取url参数
 		function GetUrlPara()
 		{
@@ -404,8 +662,9 @@
 		function pageto(){
 		document.getElementById(localStorage.getItem(comic_name+"page")).scrollIntoView();console.log('执行了哟')}
 		function topage(){
-			var input_page = document.getElementById("topage_input").value
-			image[input_page-1].scrollIntoView()
+			var input_page = parseInt(document.getElementById("topage_input").value)
+			alert(sum_temn+input_page-1)
+			document.getElementById(sum_temn+input_page-1).scrollIntoView()
 		}
 		// 阅读历史跳转
 		function pageto(){document.getElementById(localStorage.getItem(comic_name+"page")).scrollIntoView();console.log('执行了哟')}
@@ -472,13 +731,15 @@
 		}
 		//判断元素是否可见区域内
 		function elementInView(id,sle){
-			rect = document.getElementById(id).getBoundingClientRect()
-			if(sle==1){
-				if(rect.top - window.innerHeight < (wid1/2)*(wid1/localStorage.getItem("wid"))){yInView = true}else{yInView = false}
-			}else{
-				yInView = rect.top < window.innerHeight && rect.bottom > 0
-			}
-			return yInView
+				if(document.getElementById(id)){
+					rect = document.getElementById(id).getBoundingClientRect()
+					if(sle==1){
+						if(rect.top - window.innerHeight < (wid1/2)*(wid1/localStorage.getItem("wid"))){yInView = true}else{yInView = false}
+					}else{
+						yInView = rect.top < window.innerHeight && rect.bottom > 0
+					}
+					return yInView
+				}
 		}
 		//记录阅读进度
 		function localstorage(){
@@ -510,21 +771,35 @@
 		}
 		function lazyload(){
 			window.onscroll = function(){
+				var oScrollTop = $(window).scrollTop();
+				if(oScrollTop > sign) {
+					sign = oScrollTop;//更新scrollTop
+					button_group()
+					direction = 'down'
+					//console.log('向下');
+				}
+				if(oScrollTop < sign) {
+					sign = oScrollTop//更新scrollTop
+					button_group1()
+					direction = 'up'
+					//console.log('向上');
+				}
 				for (k=sum_temn;k < sum_temn+pages[y-1]; k++) {
 					if (elementInView(k,1)) {
-						count = k - sum_temn//记录已加载页
-						console.log(k)
-						image[count].setAttribute('src', image[count].getAttribute('src-data'));
-						console.log(count)
+						var tem = sum_temn
+						if(auto_boole){var tem = 0}
+						count = k - tem//记录已加载页
+						var Image = document.getElementById(k)
+						Image.setAttribute('src', Image.getAttribute('src-data'))
+						y = parseInt(Image.getAttribute('data-chapter'))
+						//image[count].setAttribute('src', image[count].getAttribute('src-data'));
+						// console.log(count)
 					}
 					if (elementInView(k,0)) {
 						step = k//记录可见页
 						localStorage.setItem(comic_name+"page", k)
 						// snackbar()
 						document.getElementById('nav').innerHTML = '第'+y+'章,'+(step-sum_temn+1)+'/'+pages[y-1]+'页'
-						if(count==pages[y-1]-1){
-						document.getElementById('the_over').innerHTML='本章节已结束';
-						}else{document.getElementById('the_over').innerHTML='漫画加载中......';}
 					}
 					document.getElementById('steps').setAttribute('style','width:'+ 100*((step-sum_temn)/(pages[y-1]-1)) +'%;');//进度指示器
 					Loading = document.getElementById(step)
@@ -538,6 +813,21 @@
 			var action = document.querySelector('#action');
 			action.classList.toggle('active')
 		}
+		//设置菜单
+		function action_setting(sel){
+			var action = document.querySelector('#action_all');
+			if(sel){
+				action.classList.toggle('allout')
+			}else{action.classList.toggle('hide')}
+		}
+		function action_all(){
+			action_setting(true)
+			action_sliderlight()
+			action_slider()
+			// action_autonext()
+			action_switch()
+			// bookshelf()
+		}
 		//滑条调整漫画宽度
 		function action_slider(){
 			var action = document.querySelector('#slidera');
@@ -550,8 +840,10 @@
 			console.log(sliderValue.newValue)
 			wid = sliderValue.newValue
 			localStorage.setItem("wid", sliderValue.newValue);
-			for(var i=0;i<pages[y-1]-1;i++)
-			image[i].setAttribute('style','width:'+localStorage.getItem("wid")+'px');
+			for(i=step;i<step+pages[y-1];i++){
+				var Image = document.getElementById(i)
+				Image.setAttribute('style','width:'+localStorage.getItem("wid")+'px');
+			}
 		});
 		function action_sliderlight(){
 			var action = document.querySelector('#sliderb');
@@ -567,7 +859,33 @@
 			// localStorage.setItem("wid", sliderValue.newValue);
 			// for(var i=0;i<pages[y-1]-1;i++)
 		});
-		
+		//自动下一章开关
+		function autonext_switch(){
+			var tem = document.getElementsByClassName('slider round')
+			if(switch_boole){
+				alert('开了')
+				auto_on()
+				switch_boole = false
+			}else{
+				auto_off()
+				alert('关了')
+				switch_boole = true}
+		}
+		function button_group(){
+			document.getElementById('fabs').style = 'position: fixed;display: block;width: 5%;height: 5%;bottom: 1%;right: 1%;transform:translateY(300%);transition: transform 0.7s;transition-timing-function:ease;'
+		}
+		function button_group1(){
+			document.getElementById('fabs').style = 'position: fixed;display: block;width: 5%;height: 5%;bottom: 1%;right: 1%;transform:translateY(0%);transition: transform 0.7s;transition-timing-function:ease;'
+		}
+		//书架和帮助
+		function help(){
+			window.open("https://blog.csdn.net/zero_mumu/article/details/107852060",target="_blank");
+		}
+		function bookshelf(){
+			// var action = document.querySelector('#home');
+			// action.classList.toggle('out')
+			window.open("书架.html",target="_self");
+		}
 		//切换开关
 		function action_switch(){
 			var action = document.querySelector('.toggle-button-wrapper');
@@ -638,7 +956,7 @@
 		// 	});
 
 
-		function firstone(){//每次初始先加载三张图片
+		function firstone(){//每次初始先加载2张图片
 			if(pages[y-1]<2){
 				var firstone = pages[y-1]
 			}
@@ -663,7 +981,7 @@
 		alert('jkckzfuyzfyvb')
 	}
 		function createimg(n){
-			var img = document.createElement('img');
+			/*var img = document.createElement('img');
 			img.setAttribute('src-data',Uclass+URL[n]);
 			img.setAttribute('src','assets/loading.gif');
 			img.setAttribute('class','image');
@@ -672,9 +990,12 @@
 			// img.setAttribute('onloadstartNew','image_loading(this)');
 			// img.setAttribute('alt','图片错误');
 			img.setAttribute('style','display: block;height: auto;width:'+wid+'px');
-			img.id = n;
+			img.id = n;*/
 			var div = document.getElementById('div');
-			div.appendChild(img);
+			img = '<img src-data="'+ Uclass+URL[n] +'"src="assets/loading.gif" class="image" loading="lazy" onerror="image_error(this)" style="display: block;height: auto;width:'+ wid +'px" data-chapter='+y+' id="'+ n +'">'
+			//div.appendChild(img);
+			div.innerHTML += img;
+			//div.appendChild(img);
 		}
 		var sum = 0
 		function add_pre(n){
@@ -711,13 +1032,17 @@
 		function listimg_next(n){
 			console.log(n);
 			sum_temn = parseInt(sum) + parseInt(y)-1
+			if(chap_name[y-1]&&auto_boole){//阅读完毕提示
+				document.getElementById('div').innerHTML += '<p data-sum='+sum+' id=abstruct-'+(y-1)+'>已读完：'+chap_name[y-2]+'<br/><br/><br/></p>';
+				document.getElementById('div').innerHTML += '<p data-sum='+sum+' id=abstruct-'+(y-1)+'>下一章：'+chap_name[y-1]+'</p>';
+			}
 			for(num=0;num<pages[n-1];num++){
 				createimg(sum_temn+num);
 			}
 		}
 		
 		function removeimg_pre(n){
-			console.log(sum);
+			// console.log(sum);
 			if(sum>=0){
 			var div1 = document.getElementById("div");
 			for(i=sum_temn+pages[n-1];i<sum_temn+pages[n-1]+pages[n];i++){
@@ -728,32 +1053,75 @@
 		}
 		function removeimg_now(n){
 			for(i=sum_temn;i<sum_temn+pages[n-1];i++){
-				console.log(i)
+				// console.log(i)
 				document.getElementById(i).remove();
 				}
 		}
-		function removeimg_next(n){
-			console.log(sum);
-			if(sum>0){
-			var div1 = document.getElementById("div");
-			for(i=sum_temn-pages[n-2];i<sum_temn;i++){
-				console.log(i)
-				document.getElementById(i).remove();
+		function removeimg_next(n,sel){
+			if(sel){
+				// console.log(sum);
+				// console.log(sel)
+				if(sum>0){
+				var div1 = document.getElementById("div");
+				for(i=sum_temn-pages[n-2];i<sum_temn;i++){
+					// console.log(i)
+					document.getElementById(i).remove();
+					}
 				}
 			}
 		}
-		function topFunction() {
-			document.body.scrollTop = 0;
-			document.documentElement.scrollTop = 0;
+		function topFunction(sel_top) {
+			// console.log(sel_top)
+			if(sel_top){
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			}
 		}
-		function next(){if(y<chaplen){cnext();topFunction();firstone();show()}}
-		function pre(){if(y>=2){cpre();topFunction();firstone();show()}}
-		function cnext(){y++;add_next(y);listimg_next(y);removeimg_next(y);firstone();document.getElementById('the_over').innerHTML='漫画加载中......';}
+		function next(sel){if(y<chaplen){cnext(sel);topFunction(sel);firstone();show()}}
+		function pre(){if(y>=2){cpre();topFunction(true);firstone();show()}}
+		function cnext(sel){y++;add_next(y);listimg_next(y);removeimg_next(y,sel);firstone();document.getElementById('the_over').innerHTML='漫画加载中......';}
 		function cpre(){y--;add_pre(y);listimg_pre(y);removeimg_pre(y);firstone();document.getElementById('the_over').innerHTML='漫画加载中......';}
 		function show(){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];localstorage();document.getElementById("catalog"+(y-1)).setAttribute("class","mdui-color-grey mdui-shadow-6 mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2");}
 		function Goto(){y = document.getElementById('chaps').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage();}
 		function Goto1(){y = document.getElementById('chaps1').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage()}
-
+		function auto_off(){//关闭自动下一章及参数更新
+			auto_boole = false
+			clearInterval(auto_next)
+			document.getElementById('div').innerHTML = ''
+			lazyload()
+			history_goto()
+		}
+		auto_on()
+		function auto_on(){//开启自动下一章及参数更新
+			auto_boole = true
+			auto_next = setInterval(function(){
+				if(elementInView('the_over',0)&&document.getElementById('the_over').innerText =='本章节已结束'){
+					document.getElementById('the_over').innerHTML = '漫画加载中......'
+					next(false)
+					//alert('abstruct-'+(y-1))
+					document.getElementById('abstruct-'+(y-1)).scrollIntoView(false)
+				}
+				for(i=0;i<pages.length;i++){
+					abstruct_id = 'abstruct-'+String(i+1)
+					if(elementInView(abstruct_id,0)){
+						var abst = document.getElementById(abstruct_id)
+						var tem = abstruct_id.split('-')
+						if(direction=='up'){
+							y = parseInt(tem[1])
+							localStorage.setItem(comic_name+"chapter", y-1);
+							sum = parseInt(abst.getAttribute('data-sum'))+1-pages[y-1]
+							// console.log('add pre')
+						}else{
+							y = parseInt(tem[1])+1
+							localStorage.setItem(comic_name+"chapter", y-1);
+							sum = parseInt(abst.getAttribute('data-sum'))
+							// console.log('add next')
+						}
+						sum_temn = parseInt(sum) + parseInt(y)-1
+					}
+				}
+			},200)
+		}
 		// 目录
 		var inst_drawer = new mdui.Drawer('#drawer');
 		document.getElementById('toggle').addEventListener('click', function () {
@@ -769,7 +1137,7 @@
 				drawer_ul.appendChild(a)
 				document.getElementById("catalog"+n).innerHTML=chap_name[n];
 			}
-		function catalogGoto(y){cashow(y);topFunction();Goto()}
+		function catalogGoto(y){cashow(y);topFunction(true);Goto()}
 
 		//显示遮罩
 		function cover(brightness) {
