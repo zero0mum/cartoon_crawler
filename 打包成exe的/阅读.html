@@ -34,6 +34,9 @@
 		.function_button.hide{
 			visibility: hidden;
 		}
+		.nextpre.hide{
+			visibility: hidden;
+		}
 		#action_all{
 			visibility: visible;
 			position: fixed;
@@ -331,10 +334,7 @@
 		</div>
 <!-- <button onclick="lightness()" style="position: fixed; top: 100px;left: 6px;">测试</button> -->
 
-	<!-- 滑条 -->
-<!-- 	<input id="sliderlight" type="text" data-slider-min="0" data-slider-max="0.95" data-slider-value="0" data-slider-step="0.01"/>
- -->	<!-- <div class="mdui-container-fluid">
-			<!-- 设置菜单 -->
+		<!-- 设置菜单 -->
 		<div class="function_button">
 			<div id='action_all' class="function_button">
 				<button onclick="action_all()" class=" mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon material-icons">settings</i></button>
@@ -348,34 +348,38 @@
 			</div>
 			<div id="slidera">
 				<div class="mdui-chip">
-					<span class="mdui-chip-icon"><i class="mdui-icon material-icons">build</i></span>
+					<span class="mdui-chip-icon"><i class="mdui-icon material-icons">photo_size_select_large</i></span>
 					<span class="mdui-chip-title">宽度:</span>
 				</div><br/>
 				<input id="slider1" type="text" data-slider-max="1077" data-slider-min="217" data-slider-step="1"/>
 			</div>
 		</div>
-<!-- 	</div> -->
 
 	<div class="col-md-offset-4 col-lg-offset-4col-xl-offset-4">
 		<input type="text" style="visibility:hidden;" id="001" value="" >
 		<input type="text" style="visibility:hidden;" id="002" value="" >
 	</div>
-	<h2 id="chap_names" align="center">章节名称：</h2>
 
-	<form id="control_1">
-		<div class="form-group col-md-offset-4 col-lg-offset-4col-xl-offset-4">
-			<label for="sumchaps" class="form-inline"/>
-				总共<input type="text" style="width: 60px;" class="sumchaps form-control" placeholder="??">章
-			</label>
-			<label for="chaps" class="form-inline" />
-				当前第<input data-toggle="tooltip" mdui-tooltip="{content: '在这输入要跳转的章节后点击跳转'}" type="text" id="chaps" style="width: 60px;" class="form-control" value="1">章
-			</label>
-			<button data-toggle="tooltip" type="button" onclick=pre() mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction(true) mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
-<!-- 			<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-light-green-a700s">Button</button> -->
+	<div align="center">
+		<h2 id="chap_names">章节名称：</h2>
+
+		<div id="control_1">
+			<div class="form-group">
+				<label for="sumchaps"  class="form-inline"/>
+					总共<input type="text" style="width: 60px;" class="sumchaps form-control" placeholder="??">章，
+				</label>
+				<label for="chaps"  class="form-inline"/>
+					当前第<input data-toggle="tooltip" mdui-tooltip="{content: '在这输入要跳转的章节后点击跳转'}" type="text" id="chaps" style="width: 60px;" class="form-control" value="1">章
+				</label>
+			</div>
+			<div class="nextpre">
+				<button data-toggle="tooltip" type="button" onclick=pre() mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction(true) mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
+				<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
+				<p><br/></p>
+			</div>
 		</div>
-	</form>
+	</div>
 
 	<div id="topage" class="mdui-container-fluid" style="display: none;">
 			<div class="mdui-row">
@@ -406,7 +410,7 @@
 			  </button>
 			  <button mdui-tooltip="{content: '隐藏所有功能键'}" onclick="hide_button()" id='hide_button' class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">visibility_off</i>
 			  </button>
-			  <button onclick="action_setting(false),action_slider()" mdui-tooltip="{content: '调整漫画尺寸'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">build</i>
+			  <button onclick="action_setting(false),action_slider()" mdui-tooltip="{content: '调整漫画尺寸'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">photo_size_select_large</i>
 			  </button>
 			  <button onclick="topFunction(true)" mdui-tooltip="{content: '到顶部'}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">vertical_align_top</i>
 			  </button>
@@ -445,19 +449,22 @@
 		</div>
 	</div>
 
-	<form id="control_2">
-		<div class="form-group col-md-offset-4 col-lg-offset-4col-xl-offset-4">
+	<div id="control_2" align="center">
+		<div class="form-group" >
 			<label for="sumchaps" class="form-inline"/>
-				总共<input type="text" style="width: 60px;" class="sumchaps form-control" placeholder="??">章
+				总共<input type="text" style="width: 60px;" class="sumchaps form-control" placeholder="??">章，
 			</label>
 			<label for="chaps" class="form-inline" />
 				当前第<input type="text" id="chaps1" style="width: 60px;" class="form-control" value="1">章
 			</label>
+		</div>
+		<div class="nextpre">
 			<button data-toggle="tooltip" type="button" onclick=pre() mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
 			<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction(true) mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
 			<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
 		</div>
-	</form>
+	</div>
+
 	<div class="mdui-container">
 		<div align="center" style="position: fixed;bottom: 0%;left: 46%;" class="mdui-chip mdui-bottom-nav-scroll-hide">
 		  <span id="nav" onclick="show_textfield()" class="mdui-chip-title">Example Chip</span>
@@ -486,6 +493,7 @@
 		var music_boole = false
 		var auto_boole = true
 		var switch_boole = false
+		var hide_boole = true
 		var comic_name = GetUrlPara()
 		var path = window.location.href;
 		var path = decodeURI(path).replace(/com.html/g,"");
@@ -547,6 +555,17 @@
 		function hide_button(){
 			var action = document.querySelectorAll('.function_button');
 			for(var i=0;i<action.length;i++){action[i].classList.toggle('hide')}
+			if(hide_boole){
+				mdui.snackbar({
+				  message: '已隐藏所有功能键'
+				})
+				hide_boole = false
+			}else{
+				mdui.snackbar({
+				  message: '已显示所有功能键'
+				})
+				hide_boole = true
+			}
 		}
 		function show_button(){
 			var action = document.querySelector('#wymusic');
@@ -790,6 +809,7 @@
 						if(auto_boole){var tem = 0}
 						count = k - tem//记录已加载页
 						var Image = document.getElementById(k)
+						//console.log("k：",k)
 						Image.setAttribute('src', Image.getAttribute('src-data'))
 						y = parseInt(Image.getAttribute('data-chapter'))
 						//image[count].setAttribute('src', image[count].getAttribute('src-data'));
@@ -863,12 +883,18 @@
 		function autonext_switch(){
 			var tem = document.getElementsByClassName('slider round')
 			if(switch_boole){
-				alert('开了')
+				//alert('开了')
+				mdui.snackbar({
+				  message: '自动下一章已开启'
+				});
 				auto_on()
 				switch_boole = false
 			}else{
 				auto_off()
-				alert('关了')
+				//alert('关了')
+				mdui.snackbar({
+				  message: '自动下一章已关闭'
+				});
 				switch_boole = true}
 		}
 		function button_group(){
@@ -972,8 +998,10 @@
     function image_error(image){
 		var img=event.srcElement;
 		image.setAttribute('src', image.getAttribute('src-data'))
-		image.setAttribute('src-data','assets/heart-broken.svg')
-		image.src="assets/heart-broken.svg"
+		setTimeout(function(){
+			image.setAttribute('src-data','assets/heart-broken.svg')
+			image.src="assets/heart-broken.svg"
+		},1000)
 		img.οnerrοr=null;// 控制不要一直跳动
     }
 	function image_loading(image){
@@ -1084,8 +1112,14 @@
 		function show(){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];localstorage();document.getElementById("catalog"+(y-1)).setAttribute("class","mdui-color-grey mdui-shadow-6 mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2");}
 		function Goto(){y = document.getElementById('chaps').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage();}
 		function Goto1(){y = document.getElementById('chaps1').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage()}
+
+		function hide_control(){
+			var action = document.querySelectorAll('.nextpre');
+			for(var i=0;i<action.length;i++){action[i].classList.toggle('hide')}
+		}
 		function auto_off(){//关闭自动下一章及参数更新
 			auto_boole = false
+			hide_control()
 			clearInterval(auto_next)
 			document.getElementById('div').innerHTML = ''
 			lazyload()
@@ -1094,8 +1128,9 @@
 		auto_on()
 		function auto_on(){//开启自动下一章及参数更新
 			auto_boole = true
+			hide_control()
 			auto_next = setInterval(function(){
-				if(elementInView('the_over',0)&&document.getElementById('the_over').innerText =='本章节已结束'){
+				if(elementInView('the_over',0)&&document.getElementById('the_over').innerText =='本章节已结束'&&y<pages.length){
 					document.getElementById('the_over').innerHTML = '漫画加载中......'
 					next(false)
 					//alert('abstruct-'+(y-1))
@@ -1126,6 +1161,7 @@
 		var inst_drawer = new mdui.Drawer('#drawer');
 		document.getElementById('toggle').addEventListener('click', function () {
 			inst_drawer.toggle();
+			if(machine=='other'){action_inout()}
 		});
 		function cashow(y){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];catalog = document.getElementById("catalog"+(y-1));catalog.setAttribute("class","mdui-color-grey mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2");}
 		function catalogCreate(n){

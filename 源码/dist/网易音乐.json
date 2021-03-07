@@ -5,5 +5,14 @@ var musics = {
     "3":"<iframe frameborder='no' border='0' marginwidth='0' marginheight='0' width=330 height=450 src='https://music.163.com/outchain/player?type=0&id=2076424358&auto=1d=2076424358&auto=1&height=430'></iframe>",
     "4":"<iframe frameborder='no' border='0' marginwidth='0' marginheight='0' width=330 height=450 src='https://music.163.com/outchain/player?type=0&id=423906918&auto=1&d=423906918&auto=1&height=430'></iframe>",
     "5":"<iframe frameborder='no' border='0' marginwidth='0' marginheight='0' width=330 height=450 src='https://music.163.com/outchain/player?type=0&id=2829896389&auto=1d=2829896389&auto=1&height=430'></iframe>",
-    "6":"<iframe frameborder='no' border='0' marginwidth='0' marginheight='0' width=330 height=450 src='https://music.163.com/outchain/player?type=0&id=598194167&auto=1&d=598194167&auto=1&height=430'></iframe>"
+    "6":"<iframe frameborder='no' border='0' marginwidth='0' marginheight='0' width=330 height=450 src='https://music.163.com/outchain/player?type=0&id=598194167&auto=1&d=598194167&auto=1&height=430'></iframe>",
+	"7":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=0&id=5446890948&auto=1&height=430"></iframe>",
+	"8":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=0&id=5478997754&auto=1&height=430"></iframe>",
+	"9":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=4&id=794466440&auto=1&height=430"></iframe>",
+	"10":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=4&id=957996936&auto=1&height=430"></iframe>",
+	"11":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=4&id=349435875&auto=1&height=430"></iframe>",
+	"12":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=4&id=794939390&auto=1&height=430"></iframe>",
+	"13":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=4&id=792725389&auto=1&height=430"></iframe>",
+	"14":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=4&id=527191603&auto=1&height=430"></iframe>",
+	"15":"<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="https://music.163.com/outchain/player?type=4&id=3370010&auto=1&height=430"></iframe>"
 }

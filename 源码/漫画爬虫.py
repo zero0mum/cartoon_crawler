@@ -689,7 +689,7 @@ else:
   for str2 in list2:#获取漫画章节链接
     chapter.append(str2.select('li>a>span')[0].get_text())
     hrefs1.append(str2.select('li>a')[0]['href'])
-    print('666666')
+    # print('666666')
 
   first_chaperro()
 # print(i,len(chapter),names)
