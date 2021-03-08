@@ -1,9 +1,14 @@
 # 漫画爬虫
 
 #### 介绍
-看到的点个watch, star还有博客上点个赞啥的鼓励一下我吧(๑•̀ㅂ•́)و✧
+写来玩的，看到的大佬点个watch, star还有博客上点个赞啥的鼓励一下我吧(๑•̀ㅂ•́)و✧
 [漫画爬虫阅读网页 预览地址：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
-详细图文介绍请看：
+
+[码云项目地址](https://gitee.com/mumu_zero/cartoon_crawler)
+
+[github项目地址](https://github.com/zero0mum/cartoon_crawler)
+
+详细图文介绍和帮助请看：
 [CSDN博文地址](https://blog.csdn.net/zero_mumu/article/details/107852060)
 
 爬取过程：
@@ -19,8 +24,8 @@
 我的邮箱：mumuwyyx@163.com欢迎你来评论，提意见。
 
  1. 可分章节下载漫画到本地
- 2. 网页可调节漫画宽度，可调节亮度
- 3. 上下滚动阅读
+ 2. 网页**可调节漫画宽度，可调节亮度**
+ 3. **上下滚动下拉式**阅读
  4. 书架网页方便阅读，自动记录阅读位置，下次进入自动跳转
  5. 通过其中的漫画打包工具可将下载好的漫画每一章打包为一个zip压缩包，方便在comics++ 布卡漫画 tachiyomi等软件本地漫画功能中使用。
  6. 可通过本地网页阅读下载到本地的漫画
@@ -31,9 +36,9 @@ python3.8.X
 
 
 #### 安装教程
-源码文件夹中的需要安装python3.8和相关依赖库（文件内有说明，还有安装库前记得换成国内pip源，要不可能下载失败）
+源码文件夹中的需要安装python3.8和相关依赖库（文件内有说明有可以自动安装库的.bat批处理脚本，安装库前记得换成国内pip源，要不可能下载失败）
 
-打包好的exe内文件不需要安装，下载其中漫画爬虫.zip解压点击漫画爬虫.exe运行即可。
+打包好的exe内文件不需要安装，下载其中.zip解压后点击漫画爬虫.exe运行即可。
 
 #### 使用说明
 [漫画爬虫网页 预览地址：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
@@ -64,5 +69,5 @@ python3.8.X
 3.  提交代码
 4.  新建 Pull Request
 5.  提出你宝贵的意见
-
-6.  https://gitee.com/gitee-stars/)
+6.  [码云项目地址](https://gitee.com/mumu_zero/cartoon_crawler)
+7.  [github项目地址](https://github.com/zero0mum/cartoon_crawler)
