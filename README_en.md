@@ -33,7 +33,7 @@ When you put it away：
 
 delete, zip, import tool:
 
-![工具](C:\Users\HASEE\Desktop\漫画爬虫csdn\工具.jpg)
+![漫画导入](https://img-blog.csdnimg.cn/20210326132025741.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plcm9fbXVtdQ==,size_16,color_FFFFFF,t_70#pic_center)
 
 #### Software Architecture
 
