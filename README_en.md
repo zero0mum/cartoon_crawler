@@ -3,20 +3,43 @@
 #### Description
 When you see it, click watch, star and like it on the blog to encourage me(๑•̀ㅂ•́)و✧
 [Cartoon crawler page preview address：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
+
+[gitee project address](https://gitee.com/mumu_zero/cartoon_crawler)
+
+[github project address](https://github.com/zero0mum/cartoon_crawler)
+
+Please see the detailed introduction and help：
 [CSDN blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
-A Python crawler that crawls and downloads comics
+
+A Python crawler that crawls and downloads and import comics
 My email is mumuwyyx@163.com. You are welcome to comment.
 
-1. Comic books can be downloaded locally in chapters
-2. The web page can adjust the width of the cartoon, Adjustable brightness
+1. **Comic books can be downloaded locally in chapters**
+2. The web page **can adjust the width of the cartoon**, Adjustable brightness
 3. Scroll down and read
-4. Local comics can be read and downloaded from local websites
-5. Each chapter of the downloaded comics can be packaged into a zip zip package through the comic packaging tool, which is convenient for use in local comic functions of Comics ++, Buka Comics, Tachiyomi and other software.
-6. The web page can automatically record the progress of comics reading (stored through the browser localStorage)
+4. You can **import downloaded comics** to view
+5. Local comics can be read and downloaded from local websites file
+6. Each chapter of the downloaded comics can be packaged into a zip package through the **comic packaging tool**, which is convenient for use in local comic functions of Comics ++, Buka Comics, Tachiyomi and other software.
+7. The web page can automatically record the progress of comics reading (stored through the browser localStorage)
 
+The crawl process：
+  ![mumu漫画爬虫](https://img-blog.csdnimg.cn/20200816122420888.gif#pic_center)
+
+Comic reading page after all features are deployed：
+![漫画爬虫网页所有功能](https://mumu_zero.gitee.io/assets/%E5%9B%BE/%E5%A4%A7%E6%A6%82.jpg)
+
+When you put it away：
+![正常](https://mumu_zero.gitee.io/assets/%E5%9B%BE/%E6%AD%A3%E5%B8%B8.jpg)
+
+delete, zip, import tool:
+
+![工具](C:\Users\HASEE\Desktop\漫画爬虫csdn\工具.jpg)
 
 #### Software Architecture
-Software architecture description
+
+python3.8.X
+
+Dependent libraries: BeautifulSoup,  tqdm, requests ,lxml, selenium, pydub, ffmpeg, simpleaudio
 
 #### Installation
 
@@ -49,6 +72,8 @@ Google chrome is recommended for crawling. IE11 is unstable.
 If you are using IE browser during crawling, please enter the Settings of IE before crawling;>
 Safety>All four items in security check the start protection mode and apply
 
+And set the zoom of Internet Explorer to 100%
+
 // The browser version number of the downloaded browser driver by default is as follows (if the browser version is different from the default version, please download the corresponding version driver from the download address of the browser driver folder and replace the driver in this folder) 
 
 * IEDriverServer.exe>Internet Explorer 11;   Chromedriver.exe>Google Chrome 88.0.4324.150;*
@@ -60,13 +85,5 @@ Safety>All four items in security check the start protection mode and apply
 3.  Commit your code
 4.  Create Pull Request
 5.  Give your valuable advice
-
-
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+6.  [github project address](https://github.com/zero0mum/cartoon_crawler)
+7.  [gitee project address](https://gitee.com/mumu_zero/cartoon_crawler)

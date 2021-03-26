@@ -227,8 +227,14 @@ def save_json(fpath,msg):
 
 global_var_list={}
 def read_json(jpath,name):
-    with open(jpath, "r",encoding='utf-8') as jsonFile:
-        global_var_list[name] = str(json.load(jsonFile))
+	with open(jpath, "r",encoding='utf-8') as jsonFile:
+		global_var_list[name] = str(json.load(jsonFile))
+def read_jsoni(jpath,name):
+    if os.path.exists(jpath):
+        with open(jpath, "r",encoding='utf-8') as jsonFile:
+            global_var_list[name] = str(json.load(jsonFile))
+    else:
+        global_var_list[name] = '""'
 
 def create_file(path,msg,way):#内容写成文本文件
     f=open(path,way,encoding="utf-8")
@@ -363,10 +369,44 @@ def combine():
   read_json(name_path,"name")
   read_json(img_path,"img")
   read_json(pages_path,"pages")
+  read_json(setting_path,"setting")
+  read_json(coverjson_path,"cover")
 
-  name_img_pages = "var chap_name ="+global_var_list["name"]+";"+"var img_url = "+global_var_list["img"]+";"+"var pages = "+global_var_list["pages"]
+  name_img_pages = "var chap_name ="+global_var_list["name"]+";"+"var img_url = "+global_var_list["img"]+";"+"var pages = "+global_var_list["pages"]+";"+"var setting = "+global_var_list["setting"]+";"+"var covers = "+global_var_list["cover"]
   create_file(data_path,name_img_pages,'w')#json合并写入name_img_pages.json
 
+def combinei():
+  #json合并
+  read_jsoni(name_path,"name")
+  read_jsoni(img_path,"img")
+  read_jsoni(pages_path,"pages")
+  read_jsoni(setting_path,"setting")
+  read_jsoni(coverjson_path,"cover")
+
+  name_img_pages = "var chap_name ="+global_var_list["name"]+";"+"var img_url = "+global_var_list["img"]+";"+"var pages = "+global_var_list["pages"]+";"+"var setting = "+global_var_list["setting"]+";"+"var covers = "+global_var_list["cover"]
+  create_file(data_path,name_img_pages,'w')#json合并写入name_img_pages.json
+
+fpath = sys.argv[0]
+fpath = os.path.split(fpath)#获取当前.py文件工作目录
+filepath = fpath[0].replace("/","\\")
+filepath1 = fpath[0].replace("/","/")
+setting_path = filepath+'\\dist\\setting.json'#设置文件
+img_path = filepath+'\\dist\\漫画地址.json'#图片地址文件路径
+pages_path = filepath+'\\dist\\pages.json'#漫画每章页数文件路径
+data_path = filepath+'\\dist\\data.json'
+name_path = filepath+'\\dist\\章节名称.json'#章节名称文件保存路径
+coverjson_path = filepath+'\\dist\\cover.json'#漫画封面json路径
+html_path = filepath+'\\书架.html'#漫画html文件路径
+
+read_json(setting_path,"setting")
+global_var_list['setting'] = eval(global_var_list['setting'])
+global_var_list['setting']['default_import_src'] = filepath.replace('\\','/') + '/漫画导入'
+if global_var_list['setting']['firsttime'] == 'true':
+    global_var_list['setting']['current_import_src'] = filepath.replace('\\','/') + '/漫画导入'
+    global_var_list['setting']['firsttime'] = 'false'
+data = eval(str(global_var_list['setting']))
+create_file(setting_path,json.dumps(global_var_list['setting'],ensure_ascii=False),"w")#默认路径写入json文件
+combinei()
 
 name_=input("请输入想看的漫画名称：")
 data = {'keyword':name_}
@@ -479,23 +519,13 @@ if(webchoice==1):
   img_domain = cover_src[0:img_domain_index]+'.com'
   list2=soup1.select('ul.jslist01>li')
 elif(webchoice==2):
-  chapterName=[]
   h = hrefs[i-1]
   url_yk2 = h
-  chap_index = 'chapter-list-'
   res2 = r.get(url=url_yk2)
   res2 = res2.text
   soup1=BeautifulSoup(res2,'lxml')
   cover_src = soup1.select('.comic_i_img>img')[0]['src']
-
-  listchap = soup1.select('.zj_list_head')
-  for strchap in listchap:
-    chapterName.append(strchap.select('div>h2')[0].get_text())#多章节选择章节名称获取
-  chap_id = Multichapter_select(chap_index,res2)
-  id = chap_id[0]
-  # list2=soup1.select('#'+chap_id[1][id]+'>li')
-  list2 = soup1.select('div.zj_list_con')[id]
-  list2 = list2.select('div>ul>li')
+  list2=soup1.select('div.zj_list_con>ul>li')
 elif(webchoice==4):
   url_xm2 = url_xm+hrefs[i-1]
   mid = str(hrefs[i-1][1:-3])
@@ -550,21 +580,12 @@ rm1=[]
 j=0
 d=0
 
-fpath = sys.argv[0]
-fpath = os.path.split(fpath)#获取当前.py文件工作目录
-filepath = fpath[0].replace("/","\\")
-filepath1 = fpath[0].replace("/","/")
+
 assets_path = filepath+"\\"+names[i-1]+web+"\\assets"#看板娘assets文件目的目录
 # shutil.copytree(filepath+"\\assets",assets_path)
 Path = filepath+"\\Download\\"+names[i-1]+web#漫画保存路径
-name_path = filepath+'\\dist\\章节名称.json'#章节名称文件保存路径
 # hrefs1_path = Path+'\\章节链接.txt'#章节链接文件保存路径
-img_path = filepath+'\\dist\\漫画地址.json'#图片地址文件路径
-pages_path = filepath+'\\dist\\pages.json'#漫画每章页数文件路径
-data_path = filepath+'\\dist\\data.json'
 cover_path = filepath+'\\assets\\封面\\'+names[i-1]+'cover.jpg'#漫画封面路径
-coverjson_path = filepath+'\\dist\\cover.json'#漫画封面json路径
-html_path = filepath+'\\index.html'#漫画html文件路径
 comic_download = filepath+"\\Download\\"+names[Serial_number-1]+"\\"#下载漫画地址
 
 res_cover = requests.session().get(url=cover_src)
@@ -639,14 +660,14 @@ html = """
 </html>
 """
 
-create_file(html_path,html,"w")#漫画html写文件
+# create_file(html_path,html,"w")#漫画html写文件
 
 if(webchoice==1):
   for str2 in list2:#获取漫画章节链接
       chapter.append(str2.select('li>a')[0].get_text())
       hrefs1.append(str2.select('li>a')[0]['href'])
   for j in range(len(hrefs1)):
-    hrefs1[j] = img_domain +str(hrefs1[j])
+    hrefs1[j] = url_bn +str(hrefs1[j])
   chapter.reverse()
   first_chaperro()
 

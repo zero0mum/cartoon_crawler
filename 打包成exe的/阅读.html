@@ -40,7 +40,7 @@
 		#action_all{
 			visibility: visible;
 			position: fixed;
-			top: 15%;
+			top: 25%;
 			right: 1%;
 			transform:translateX(0%);
 			transition: transform 0.7s;
@@ -50,7 +50,7 @@
 			visibility: visible;
 			position: fixed;
 			display: inline-block;
-			top: 15%;
+			top: 25%;
 			right: 1%;
 			transform:translateX(-600%);
 			transition: transform 0.7s;
@@ -481,9 +481,8 @@
 		var tem = ''
 		var tem1 = ''
 		var y = 1
+		var sum_page = 1
 		var count = step = 3
-		var uclass = 'http'
-		var Uclass = uclass
 		var wait_t = 1;
 		var sum_temn = 0
 		var brightness = 0.01;
@@ -494,7 +493,12 @@
 		var auto_boole = true
 		var switch_boole = false
 		var hide_boole = true
-		var comic_name = GetUrlPara()
+		var comic_name = GetUrlPara(1)
+		var loc_import = GetUrlPara(2)
+		if(loc_import=='locimport'){
+			uclass = ''
+		}else{uclass = 'http'}
+		var Uclass = uclass
 		var path = window.location.href;
 		var path = decodeURI(path).replace(/com.html/g,"");
 
@@ -504,10 +508,20 @@
 		var img_url = img_url[comic_name]
 		var chap_name = Object.values(chap_name[comic_name])//章节名称
 		var pages = Object.values(pages[comic_name])//每章页数
-		img_url=img_url.split('http');//获取到每页漫画图片地址
-		img_url.push(img_url[0]);
-		img_url.splice(0,1);
 		var chaplen = chap_name.length;//获取到章节总数
+
+		if(loc_import=='locimport'){
+			for(i=0;i<(chaplen);i++){
+				sum_page += pages[i]
+				}
+			for(j=0;j<sum_page-1;j++){
+				img_url[j] = setting['current_import_src'] + img_url[j]
+			}
+		}else{
+			img_url=img_url.split('http');//获取到每页漫画图片地址
+			img_url.push(img_url[0]);
+			img_url.splice(0,1);
+		}
 		URL = img_url
 		img_url_loc = new Array();
 		k=0;
@@ -515,7 +529,7 @@
 			// console.log(i);
 			//console.log(pages[i]);
 			for(j=0;j<pages[i];j++){
-				img_url_loc[k]="Download\\"+comic_name+"\\"+chap_name[i]+"\\"+j+".jpg";
+					img_url_loc[k]="Download\\"+comic_name+"\\"+chap_name[i]+"\\"+j+".jpg";
 				// console.log(img_url_loc[k]);
 				k++;
 			}
@@ -644,11 +658,11 @@
 			}else{document.getElementById('the_over').innerHTML='漫画加载中......'}
 		}
 		//获取url参数
-		function GetUrlPara()
+		function GetUrlPara(n)
 		{
 			var url = document.location.toString()
 			var arrUrl = url.split("?")
-			var para = decodeURI(arrUrl[1])
+			var para = decodeURI(arrUrl[n])
 			return para
 		}
 		function Get_comicname(){

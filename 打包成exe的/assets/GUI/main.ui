@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1084</width>
-    <height>508</height>
+    <width>504</width>
+    <height>288</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -222,6 +222,110 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="icon">
+        <iconset>
+         <normaloff>assets/file-import.svg</normaloff>assets/file-import.svg</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>本地漫画导入</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="tab4_label_defaultsrc">
+            <property name="text">
+             <string>默认本地漫画导入文件夹路径为：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="tab4_label_currentsrc">
+            <property name="text">
+             <string>当前本地漫画导入文件夹路径为：</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="reset_folder">
+            <property name="text">
+             <string>恢复为默认路径</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>assets/reply.svg</normaloff>assets/reply.svg</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="help">
+            <property name="text">
+             <string>帮助</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="edit_folder">
+            <property name="text">
+             <string>修改漫画导入
+文件夹路径</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>assets/folder.svg</normaloff>assets/folder.svg</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="open_import_folder">
+            <property name="text">
+             <string>打开漫画
+导入文件夹</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>assets/folder-open.svg</normaloff>assets/folder-open.svg</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;tip：漫画如果是压缩包请先解压开变成文件夹(解压出的文件夹名称应为漫画的名称)，&lt;/p&gt;&lt;p&gt;解压后将需要导入的该漫画文件夹放入&amp;quot;漫画导入&amp;quot;这个文件夹内。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>最后,当需要导入的漫画放入漫画导入文件夹后点击导入按钮：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="comics_import">
+            <property name="text">
+             <string>导入</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>assets/file-import.svg</normaloff>assets/file-import.svg</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -231,11 +335,11 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1084</width>
+     <width>504</width>
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="menu_setting">
     <property name="toolTip">
      <string>设置</string>
     </property>
@@ -253,21 +357,26 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="menu_help">
     <property name="title">
      <string>帮助</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menu_3">
+   <widget class="QMenu" name="menu_about">
     <property name="title">
      <string>关于</string>
     </property>
    </widget>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
-   <addaction name="menu_3"/>
+   <addaction name="menu_setting"/>
+   <addaction name="menu_help"/>
+   <addaction name="menu_about"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionhelp">
+   <property name="text">
+    <string>help</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
