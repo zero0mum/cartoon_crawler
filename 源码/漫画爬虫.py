@@ -253,7 +253,7 @@ def first_chaperro():#起始章节数报错
     restart_program()
 
 def DownLoad():
-  global img_path,Path,chapter,hrefs1,comic_download,Serial_number,names
+  global img_path,Path,chapter,hrefs1,comic_download,Serial_number,names,hprotocol
   img_srcs2=[]
   read_json(pages_path,"pages_download")
   read_json(img_path,"img_download")
@@ -262,7 +262,7 @@ def DownLoad():
   pages_download = list(pages_download.values())
 
   img_srcs1 = img_srcs1.replace('\\','')
-  img_srcs = img_srcs1.split("https")
+  img_srcs = img_srcs1.split(hprotocol)
   img_srcs.pop(0)
   for i in range(len(img_srcs)):
     img_srcs[i]="http"+str(img_srcs[i])
@@ -591,7 +591,13 @@ comic_download = filepath+"\\Download\\"+names[Serial_number-1]+"\\"#下载漫�
 res_cover = requests.session().get(url=cover_src)
 create_filewb(cover_path,res_cover.content)#封面下载
 
-cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class='mdui-ripple mdui-hoverable mdui-card mdui-col-md-2 mdui-col-xs-6'><div class='mdui-ripple mdui-hoverable mdui-card-media'><a href='阅读.html?"""+names[i-1]+"""' target="_blank"><img src='assets\\封面\\"""+names[i-1]+"""cover.jpg'/></a><div class='mdui-card-media-covered'><div class='mdui-card-primary'><div style='font-weight:900;font-size: large;'>"""+names[i-1]+"""</div></div></div></div></div>"""
+hprotocol = ''
+if cover_src[0:5] == 'http:':
+	hprotocol = 'http'
+else:
+	hprotocol = 'https'
+
+cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class='mdui-ripple mdui-hoverable mdui-card mdui-col-md-2 mdui-col-xs-6'><div class='mdui-ripple mdui-hoverable mdui-card-media'><a href='阅读.html?"""+names[i-1]+"""' target="_blank"><img src='assets\\封面\\"""+names[i-1]+"""cover.jpg'/></a><div class='mdui-card-media-covered'><div class='mdui-card-primary'><div style='font-weight:900;font-size: large;' onclick='openweb(this)';>"""+names[i-1]+"""</div></div></div></div></div>"""
 if (os.path.exists(coverjson_path)):
   with open(coverjson_path,"r",encoding='utf-8') as jsonFile:
     jcover = json.load(jsonFile)
