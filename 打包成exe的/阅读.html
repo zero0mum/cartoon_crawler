@@ -20,14 +20,18 @@
 	<!--[endif]-->
 
   <style>
-		*::-webkit-scrollbar {
-			display: none;
-		}
-		*{
+
+		/* *{
 			padding: 0;
 			margin: 0;
 			scrollbar-width: none;
-		}
+		} */
+
+		::-webkit-srollbar-track-piece{background:none;-webkit-border-radius:0;}
+		::-webkit-scrollbar{width:8px;height:8px;}
+		::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#bbbbbb;-webkit-border-radius:4px;outline:0px solid #ffffff;ouline-offset:-2px;border:2px solid #bbbbbb;}
+		::-webkit-scrollbar-thumb:hover{height:50px;background-color:#999999;-webkit-border-radius:4px;}
+		::-webkit-scrollbar-thumb:horizontal{width:50px;background-color:#bbbbbb;-webkit-border-radius:4px;outline:0px solid #ffffff;ouline-offset:-2px;border:2px solid #bbbbbb;}
 /* 		body{
 			cursor: url("assets/normal-select.cur"),text;
 		} */
@@ -285,6 +289,31 @@
 		#toggle-button:checked + label.button-label{
 		background-color: #2CA2F9;
 		}
+		/* 对话框 */
+		.org_box{
+			height:40px;
+		    line-height:80px; 
+		    margin-bottom:30px; 
+		    padding-left:2em;
+			opacity: 0.75;
+		    background:#4E342E; 
+		    position:relative;
+			border-radius: 60px;
+		}
+		.org_bot_cor{
+		    width:0;
+		    height:0;
+		    font-size:0;
+		    border-width:15px;
+		    border-style:solid;
+		    border-color:#4E342E transparent transparent;
+		    _border-color:#4E342E white white;
+		    overflow:hidden;
+		    position:absolute;
+		    left:50%;
+			margin-left: -15px;
+		    bottom:-30px;
+		}
   </style>
 
   </head>
@@ -342,14 +371,14 @@
 			<div id="sliderb">
 				<div class="mdui-chip">
 					<span class="mdui-chip-icon"><i class="mdui-icon material-icons">brightness_4</i></span>
-					<span class="mdui-chip-title">亮度:</span>
+					<span class="mdui-chip-title">亮度<b style="font-weight: 1000"> :</b></span>
 				</div><br/>
 				<input id="sliderlight" type="text" data-slider-min="0" data-slider-max="0.95" data-slider-value="0" data-slider-step="0.01"/>
 			</div>
 			<div id="slidera">
 				<div class="mdui-chip">
 					<span class="mdui-chip-icon"><i class="mdui-icon material-icons">photo_size_select_large</i></span>
-					<span class="mdui-chip-title">宽度:</span>
+					<span class="mdui-chip-title">宽度<b style="font-weight: 1000"> :</b></span>
 				</div><br/>
 				<input id="slider1" type="text" data-slider-max="1077" data-slider-min="217" data-slider-step="1"/>
 			</div>
@@ -381,16 +410,16 @@
 		</div>
 	</div>
 
-	<div id="topage" class="mdui-container-fluid" style="display: none;">
-			<div class="mdui-row">
-				<div style="position: fixed;top: 50%;width: 10%;right: 8%;" class="mdui-textfield mdui-textfield-floating-label">
-				  <button style="position: fixed;top: 58%; right: 18.5%;" data-toggle="tooltip" type="button" onclick="topage()" mdui-tooltip="{content: '跳转'}" id="bt" class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
-				  <label class="mdui-textfield-label">跳转到：</label>
-				  <input id="topage_input" class="mdui-textfield-input" type="number"/>
-				  <div id="topage_div" class="mdui-textfield-helper">输入需要跳转到的页数</div>
-				</div>
-				<button style="position: fixed;top: 59%; right: 5%;" onclick="close_textfield()" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
+	<div id="topage" class="mdui-container-fluid" style="display: none;position: fixed;top: 70%;right: 50%;margin-right: -200px;">
+		<div style="position: relative;width: 400px;height: 20px;">
+			<button style="position: absolute; left: 60px;top: 45px;opacity: 0.85;" data-toggle="tooltip" onclick="topage()" mdui-tooltip="{content: '跳转'}" id="bt" class="mdui-btn mdui-btn-icon mdui-color-lime-a700 mdui-ripple"><i class="mdui-icon material-icons">check</i></button>
+			<div style="position: absolute;color: #FFFFFF; width: 200px; left: 50%;margin-left: -100px;" class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">跳转到：</label>
+				<input id="topage_input" style="background-color: rgba(255, 168, 39, 0.85); border-radius: 9px;" class="mdui-textfield-input" type="number"/>
+				<div id="topage_div" class="mdui-textfield-helper" style="background-color: rgba(255, 168, 39, 0.85);border-radius: 2px;">输入需要跳转到的页数</div>
 			</div>
+			<button style="position: absolute; right: 60px;top: 45px;opacity: 0.85;" onclick="close_textfield()" mdui-tooltip="{content: '关闭'}" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">close</i></button>
+		</div>
 	</div>
 	
 	<!--漫画图片-->
@@ -421,11 +450,11 @@
 	<div class="function_button toggle-button-wrapper">	
 		<div class="mdui-chip">
 			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">linear_scale</i></span>
-			<span class="mdui-chip-title">自动下一章:</span>
+			<span class="mdui-chip-title">自动下一章<b style="font-weight: 1000"> :</b></span>
 		</div>
 		<div class="mdui-chip">
 			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">cloud</i></span>
-			<span class="mdui-chip-title">模式:</span>
+			<span class="mdui-chip-title">模式<b style="font-weight: 1000"> :</b></span>
 		</div><br/>
 		<!-- 自动下一页开关 -->
 		<div id="autonext_switch" style="display: inline-block;">
@@ -464,792 +493,143 @@
 			<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
 		</div>
 	</div>
+	<!-- 页数跳转滑条 -->
+	<div id="chip_dad">
+		<div style="position: relative; bottom: 3%;">
+			<div id="nextpre_fixed" class="nextpre" style="position: fixed; bottom: 3%; left: 50%; margin-left: -225px; width: 450px;display: block;height: 70px;">
+				<!-- <button style="position: absolute; bottom: 50%; left: 0px; opacity: 0.85;background-color: #4E342E;" data-toggle="tooltip" type="button" onclick="pre()" mdui-tooltip="{content: '上一章'}" class="button button-pill button-small"><span class="glyphicon glyphicon-chevron-left"></span></button> -->
+				<button style="position: absolute; bottom: 50%; left: 10%; opacity: 0.85;" onclick="pre()" mdui-tooltip="{content: '上一话'}" id="prebt" class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-brown"><i class="mdui-icon material-icons">chevron_left</i></button>
+				<button style="position: absolute; bottom: 50%; right : 10%; opacity: 0.85;" onclick="next(true)" mdui-tooltip="{content: '下一话'}" id="prebt" class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-brown"><i class="mdui-icon material-icons">chevron_right</i></button>
+				<!-- <button style="position: absolute; bottom: 50%; right : 0px; opacity: 0.85;background-color: #4E342E;" data-toggle="tooltip" type="button" onclick="next(true)" mdui-tooltip="{content: '下一章'}" class="button button-pill button-small"><span class="glyphicon glyphicon-chevron-right"></span></button> -->
+			</div>
+			<div id="topage_box" class="mdui-text-color-theme-text" style="position: fixed; bottom: 3%;left: 50%;margin-left: -140px;width: 280px;">
+				<div class="org_box">
+					<span class="org_bot_cor"></span>
+					<!-- 边框法实现底部90度尖角对话框 -->
+				</div>
+				<p id="pageto_current_page" style="position: absolute; bottom: 75%; margin-bottom: -12.5px;left: 10px; opacity: 1;color: #FFFFFF;">1</p>
+				<div id = "topage_slider" style="position: absolute; bottom: 75%; margin-bottom: -13px;left: 35px;">
+					<input style="opacity: 0;" id="chip_slider" type="text" data-slider-min="1" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
+				</div>
+				<p id="pageto_sum_page" style="position: absolute; bottom: 75%; margin-bottom: -12.5px; right: 10px;color: #FFFFFF;">6</p>
+			</div>
+		</div>
 
-	<div class="mdui-container">
-		<div align="center" style="position: fixed;bottom: 0%;left: 46%;" class="mdui-chip mdui-bottom-nav-scroll-hide">
+		<div align="center" style="position: fixed;bottom: 0%;left: 50%;margin-left: -57px;" class="mdui-chip mdui-bottom-nav-scroll-hide">
 		  <span id="nav" onclick="show_textfield()" class="mdui-chip-title">Example Chip</span>
 		</div>
 	</div>
 	<!-- 进度指示器 -->
-	<div class="mdui-container mdui-p-b-0" style="position: fixed;bottom: 0px;">
+	<div class="mdui-container" style="position: fixed;bottom: 0px;width: 100%;">
 	  <div class="mdui-progress">
 	    <div id="steps" class="mdui-progress-determinate" style="width: 1%;"></div>
 	  </div>
 	</div>
-
-  <script>
-		var tem = ''
-		var tem1 = ''
-		var y = 1
-		var sum_page = 1
-		var count = step = 3
-		var wait_t = 1;
-		var sum_temn = 0
-		var brightness = 0.01;
-		var brightness0 = 0
-		var Switch = true
-		var sign = 80
-		var music_boole = false
-		var auto_boole = true
-		var switch_boole = false
-		var hide_boole = true
-		var comic_name = GetUrlPara(1)
-		var loc_import = GetUrlPara(2)
-		if(loc_import=='locimport'){
-			uclass = ''
-		}else{uclass = 'http'}
-		var Uclass = uclass
-		var path = window.location.href;
-		var path = decodeURI(path).replace(/com.html/g,"");
-
-		document.getElementById("title").innerHTML = comic_name
-		document.getElementById("title1").innerHTML = comic_name
-		
-		var img_url = img_url[comic_name]
-		var chap_name = Object.values(chap_name[comic_name])//章节名称
-		var pages = Object.values(pages[comic_name])//每章页数
-		var chaplen = chap_name.length;//获取到章节总数
-
-		if(loc_import=='locimport'){
-			for(i=0;i<(chaplen);i++){
-				sum_page += pages[i]
-				}
-			for(j=0;j<sum_page-1;j++){
-				img_url[j] = setting['current_import_src'] + img_url[j]
-			}
-		}else{
-			img_url=img_url.split('http');//获取到每页漫画图片地址
-			img_url.push(img_url[0]);
-			img_url.splice(0,1);
-		}
-		URL = img_url
-		img_url_loc = new Array();
-		k=0;
-		for(i=0;i<(chaplen);i++){
-			// console.log(i);
-			//console.log(pages[i]);
-			for(j=0;j<pages[i];j++){
-					img_url_loc[k]="Download\\"+comic_name+"\\"+chap_name[i]+"\\"+j+".jpg";
-				// console.log(img_url_loc[k]);
-				k++;
-			}
-		}
-
-		for(j=0;j<2;j++){
-			document.getElementsByClassName("sumchaps form-control")[j].setAttribute("value",chaplen)
-		}
-
-
-		if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){//设定漫画默认尺寸
-			var machine = 'android'
-			if(localStorage.getItem("wid")){
-				var wid = wid1 = localStorage.getItem("wid")
-				document.getElementById("slider1").setAttribute("data-slider-value",wid)
-			}else{
-				document.getElementById("slider1").setAttribute("data-slider-value",348)
-				var wid = wid1 = 348
-			}
-		}else {
-			var machine = 'other'
-			live2d = document.getElementById("l2d")
-			live2d.setAttribute("type", "text/javascript");
-			live2d.setAttribute("src","dist/live2d-widget-0.8.3/autoload.js")
-			// more = document.getElementById("action")
-			// more.setAttribute("style","bottom: 350px;left: 2%;")
-			if(localStorage.getItem("wid")){
-				var wid = wid1 = localStorage.getItem("wid")
-				document.getElementById("slider1").setAttribute("data-slider-value",wid)
-			}else{
-				document.getElementById("slider1").setAttribute("data-slider-value",677)
-				var wid = wid1 = 677
-			}
-
-		}
-		//功能键隐藏
-		function hide_button(){
-			var action = document.querySelectorAll('.function_button');
-			for(var i=0;i<action.length;i++){action[i].classList.toggle('hide')}
-			if(hide_boole){
-				mdui.snackbar({
-				  message: '已隐藏所有功能键'
-				})
-				hide_boole = false
-			}else{
-				mdui.snackbar({
-				  message: '已显示所有功能键'
-				})
-				hide_boole = true
-			}
-		}
-		function show_button(){
-			var action = document.querySelector('#wymusic');
-			action.classList.toggle('show')
-		}
-		//加载网易音乐插件
-		function randomNum(minNum,maxNum){//生成随机数
-		    switch(arguments.length){ 
-		        case 1: 
-		            return parseInt(Math.random()*minNum+1,10); 
-		        break; 
-		        case 2: 
-		            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
-		        break; 
-		            default: 
-		                return 0; 
-		            break; 
-		    } 
-		}
-		function wymusic(){
-			var tem = Object.keys(musics)
-			document.getElementById('music').innerHTML += musics[randomNum(0,tem.length-1)]
-		}
-		function action_inout(){
-			var action = document.querySelector('#wymusic');
-			action.classList.toggle('out')
-			var icon = document.getElementById('wymusic_icon')
-			var icon_dad = document.getElementById('wy_inout')
-			if(music_boole){
-				icon_dad.innerHTML = '<i id="wymusic_icon" class="function_button mdui-icon material-icons">keyboard_arrow_right</i>'
-				music_boole = false
-			}else{
-				icon_dad.innerHTML = '<i id="wymusic_icon" class="function_button mdui-icon material-icons">keyboard_arrow_left</i>'
-				music_boole = true
-			}
-		}
-		function switch_music(){
-			var tem = document.getElementById('music')
-			tem.getElementsByTagName('iframe')[0].remove()
-			wymusic()
-		}
-		function folder(){
-			var e = document.createEvent("MouseEvents");
-			e.initEvent("click", true, true);
-			document.querySelector("iframe").querySelector(".bg open").dispatchEvent(e);
-			// document.getElementsByClassName("bg open")[0].dispatchEvent(e);
-		}
-		//初始化加载漫画
-		if(localStorage.getItem(comic_name+"chapter")){
-			setTimeout(function(){history_goto()},100)
-		}
-		else{
-			hishow(1)
-			for(num=0;num<pages[0];num++){
-			  createimg(num);
-			}
-			firstone()
-			localStorage.setItem(comic_name+"chapter",0)
-		}
-		for(c=0;c<chaplen;c++){
-			catalogCreate(c);//生成目录
-		}
-		var timer = setInterval(function(){myTimer()},1000);//时间
-		lazyload();
-		wymusic()//加载网易音乐
-		// window.onload = folder()
-		
-		//时间：
-		function myTimer(){
-			var d=new Date();
-			var t=d.toLocaleTimeString();
-			document.getElementById("time").innerHTML=t;
-			if(auto_boole){var tem = sum_temn}else{var tem = 0}
-			if(count==parseInt(pages[y-1]-1 + tem)){
-			document.getElementById('the_over').innerHTML='本章节已结束';
-			}else{document.getElementById('the_over').innerHTML='漫画加载中......'}
-		}
-		//获取url参数
-		function GetUrlPara(n)
-		{
-			var url = document.location.toString()
-			var arrUrl = url.split("?")
-			var para = decodeURI(arrUrl[n])
-			return para
-		}
-		function Get_comicname(){
-			var url = document.URL;
-			var url = url.split("/")
-			comic_name = decodeURI(url[url.length-1].replace(".html",""))
-			return comic_name
-		}
-		// 菜单悬浮球
-		var inst_fab = new mdui.Fab('#fab1');
-		// 应用栏
-		var body = document.getElementById('body');
-		document.getElementById('tgns').onclick = function(){
-		    if (body.dataset.status == 'click'){
-				body.dataset.status=''
-		        body.className = 'mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-dark mdui-appbar-with-toolbar';
-			    }
-				else{
-				console.log(body.dataset.status)
-		        body.dataset.status='click';
-				body.className = 'mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-white mdui-appbar-with-toolbar';
-		    }
-		}
-		function show_textfield(){
-			document.getElementById("topage").style.display = "block";
-		}
-		function close_textfield(){
-			document.getElementById("topage").style.display = "none";
-		}
-		function pageto(){
-		document.getElementById(localStorage.getItem(comic_name+"page")).scrollIntoView();console.log('执行了哟')}
-		function topage(){
-			var input_page = parseInt(document.getElementById("topage_input").value)
-			alert(sum_temn+input_page-1)
-			document.getElementById(sum_temn+input_page-1).scrollIntoView()
-		}
-		// 阅读历史跳转
-		function pageto(){document.getElementById(localStorage.getItem(comic_name+"page")).scrollIntoView();console.log('执行了哟')}
-		function hishow(y){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];}
-		function hiGoto(){y = document.getElementById('chaps').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();}
-		function history_goto(){
-			if(y==1&&localStorage.getItem(comic_name+"chapter")==0){
-				console.log('1特殊？！！！')
-				hishow(1)
-				for(num=0;num<pages[0];num++){
-				  createimg(num);
-				}
-				firstone()
-				setTimeout(function(){pageto()},100)
-			}else{
-				console.log('2普通？！！！')
-				hishow(parseInt(localStorage.getItem(comic_name+"chapter"))+1)
-				hiGoto()
-				console.log(localStorage.getItem(comic_name+"page"),sum)
-				setTimeout(function(){pageto()},300)
-			}
-		}
-		//平滑滚动
-		function elementPosition(obj) {
-		  var curleft = 0, curtop = 0;
-		  if (obj.offsetParent) {
-		   curleft = obj.offsetLeft;
-		   curtop = obj.offsetTop;
-		   while (obj = obj.offsetParent) {
-		    curleft += obj.offsetLeft;
-		    curtop += obj.offsetTop;
-		   }
-		  }
-		  return { x: curleft, y: curtop };
-		}
-		function ScrollToControl(id)
-		{
-		 var elem = document.getElementById(id);
-		 var scrollPos = elementPosition(elem).y;
-		 scrollPos = scrollPos - document.documentElement.scrollTop;
-		 var remainder = scrollPos % 50;
-		 var repeatTimes = (scrollPos - remainder) / 50;
-		 ScrollSmoothly(scrollPos,repeatTimes);
-		 window.scrollBy(0,remainder);
-		}
-		var repeatCount = 0;
-		var cTimeout;
-		var timeoutIntervals = new Array();
-		var timeoutIntervalSpeed;
-		function ScrollSmoothly(scrollPos,repeatTimes)
-		{
-		 if(repeatCount < repeatTimes)
-		 {
-		 window.scrollBy(0,50);
-		 }
-		 else
-		 {
-		 repeatCount = 0;
-		 clearTimeout(cTimeout);
-		 return;
-		 }
-		repeatCount++;
-		cTimeout = setTimeout("ScrollSmoothly('"+scrollPos+"','"+repeatTimes+"')",10);
-		}
-		//判断元素是否可见区域内
-		function elementInView(id,sle){
-				if(document.getElementById(id)){
-					rect = document.getElementById(id).getBoundingClientRect()
-					if(sle==1){
-						if(rect.top - window.innerHeight < (wid1/2)*(wid1/localStorage.getItem("wid"))){yInView = true}else{yInView = false}
-					}else{
-						yInView = rect.top < window.innerHeight && rect.bottom > 0
-					}
-					return yInView
-				}
-		}
-		//记录阅读进度
-		function localstorage(){
-			// 判断浏览器是否支持
-			if (typeof(Storage) !== "undefined") {
-			    // 存储
-			    localStorage.setItem(comic_name+"chapter", y-1);
-				localStorage.setItem(comic_name+"page", sum_temn);
-			} else {
-				alert("对不起，您的浏览器不支持Web Storage，无法记录阅读进度。")
-			}
-		}
-		// function lightness(){
-		// 	// document.getElementById('body').setAttribute('class','mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto mdui-appbar-with-toolbar');
-		// 	if(Switch){cover(brightness);Switch = false}
-		// 	else if(Switch == false){cover(brightness0);Switch = true}
-		// }
-		function reloada (){
-<!-- 		<a href="javascript:;" id="nav" style="border-radius:60px;" class="mdui-m-a-1 mdui-color-black mdui-ripple mdui-bottom-nav-active mdui-bottom-nav-scroll-hide"></a> -->
-			var nava =document.getElementById('fa_div')
-			nava.innerHTML=''
-			var frameDiv = document.createElement('a')
-			var bodyFa = document.getElementById("fa_div");//通过id号获取frameDiv 的父类（也就是上一级的节点）
-			bodyFa .appendChild(frameDiv);//把创建的节点frameDiv 添加到父类body 中；
-			frameDiv.setAttribute('href',"javascript:;")
-			frameDiv.setAttribute('id',"nav")
-			frameDiv.setAttribute('style',"border-radius:60px;")
-			frameDiv.setAttribute('class',"mdui-m-a-1 mdui-color-black mdui-ripple mdui-bottom-nav-active mdui-bottom-nav-scroll-hide")
-		}
-		function lazyload(){
-			window.onscroll = function(){
-				var oScrollTop = $(window).scrollTop();
-				if(oScrollTop > sign) {
-					sign = oScrollTop;//更新scrollTop
-					button_group()
-					direction = 'down'
-					//console.log('向下');
-				}
-				if(oScrollTop < sign) {
-					sign = oScrollTop//更新scrollTop
-					button_group1()
-					direction = 'up'
-					//console.log('向上');
-				}
-				for (k=sum_temn;k < sum_temn+pages[y-1]; k++) {
-					if (elementInView(k,1)) {
-						var tem = sum_temn
-						if(auto_boole){var tem = 0}
-						count = k - tem//记录已加载页
-						var Image = document.getElementById(k)
-						//console.log("k：",k)
-						Image.setAttribute('src', Image.getAttribute('src-data'))
-						y = parseInt(Image.getAttribute('data-chapter'))
-						//image[count].setAttribute('src', image[count].getAttribute('src-data'));
-						// console.log(count)
-					}
-					if (elementInView(k,0)) {
-						step = k//记录可见页
-						localStorage.setItem(comic_name+"page", k)
-						// snackbar()
-						document.getElementById('nav').innerHTML = '第'+y+'章,'+(step-sum_temn+1)+'/'+pages[y-1]+'页'
-					}
-					document.getElementById('steps').setAttribute('style','width:'+ 100*((step-sum_temn)/(pages[y-1]-1)) +'%;');//进度指示器
-					Loading = document.getElementById(step)
-					// if(Loading.readyState == 'loading'){console.log('skjguasfgaufvgavfv hjfc bzgjh???!!');Loading.setAttribute('scr','assets/zip.png')}
-				}
-					// console.log(elementInView(k),typeof(elementInView(k)))
-			}
-		}
-		//菜单
-		function actionToggle(){
-			var action = document.querySelector('#action');
-			action.classList.toggle('active')
-		}
-		//设置菜单
-		function action_setting(sel){
-			var action = document.querySelector('#action_all');
-			if(sel){
-				action.classList.toggle('allout')
-			}else{action.classList.toggle('hide')}
-		}
-		function action_all(){
-			action_setting(true)
-			action_sliderlight()
-			action_slider()
-			// action_autonext()
-			action_switch()
-			// bookshelf()
-		}
-		//滑条调整漫画宽度
-		function action_slider(){
-			var action = document.querySelector('#slidera');
-			action.classList.toggle('slider')
-		}
-		var slider = new Slider("#slider1", {
-			reversed : true
-		});
-		slider.on("change", function(sliderValue) {
-			console.log(sliderValue.newValue)
-			wid = sliderValue.newValue
-			localStorage.setItem("wid", sliderValue.newValue);
-			for(i=step;i<step+pages[y-1];i++){
-				var Image = document.getElementById(i)
-				Image.setAttribute('style','width:'+localStorage.getItem("wid")+'px');
-			}
-		});
-		function action_sliderlight(){
-			var action = document.querySelector('#sliderb');
-			action.classList.toggle('slider')
-		}
-		var slider = new Slider("#sliderlight", {
-			reversed : true
-		});
-		slider.on("change", function(sliderValue) {
-			console.log(sliderValue.newValue)
-			brightness = sliderValue.newValue
-			document.getElementsByClassName('cover')[0].style.outlineColor = 'rgba(0,0,0,' + brightness + ')';
-			// localStorage.setItem("wid", sliderValue.newValue);
-			// for(var i=0;i<pages[y-1]-1;i++)
-		});
-		//自动下一章开关
-		function autonext_switch(){
-			var tem = document.getElementsByClassName('slider round')
-			if(switch_boole){
-				//alert('开了')
-				mdui.snackbar({
-				  message: '自动下一章已开启'
-				});
-				auto_on()
-				switch_boole = false
-			}else{
-				auto_off()
-				//alert('关了')
-				mdui.snackbar({
-				  message: '自动下一章已关闭'
-				});
-				switch_boole = true}
-		}
-		function button_group(){
-			document.getElementById('fabs').style = 'position: fixed;display: block;width: 5%;height: 5%;bottom: 1%;right: 1%;transform:translateY(300%);transition: transform 0.7s;transition-timing-function:ease;'
-		}
-		function button_group1(){
-			document.getElementById('fabs').style = 'position: fixed;display: block;width: 5%;height: 5%;bottom: 1%;right: 1%;transform:translateY(0%);transition: transform 0.7s;transition-timing-function:ease;'
-		}
-		//书架和帮助
-		function help(){
-			window.open("https://blog.csdn.net/zero_mumu/article/details/107852060",target="_blank");
-		}
-		function bookshelf(){
-			// var action = document.querySelector('#home');
-			// action.classList.toggle('out')
-			window.open("书架.html",target="_self");
-		}
-		//切换开关
-		function action_switch(){
-			var action = document.querySelector('.toggle-button-wrapper');
-			action.classList.toggle('switch')
-		}
-		btn = document.getElementById("load");
-			t = true;
-			btn.onclick = function dian() {
-			if (t) {
-				Uclass = '';
-				URL = img_url_loc;
-			}
-			else {
-				Uclass = uclass;
-				URL = img_url;
-			}
-			t = !t;
-		}
-		function switchto_online(){
-			Uclass = uclass
-			URL = img_url
-			console.log(URL)
-			removeimg_now(y)
-			listimg_next(y)
-			firstone()
-		}
-		function switchto_local(){
-			Uclass = ''
-			URL = img_url_loc
-			console.log(URL)
-			removeimg_now(y)
-			listimg_next(y)
-			firstone()
-		}
-
-		//拖拽效果
-		// $('#action').mousedown(function(e) {
-		//     // e.pageX
-		//     var positionDiv = $(this).offset();
-		//     var distenceX = e.pageX - positionDiv.left;
-		//     var distenceY = e.pageY - positionDiv.top;
-		//     //alert(distenceX)
-		//     // alert(positionDiv.left);
-		
-		// $(document).mousemove(function(e) {
-		// 	var x = e.pageX - distenceX;
-		// 	var y = e.pageY - distenceY;
-		// 		if (x < 0) {
-		// 		x = 0;
-		// 	} 
-		// 	else if (x > $(document).width() - $('#action').outerWidth(true)) {
-		// 		x = $(document).width() - $('#action').outerWidth(true);
-		// 	}
-		// 	if (y < 0) {
-		// 		y = 0;
-		// 	} 
-		// 	else if (y > $(document).height() - $('#action').outerHeight(true)) {
-		// 		y = $(document).height() - $('#action').outerHeight(true);
-		// 	}
-		// 	$('#action').css({
-		// 		'left': x + 'px',
-		// 		'top': y + 'px'
-		// 		});
-		// 	});
-		// 	$(document).mouseup(function() {
-		// 	$(document).off('mousemove');
-		// 		});
-		// 	});
-
-
-		function firstone(){//每次初始先加载2张图片
-			if(pages[y-1]<2){
-				var firstone = pages[y-1]
-			}
-			else{var firstone = 2}
-			for(var i=0;i<firstone;i++){
-				image = document.getElementsByClassName('image');
-				image[i].setAttribute('src', image[i].getAttribute('src-data'));
-				}
-            }
-		
-		var widths = document.getElementsByClassName('image');
-
-    function image_error(image){
-		var img=event.srcElement;
-		image.setAttribute('src', image.getAttribute('src-data'))
-		setTimeout(function(){
-			image.setAttribute('src-data','assets/heart-broken.svg')
-			image.src="assets/heart-broken.svg"
-		},1000)
-		img.οnerrοr=null;// 控制不要一直跳动
-    }
-	function image_loading(image){
-		image.src="assets/zip.png"
-		alert('jkckzfuyzfyvb')
-	}
-		function createimg(n){
-			/*var img = document.createElement('img');
-			img.setAttribute('src-data',Uclass+URL[n]);
-			img.setAttribute('src','assets/loading.gif');
-			img.setAttribute('class','image');
-			img.setAttribute('loading','lazy');
-			img.setAttribute('onerror','image_error(this)');
-			// img.setAttribute('onloadstartNew','image_loading(this)');
-			// img.setAttribute('alt','图片错误');
-			img.setAttribute('style','display: block;height: auto;width:'+wid+'px');
-			img.id = n;*/
-			var div = document.getElementById('div');
-			img = '<img src-data="'+ Uclass+URL[n] +'"src="assets/loading.gif" class="image" loading="lazy" onerror="image_error(this)" style="display: block;height: auto;width:'+ wid +'px" data-chapter='+y+' id="'+ n +'">'
-			//div.appendChild(img);
-			div.innerHTML += img;
-			//div.appendChild(img);
-		}
-		var sum = 0
-		function add_pre(n){
-			if(n>=1){
-				var n=n-1
-				sum = sum - pages[n]+1}
-			else sum = 0
-			return sum
-		}
-		function add_next(n){
-			if(n>=1){
-				var n=n-1
-				sum+=(pages[n-1]-1)}
-			else sum = 0
-			return sum
-		}
-		function add_go(n){
-			if(n>=1){
-				var n=n-1
-				sum = 0
-				for(i=0;i<n;i++){sum+=pages[i]-1;}
-				}
-			else sum = 0
-			return sum
-		}
-		function listimg_pre(n){
-			console.log(n);
-			sum_temn = parseInt(sum) + parseInt(y)-1
-			for(num=0;num<pages[n-1];num++){
-				createimg(sum_temn+num);
-			}
-		}
-
-		function listimg_next(n){
-			console.log(n);
-			sum_temn = parseInt(sum) + parseInt(y)-1
-			if(chap_name[y-1]&&auto_boole){//阅读完毕提示
-				document.getElementById('div').innerHTML += '<p data-sum='+sum+' id=abstruct-'+(y-1)+'>已读完：'+chap_name[y-2]+'<br/><br/><br/></p>';
-				document.getElementById('div').innerHTML += '<p data-sum='+sum+' id=abstruct-'+(y-1)+'>下一章：'+chap_name[y-1]+'</p>';
-			}
-			for(num=0;num<pages[n-1];num++){
-				createimg(sum_temn+num);
-			}
-		}
-		
-		function removeimg_pre(n){
-			// console.log(sum);
-			if(sum>=0){
-			var div1 = document.getElementById("div");
-			for(i=sum_temn+pages[n-1];i<sum_temn+pages[n-1]+pages[n];i++){
-				console.log(i)
-				document.getElementById(i).remove();
-				}
-			}
-		}
-		function removeimg_now(n){
-			for(i=sum_temn;i<sum_temn+pages[n-1];i++){
-				// console.log(i)
-				document.getElementById(i).remove();
-				}
-		}
-		function removeimg_next(n,sel){
-			if(sel){
-				// console.log(sum);
-				// console.log(sel)
-				if(sum>0){
-				var div1 = document.getElementById("div");
-				for(i=sum_temn-pages[n-2];i<sum_temn;i++){
-					// console.log(i)
-					document.getElementById(i).remove();
-					}
-				}
-			}
-		}
-		function topFunction(sel_top) {
-			// console.log(sel_top)
-			if(sel_top){
-				document.body.scrollTop = 0;
-				document.documentElement.scrollTop = 0;
-			}
-		}
-		function next(sel){if(y<chaplen){cnext(sel);topFunction(sel);firstone();show()}}
-		function pre(){if(y>=2){cpre();topFunction(true);firstone();show()}}
-		function cnext(sel){y++;add_next(y);listimg_next(y);removeimg_next(y,sel);firstone();document.getElementById('the_over').innerHTML='漫画加载中......';}
-		function cpre(){y--;add_pre(y);listimg_pre(y);removeimg_pre(y);firstone();document.getElementById('the_over').innerHTML='漫画加载中......';}
-		function show(){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];localstorage();document.getElementById("catalog"+(y-1)).setAttribute("class","mdui-color-grey mdui-shadow-6 mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2");}
-		function Goto(){y = document.getElementById('chaps').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage();}
-		function Goto1(){y = document.getElementById('chaps1').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage()}
-
-		function hide_control(){
-			var action = document.querySelectorAll('.nextpre');
-			for(var i=0;i<action.length;i++){action[i].classList.toggle('hide')}
-		}
-		function auto_off(){//关闭自动下一章及参数更新
-			auto_boole = false
-			hide_control()
-			clearInterval(auto_next)
-			document.getElementById('div').innerHTML = ''
-			lazyload()
-			history_goto()
-		}
-		auto_on()
-		function auto_on(){//开启自动下一章及参数更新
-			auto_boole = true
-			hide_control()
-			auto_next = setInterval(function(){
-				if(elementInView('the_over',0)&&document.getElementById('the_over').innerText =='本章节已结束'&&y<pages.length){
-					document.getElementById('the_over').innerHTML = '漫画加载中......'
-					next(false)
-					//alert('abstruct-'+(y-1))
-					document.getElementById('abstruct-'+(y-1)).scrollIntoView(false)
-				}
-				for(i=0;i<pages.length;i++){
-					abstruct_id = 'abstruct-'+String(i+1)
-					if(elementInView(abstruct_id,0)){
-						var abst = document.getElementById(abstruct_id)
-						var tem = abstruct_id.split('-')
-						if(direction=='up'){
-							y = parseInt(tem[1])
-							localStorage.setItem(comic_name+"chapter", y-1);
-							sum = parseInt(abst.getAttribute('data-sum'))+1-pages[y-1]
-							// console.log('add pre')
-						}else{
-							y = parseInt(tem[1])+1
-							localStorage.setItem(comic_name+"chapter", y-1);
-							sum = parseInt(abst.getAttribute('data-sum'))
-							// console.log('add next')
-						}
-						sum_temn = parseInt(sum) + parseInt(y)-1
-					}
-				}
-			},200)
-		}
-		// 目录
-		var inst_drawer = new mdui.Drawer('#drawer');
-		document.getElementById('toggle').addEventListener('click', function () {
-			inst_drawer.toggle();
-			if(machine=='other'){action_inout()}
-		});
-		function cashow(y){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];catalog = document.getElementById("catalog"+(y-1));catalog.setAttribute("class","mdui-color-grey mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2");}
-		function catalogCreate(n){
-				var a = document.createElement('a')
-				a.setAttribute("onclick","catalogGoto("+ (n+1) +")")
-				a.setAttribute("class","mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2")
-				a.id = "catalog"+n
-				var drawer_ul = document.getElementById('drawer_ul')
-				drawer_ul.appendChild(a)
-				document.getElementById("catalog"+n).innerHTML=chap_name[n];
-			}
-		function catalogGoto(y){cashow(y);topFunction(true);Goto()}
-
-		//显示遮罩
-		function cover(brightness) {
-			// if (typeof(ndiv) == 'undefined') {
-			// 	ndiv = document.createElement('div');
-			// 	ndiv.setAttribute('style', 'position:fixed;top:0;left:0;outline:5000px solid;z-index:99999;');
-			ncover = document.getElementsByClassName('cover')
-			// 	ncover[0].appendChild(ndiv)
-			// } else {
-			// 	ndiv.style.display = '';
-			// }
-			ncover[0].style.outlineColor = 'rgba(0,0,0,' + brightness + ')';
-		}
-		document.onkeydown = function(event){//键盘事件左右键控制翻章节
-			var e=event || window.event;
-			if(e&&e.keyCode == 37){pre()}
-			if(e&&e.keyCode == 39){next()}
-		}
-		// function OpenNight(){cover(brightness = 0.3);}
-		window.addEventListener('keydown', function(e) {
-			if (e.altKey && e.keyCode == 38) { //Alt+↑:增加亮度
-				if (brightness - 0.01 >= 0) cover(brightness -= 0.01);
-			}
-			if (e.altKey && e.keyCode == 40) { //Alt+↓:降低亮度
-				if (brightness + 0.01 < 0.95) cover(brightness += 0.01);
-			}
-		}, false);
-		
-function fullClick(){
-   	//全屏
-	var el = window.parent.document.documentElement;
-    var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;      
-    if(typeof rfs != "undefined" && rfs) {
-        rfs.call(el);
-    };
-    
-    //退出全屏
-    var el2 = window.parent.document;
-    if (el2.exitFullscreen) {
-        el2.exitFullscreen();  
-    }
-    else if (el2.mozCancelFullScreen) {  
-        el2.mozCancelFullScreen();  
-    }  
-    else if (el2.webkitCancelFullScreen) {  
-        el2.webkitCancelFullScreen();  
-    }  
-    else if (el2.msExitFullscreen) {  
-        el2.msExitFullscreen();  
-    } 
-    if(typeof cfs != "undefined" && cfs) {
-        cfs.call(el);
-    }
-    return false;
-}
-function snackbar () {
-  mdui.snackbar({
-	timeout: 0,
-    message: '第'+y+'章,'+step+'/'+pages[y-1]+'页',
-    position: 'bottom'
-  })
-}
-  </script>
   </body>
+  <script>
+	  var tem = ''
+	  var tem1 = ''
+	  var y = 1
+	  var sum_page = 1
+	  var count = step = 3
+	  var wait_t = 1;
+	  var sum_temn = 0
+	  var brightness = 0.01;
+	  var brightness0 = 0
+	  var Switch = true
+	  var sign = 80
+	  var music_boole = false
+	  var music_hide_boole = true
+	  var auto_boole = true
+	  var switch_boole = false
+	  var hide_boole = true
+	  var fadeimg_boole = true
+	  var comic_name = GetUrlPara(1)
+	  var loc_import = GetUrlPara(2)
+	  if(loc_import=='locimport'){
+	  	uclass = ''
+	  }else{uclass = 'http'}
+	  var Uclass = uclass
+	  var path = window.location.href;
+	  var path = decodeURI(path).replace(/com.html/g,"");
+	  
+	  document.getElementById("title").innerHTML = comic_name
+	  document.getElementById("title1").innerHTML = comic_name
+	  
+	  var img_url = img_url[comic_name]
+	  var chap_name = Object.values(chap_name[comic_name])//章节名称
+	  var pages = Object.values(pages[comic_name])//每章页数
+	  var chaplen = chap_name.length;//获取到章节总数
+	  
+	//获取url参数
+	function GetUrlPara(n)
+	{
+		var url = document.location.toString()
+		var arrUrl = url.split("?")
+		var para = decodeURI(arrUrl[n])
+		return para
+	}
+
+	  if(setting['current_import_src'] == setting['default_import_src']){
+	  	import_src = '漫画导入'
+	  }else{
+	  	import_src = setting['current_import_src']
+	  }
+	  if(loc_import=='locimport'){
+	  	for(i=0;i<(chaplen);i++){
+	  		sum_page += pages[i]
+	  		}
+	  	for(j=0;j<sum_page-1;j++){
+	  		img_url[j] = import_src + img_url[j]
+	  	}
+	  }else{
+	  	img_url=img_url.split('http');//获取到每页漫画图片地址
+	  	img_url.push(img_url[0]);
+	  	img_url.splice(0,1);
+	  }
+	  
+	  URL = img_url
+	  img_url_loc = new Array();
+	  k=0;
+	  for(i=0;i<(chaplen);i++){
+	  	// console.log(i);
+	  	//console.log(pages[i]);
+	  	for(j=0;j<pages[i];j++){
+	  			img_url_loc[k]="Download\\"+comic_name+"\\"+chap_name[i]+"\\"+j+".jpg";
+	  		// console.log(img_url_loc[k]);
+	  		k++;
+	  	}
+	  }
+	  
+	  for(j=0;j<2;j++){
+	  	document.getElementsByClassName("sumchaps form-control")[j].setAttribute("value",chaplen)
+	  }
+	  
+	  
+	  if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){//设定漫画默认尺寸
+	  	var machine = 'android'
+	  	if(localStorage.getItem("wid")){
+	  		var wid = wid1 = localStorage.getItem("wid")
+	  		document.getElementById("slider1").setAttribute("data-slider-value",wid)
+	  	}else{
+	  		document.getElementById("slider1").setAttribute("data-slider-value",348)
+	  		var wid = wid1 = 348
+	  	}
+	  }else {
+	  	var machine = 'other'
+	  	live2d = document.getElementById("l2d")
+	  	live2d.setAttribute("type", "text/javascript");
+	  	live2d.setAttribute("src","dist/live2d-widget-0.8.3/autoload.js")
+	  	// more = document.getElementById("action")
+	  	// more.setAttribute("style","bottom: 350px;left: 2%;")
+	  	if(localStorage.getItem("wid")){
+	  		var wid = wid1 = localStorage.getItem("wid")
+	  		document.getElementById("slider1").setAttribute("data-slider-value",wid)
+	  	}else{
+	  		document.getElementById("slider1").setAttribute("data-slider-value",677)
+	  		var wid = wid1 = 677
+		}
+	  }
+  </script>
+  <script src="dist/js/阅读.js"></script>
 </html>
