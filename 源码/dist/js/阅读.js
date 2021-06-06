@@ -309,7 +309,7 @@
 		reversed : true
 	});
 	slider.on("change", function(sliderValue) {
-		console.log(sliderValue.newValue)
+		//console.log(sliderValue.newValue)
 		wid = sliderValue.newValue
 		localStorage.setItem("wid", sliderValue.newValue);
 		for(i=step;i<step+pages[y-1];i++){
@@ -325,7 +325,7 @@
 		reversed : true
 	});
 	slider.on("change", function(sliderValue) {
-		console.log(sliderValue.newValue)
+		//console.log(sliderValue.newValue)
 		brightness = sliderValue.newValue
 		document.getElementsByClassName('cover')[0].style.outlineColor = 'rgba(0,0,0,' + brightness + ')';
 		// localStorage.setItem("wid", sliderValue.newValue);
@@ -424,6 +424,27 @@
 		listimg_next(y)
 		firstone()
 	}
+	//放大镜
+	var zoom_list = []
+	$('#zoom_close').fadeOut();
+	function zoom(self){
+		$(self).lightzoom({
+				zoomPower   : 2,    //Default
+				glassSize   : 180,  //Default
+			});
+		zoom_list.push($(self).attr('id'))
+		$('#zoom_close').fadeIn();
+	}
+	function del_zoom(){
+		$('#glass').unbind('mousemove');
+		for(i=0;i<zoom_list.length;i++){
+			$('#'+String(zoom_list[i])).unbind('mousemove');
+		}
+		zoom_list = []
+		$('#glass').remove();
+		$("body").css("cursor","default");
+		$('#zoom_close').fadeOut()
+	}
 
 /* 		拖拽效果
 	$('#action').mousedown(function(e) {
@@ -475,6 +496,8 @@
 
 function image_error(image){
 	var img=event.srcElement;
+	image.setAttribute('src-error-data',image.getAttribute('src-data'))
+	image.setAttribute('onclick','reload_image(this)')
 	image.setAttribute('src', image.getAttribute('src-data'))
 	setTimeout(function(){
 		image.setAttribute('src-data','assets/heart-broken.svg')
@@ -482,9 +505,15 @@ function image_error(image){
 	},1000)
 	img.οnerrοr=null;// 控制不要一直跳动
 }
+function reload_image(image){
+	image.setAttribute('src-data',image.getAttribute('src-error-data'))
+	image.setAttribute('src', image.getAttribute('src-error-data'))
+	$(image).fadeOut()
+	$(image).fadeIn()
+	console.log('reload!!!!')
+}
 function image_loading(image){
 	image.src="assets/zip.png"
-	alert('jkckzfuyzfyvb')
 }
 	function createimg(n){
 		/*var img = document.createElement('img');
@@ -498,7 +527,7 @@ function image_loading(image){
 		img.setAttribute('style','display: block;height: auto;width:'+wid+'px');
 		img.id = n;*/
 		var div = document.getElementById('div');
-		img = '<img src-data="'+ Uclass+URL[n] +'"src="assets/loading.gif" class="image" loading="lazy" draggable="false" onerror="image_error(this)" style="display: block;height: auto;width:'+ wid +'px" data-chapter='+y+' id="'+ n +'">'
+		img = '<img src-data="'+ Uclass+URL[n] +'"src="assets/loading.gif" class="image" onclick="zoom(this)" loading="lazy" draggable="false" onerror="image_error(this)" style="display: block;height: auto;width:'+ wid +'px" data-chapter='+y+' id="'+ n +'">'
 		//div.appendChild(img);
 		div.innerHTML += img;
 		//div.appendChild(img);
@@ -534,13 +563,21 @@ function image_loading(image){
 			createimg(sum_temn+num);
 		}
 	}
-
+	
+	function remove_oldimg(){
+		selector = "[data-chapter='"+(y-3)+"']"
+		console.log(selector)
+		if($(selector).length != 0){
+			setTimeout("$(selector).remove()", 2000)
+		}
+	}
 	function listimg_next(n){
 		console.log(n);
 		sum_temn = parseInt(sum) + parseInt(y)-1
 		if(chap_name[y-1]&&auto_boole){//阅读完毕提示
-			document.getElementById('div').innerHTML += '<p style="font-weight: 1000"; data-sum='+sum+' id=abstruct-'+(y-1)+'>已读完：'+chap_name[y-2]+'<br/><br/><br/></p>';
-			document.getElementById('div').innerHTML += '<p style="font-weight: 1000"; data-sum='+sum+' id=abstruct-'+(y-1)+'>下一章：'+chap_name[y-1]+'</p>';
+			document.getElementById('div').innerHTML += '<p style="font-weight: 1000" class="abstruct" data-sum='+sum+' data-chapter='+(y-1)+' id=abstruct-'+(y-1)+'>已读完：'+chap_name[y-2]+'<br/><br/><br/></p>';
+			document.getElementById('div').innerHTML += '<p style="font-weight: 1000" class="abstruct" data-sum='+sum+' data-chapter='+y+' id=abstruct-'+(y-1)+'>下一章：'+chap_name[y-1]+'</p>';
+			remove_oldimg();
 		}
 		for(num=0;num<pages[n-1];num++){
 			createimg(sum_temn+num);

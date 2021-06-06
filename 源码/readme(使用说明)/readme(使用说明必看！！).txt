@@ -1,6 +1,9 @@
-详细使用教程：https://blog.csdn.net/zero_mumu/article/details/107852060
+详细使用教程在博客：https://blog.csdn.net/zero_mumu/article/details/107852060
+
 github项目地址: https://github.com/zero0mum/cartoon_crawler
 码云项目地址：https://gitee.com/mumu_zero/cartoon_crawler
+
+有bug可以在github或gitee上先新建一个 issue 然后邮箱联系我
 我的邮箱：mumuwyyx@163.com欢迎你来评论，提意见。
 
 本爬虫爬取的网站为 

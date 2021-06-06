@@ -60,11 +60,11 @@
 			var locimport = new Array()
 			function openweb(web){
 				if(web.getAttribute('comic_type')){
-					window.open('阅读.html?' + web.innerHTML + '?' + web.getAttribute('comic_type'))
+					window.location.href = '阅读.html?' + web.innerHTML + '?' + web.getAttribute('comic_type')
 					console.log('阅读.html?' + web.innerHTML + '?' + web.getAttribute('comic_type'))
 				}
 				else{
-					window.open('阅读.html?' + web.innerHTML)
+					window.location.href = '阅读.html?' + web.innerHTML
 				}
 			}
 			function bounceon(bounce1){
@@ -86,6 +86,10 @@
 				}
 			}
 			inject_cover()
+			$("img").error(function(){
+			  //当图片加载失败时
+			  $(this).attr('src','assets/cover_error.jpg.png');
+			});
 		</script>
 	</body>
 </html>

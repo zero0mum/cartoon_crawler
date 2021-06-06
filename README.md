@@ -12,6 +12,9 @@
 [CSDN博文地址](https://blog.csdn.net/zero_mumu/article/details/107852060)
 
 一个阅读，爬取,导入和下载还有打包漫画的python爬虫
+
+有**bug**可以在github或gitee上先新建一个**issue**然后邮箱联系我。
+
 我的邮箱：mumuwyyx@163.com欢迎你来评论，提意见。
 
  1. **可分章节下载漫画**到本地

@@ -12,6 +12,9 @@ Please see the detailed introduction and help：
 [CSDN blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 
 A Python crawler that crawls and downloads and import comics
+
+If you have **bug**, you can create a new **issue** on Gitub or Gitee and then contact me by email.
+
 My email is mumuwyyx@163.com. You are welcome to comment.
 
 1. **Comic books can be downloaded locally in chapters**

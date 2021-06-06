@@ -314,21 +314,31 @@
 			margin-left: -15px;
 		    bottom:-30px;
 		}
+		/* 放大镜关闭按钮 */
+		#zoom_close{
+			position: fixed;
+			right: 5%;
+			top: 60%;
+		}
   </style>
 
   </head>
   <body id="body" class="mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto mdui-appbar-with-toolbar mdui-bottom-nav-fixed" data-status="click" style="zoom: 1;">
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script src="dist/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+	<script src="dist/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script src="dist/bootstrap-3.3.7-dist/js/bootstrap-slider.min.js"></script>
 	<script type="text/javascript" src="dist/bootstrap-3.3.7-dist/js/buttons.js"></script>
+	<script type="text/javascript" src="dist/Zoom/lightzoom.js"></script>
+	<link href="dist/Zoom/glassstyle.css" rel="stylesheet">
 	<script src="dist/mdui-v1.0.1/js/mdui.min.js"></script>
 	<script type="text/javascript" src="dist/data.json"></script>
 	<script type="text/javascript" src="dist/网易音乐.json"></script>
 	<script id="l2d"></script>
 	<!-- <link rel="stylesheet" type="text/css" href="dist/fontawesome-free-5.15.1-web/css/fontawesome.min.css"/> -->
+	<link rel="stylesheet" type="text/css" href="dist/jquery-ui-1.12.1.custom/jquery-ui.min.css"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="dist/bootstrap-3.3.7-dist/css/buttons.min.css"/>
 	<link rel="stylesheet" type="text/css" href="dist/mdui-v1.0.1/css/mdui.min.css"/>
@@ -493,6 +503,8 @@
 			<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
 		</div>
 	</div>
+	<!-- 放大镜关闭按钮 -->
+	<button id="zoom_close" onclick="del_zoom()" mdui-tooltip="{content: '关闭放大镜'}" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">close</i></button>
 	<!-- 页数跳转滑条 -->
 	<div id="chip_dad">
 		<div style="position: relative; bottom: 3%;">
@@ -554,7 +566,7 @@
 	  var path = decodeURI(path).replace(/com.html/g,"");
 	  
 	  document.getElementById("title").innerHTML = comic_name
-	  document.getElementById("title1").innerHTML = comic_name
+	  document.getElementById("title1").innerHTML = "<a onclick='bookshelf()' style='color: darkorange; cursor: pointer;' >书架</a>" + " > " + comic_name;
 	  
 	  var img_url = img_url[comic_name]
 	  var chap_name = Object.values(chap_name[comic_name])//章节名称
@@ -630,6 +642,7 @@
 	  		var wid = wid1 = 677
 		}
 	  }
+	  $("#fabs").draggable()
   </script>
   <script src="dist/js/阅读.js"></script>
 </html>

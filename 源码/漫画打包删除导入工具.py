@@ -609,18 +609,21 @@ class Comic:
                 print(f'pages: {pages}; list_t: {list_t}')
 
                 pagestem = dict(zip(list_t,pages))
-                if (os.path.exists(pages_path)):
+                if (os.path.exists(pages_path)):#如果dist目录下的pages.json存在
                     jdata = []
                     with open(pages_path,"r",encoding='utf-8') as jsonFile:
                         jdata = json.load(jsonFile)
                         jdata = "{" + str(jdata)[1:-1] + ","+"'"+names[x]+"'"+ ':""}'
                         jdata = eval(jdata)
                         jdata[names[x]] = pagestem.copy()
+                else:
+                    jdata = {}
+                    jdata[names[x]] = pagestem.copy()
                 create_file(pages_path,json.dumps(jdata,ensure_ascii=False),"w")#保存漫画页数
                 pages = []
 
                 # 封面写入
-                cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class='mdui-ripple mdui-hoverable mdui-card mdui-col-md-2 mdui-col-xs-6'><div class='mdui-ripple mdui-hoverable mdui-card-media'><a href='阅读.html?"""+names[x]+"""?locimport' target="_blank"><img src='"""+cover_html+"""'/></a><div class='mdui-card-media-covered'><div class='mdui-card-primary'><div style='font-weight:900;font-size: large;'>"""+names[x]+"""</div></div></div></div></div>"""
+                cover = """<div onmouseover='bounceon(this)' onmouseout='bounceoff(this)' class='mdui-ripple mdui-hoverable mdui-card mdui-col-md-2 mdui-col-xs-6'><div class='mdui-ripple mdui-hoverable mdui-card-media'><a href='阅读.html?"""+names[x]+"""?locimport'><img src='"""+cover_html+"""'/></a><div class='mdui-card-media-covered'><div class='mdui-card-primary'><div comic_type='locimport'; style='font-weight:900;font-size: large;' onclick='openweb(this)';>"""+names[x]+"""</div></div></div></div></div>"""
                 if (os.path.exists(coverjson_path)):
                     with open(coverjson_path,"r",encoding='utf-8') as jsonFile:
                         jcover = json.load(jsonFile)
@@ -652,7 +655,7 @@ class Comic:
                 else:
                     img_data = {}
                     # print(n)
-                    img_data[names[n]] = img_src
+                    img_data[names[x]] = img_src
                 create_file(img_path,json.dumps(img_data,ensure_ascii=False),"w")#保存漫画图片地址
                 img_src = []
                 json_write(setting_path,dirs[x],1)
