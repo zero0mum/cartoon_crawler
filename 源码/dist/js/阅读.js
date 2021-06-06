@@ -577,7 +577,12 @@ function image_loading(image){
 		if(chap_name[y-1]&&auto_boole){//阅读完毕提示
 			document.getElementById('div').innerHTML += '<p style="font-weight: 1000" class="abstruct" data-sum='+sum+' data-chapter='+(y-1)+' id=abstruct-'+(y-1)+'>已读完：'+chap_name[y-2]+'<br/><br/><br/></p>';
 			document.getElementById('div').innerHTML += '<p style="font-weight: 1000" class="abstruct" data-sum='+sum+' data-chapter='+y+' id=abstruct-'+(y-1)+'>下一章：'+chap_name[y-1]+'</p>';
+			$('#the_over').css('display','none')
 			remove_oldimg();
+			if(pages[y-1]>30){
+				WaitTime = pages[y-1]/30
+			}else{WaitTime = 1}
+			setTimeout(function(){$('#the_over').css('display','block')},WaitTime*1000)
 		}
 		for(num=0;num<pages[n-1];num++){
 			createimg(sum_temn+num);
