@@ -41,6 +41,15 @@
 		.nextpre.hide{
 			visibility: hidden;
 		}
+		#cover{
+			background:gray;
+			position:fixed;
+			left:0px;
+			top:0px;
+			z-index:20;
+			filter:alpha(opacity=60);
+			opacity:0.6;
+		}
 		#action_all{
 			visibility: visible;
 			position: fixed;
@@ -341,6 +350,11 @@
 	<link rel="stylesheet" type="text/css" href="dist/bootstrap-3.3.7-dist/css/buttons.min.css"/>
 	<link rel="stylesheet" type="text/css" href="dist/mdui-v1.0.1/css/mdui.min.css"/>
 	<link rel="stylesheet" type="text/css" href="dist/bootstrap-3.3.7-dist/css/bootstrap-slider.min.css"/>
+		<!-- 遮罩 -->
+		<div id="CoverLoading" style="display:none;">
+			<div class="mdui-spinner mdui-spinner-colorful" style="position: fixed; left: 50%;margin-left: -20px; top: 50%;margin-top: -20px; z-index:9999;"></div>
+			<div id="cover"></div>
+		</div>
 		<div class="cover" style="position:fixed;top:0;left:0;outline:rgba(0,0,0,0) 5000px solid;z-index:99999;"></div>
 		<p id='time' style="position: fixed;left: 0px;top: 0%"></p>
 		<!-- 应用栏 -->
@@ -410,9 +424,9 @@
 				</label>
 			</div>
 			<div class="nextpre">
-				<button data-toggle="tooltip" type="button" onclick=pre() mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
-				<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction(true) mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
-				<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
+				<button data-toggle="tooltip" type="button" onclick="ShowCover();setTimeout(function(){pre();CloseCover();},100)" mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<button data-toggle="tooltip" type="button" onclick="ShowCover();setTimeout(function(){Goto();show();topFunction(true);CloseCover();},100)" mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
+				<button data-toggle="tooltip" type="button" onclick="ShowCover();setTimeout(function(){next(true);CloseCover();},100)" mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
 				<p><br/></p>
 			</div>
 		</div>
@@ -496,9 +510,9 @@
 			</label>
 		</div>
 		<div class="nextpre">
-			<button data-toggle="tooltip" type="button" onclick=pre() mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=Goto();show();topFunction(true) mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
-			<button data-toggle="tooltip" type="button" onclick=next(true) mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
+			<button data-toggle="tooltip" type="button" onclick="ShowCover();setTimeout(function(){pre();CloseCover();},100)" mdui-tooltip="{content: '上一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-left"></span></button>
+			<button data-toggle="tooltip" type="button" onclick="ShowCover();setTimeout(function(){Goto();show();topFunction(true);CloseCover();},100)" mdui-tooltip="{content: '跳转'}" id='bt' class="class='button button-raised button-circle button-action"><span class="glyphicon glyphicon-ok"></span></button>
+			<button data-toggle="tooltip" type="button" onclick="ShowCover();setTimeout(function(){next(true);CloseCover();},100)" mdui-tooltip="{content: '下一章'}" class='button button-3d button-pill button-action button-small'><span class="glyphicon glyphicon-chevron-right"></span></button>
 		</div>
 	</div>
 	<!-- 放大镜关闭按钮 -->
@@ -508,8 +522,8 @@
 		<div style="position: relative; bottom: 3%;">
 			<div id="nextpre_fixed" class="nextpre" style="position: fixed; bottom: 3%; left: 50%; margin-left: -225px; width: 450px;display: block;height: 70px;">
 				<!-- <button style="position: absolute; bottom: 50%; left: 0px; opacity: 0.85;background-color: #4E342E;" data-toggle="tooltip" type="button" onclick="pre()" mdui-tooltip="{content: '上一章'}" class="button button-pill button-small"><span class="glyphicon glyphicon-chevron-left"></span></button> -->
-				<button style="position: absolute; bottom: 50%; left: 10%; opacity: 0.85;" onclick="pre()" mdui-tooltip="{content: '上一话'}" id="prebt" class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-brown"><i class="mdui-icon material-icons">chevron_left</i></button>
-				<button style="position: absolute; bottom: 50%; right : 10%; opacity: 0.85;" onclick="next(true)" mdui-tooltip="{content: '下一话'}" id="prebt" class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-brown"><i class="mdui-icon material-icons">chevron_right</i></button>
+				<button style="position: absolute; bottom: 50%; left: 10%; opacity: 0.85;" onclick="ShowCover();setTimeout(function(){pre();CloseCover();},100)" mdui-tooltip="{content: '上一话'}" id="prebt" class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-brown"><i class="mdui-icon material-icons">chevron_left</i></button>
+				<button style="position: absolute; bottom: 50%; right : 10%; opacity: 0.85;" onclick="ShowCover();setTimeout(function(){next(true);CloseCover();},100)" mdui-tooltip="{content: '下一话'}" id="prebt" class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-brown"><i class="mdui-icon material-icons">chevron_right</i></button>
 				<!-- <button style="position: absolute; bottom: 50%; right : 0px; opacity: 0.85;background-color: #4E342E;" data-toggle="tooltip" type="button" onclick="next(true)" mdui-tooltip="{content: '下一章'}" class="button button-pill button-small"><span class="glyphicon glyphicon-chevron-right"></span></button> -->
 			</div>
 			<div id="topage_box" class="mdui-text-color-theme-text" style="position: fixed; bottom: 3%;left: 50%;margin-left: -140px;width: 280px;">

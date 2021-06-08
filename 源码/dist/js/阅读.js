@@ -64,7 +64,8 @@
 	}
 	//初始化加载漫画
 	if(localStorage.getItem(comic_name+"chapter")){
-		setTimeout(function(){history_goto()},100)
+		ShowCover();
+		setTimeout(function(){history_goto();CloseCover();},100)
 	}
 	else{
 		hishow(1)
@@ -577,12 +578,7 @@ function image_loading(image){
 		if(chap_name[y-1]&&auto_boole){//阅读完毕提示
 			document.getElementById('div').innerHTML += '<p style="font-weight: 1000" class="abstruct" data-sum='+sum+' data-chapter='+(y-1)+' id=abstruct-'+(y-1)+'>已读完：'+chap_name[y-2]+'<br/><br/><br/></p>';
 			document.getElementById('div').innerHTML += '<p style="font-weight: 1000" class="abstruct" data-sum='+sum+' data-chapter='+y+' id=abstruct-'+(y-1)+'>下一章：'+chap_name[y-1]+'</p>';
-			$('#the_over').css('display','none')
 			remove_oldimg();
-			if(pages[y-1]>30){
-				WaitTime = pages[y-1]/30
-			}else{WaitTime = 1}
-			setTimeout(function(){$('#the_over').css('display','block')},WaitTime*1000)
 		}
 		for(num=0;num<pages[n-1];num++){
 			createimg(sum_temn+num);
@@ -636,11 +632,11 @@ function image_loading(image){
 	}
 	function next(sel){if(y<chaplen){cnext(sel);topFunction(sel);firstone();show()}}
 	function pre(){if(y>=2){cpre();topFunction(true);firstone();show()}}
-	function cnext(sel){y++;fade_img(fadeimg_boole);add_next(y);listimg_next(y);removeimg_next(y,sel);firstone();fade_img();document.getElementById('the_over').innerHTML='漫画加载中......';}
-	function cpre(){y--;fade_img(fadeimg_boole);add_pre(y);listimg_pre(y);removeimg_pre(y);firstone();fade_img();document.getElementById('the_over').innerHTML='漫画加载中......';}
+	function cnext(sel){y++;add_next(y);listimg_next(y);removeimg_next(y,sel);firstone();document.getElementById('the_over').innerHTML='漫画加载中......';}
+	function cpre(){y--;add_pre(y);listimg_pre(y);removeimg_pre(y);firstone();document.getElementById('the_over').innerHTML='漫画加载中......';}
 	function show(){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];localstorage();document.getElementById("catalog"+(y-1)).setAttribute("class","mdui-color-grey mdui-shadow-6 mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2");}
-	function Goto(){y = document.getElementById('chaps').value;fade_img(fadeimg_boole);add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();fade_img();localstorage();}
-	function Goto1(){y = document.getElementById('chaps1').value;fade_img(fadeimg_boole);add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();fade_img();localstorage()}
+	function Goto(){y = document.getElementById('chaps').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage();}
+	function Goto1(){y = document.getElementById('chaps1').value;add_go(y);document.getElementById('div').innerHTML="";listimg_next(y);firstone();localstorage()}
 
 	function hide_control(){
 		var action = document.querySelectorAll('.nextpre');
@@ -653,7 +649,7 @@ function image_loading(image){
 		clearInterval(auto_next)
 		document.getElementById('div').innerHTML = ''
 		lazyload()
-		history_goto()
+		ShowCover();setTimeout(function(){history_goto();CloseCover();},100)
 		document.onkeydown = function(event){//键盘事件左右键控制翻章节
 			var e=event || window.event;
 			if(e&&e.keyCode == 37){pre()}
@@ -668,9 +664,9 @@ function image_loading(image){
 		auto_next = setInterval(function(){
 			if(elementInView('the_over',0)&&document.getElementById('the_over').innerText =='本章节已结束'&&y<pages.length){
 				document.getElementById('the_over').innerHTML = '漫画加载中......'
-				next(false)
+				ShowCover();setTimeout(function(){next(false);CloseCover();},100)
 				//alert('abstruct-'+(y-1))
-				document.getElementById('abstruct-'+(y-1)).scrollIntoView(false)
+				setTimeout(function(){document.getElementById('abstruct-'+(y-1)).scrollIntoView(false)},100)
 			}
 			for(i=0;i<pages.length;i++){
 				abstruct_id = 'abstruct-'+String(i+1)
@@ -715,7 +711,7 @@ function image_loading(image){
 	function cashow(y){document.getElementById('chaps').value=y;document.getElementById('chaps1').value=y;document.getElementById('chap_names').innerHTML = chap_name[y-1];document.getElementById("catalog"+(y-1)).setAttribute("class","mdui-color-grey mdui-shadow-6 mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2");}
 	function catalogCreate(n){
 			var a = document.createElement('a')
-			a.setAttribute("onclick","catalogGoto("+ (n+1) +")")
+			a.setAttribute("onclick","ShowCover();setTimeout(function(){catalogGoto("+ (n+1) +");CloseCover();},100)")
 			a.setAttribute("class","mdui-hoverable mdui-list-item mdui-ripple mdx-toc-item mdx-toc-item-h2")
 			a.id = "catalog"+n
 			var drawer_ul = document.getElementById('drawer_ul')
@@ -787,3 +783,19 @@ function snackbar () {
     position: 'bottom'
   })
 }
+function ShowCover(){//显示遮罩
+	document.body.style.overflow = "hidden"
+	$('#the_over').css('display','none')
+	var cover = document.getElementById("cover");
+	cover.style.width = document.documentElement.scrollWidth+"px";
+	cover.style.height = document.documentElement.scrollHeight+"px";
+	document.getElementById("CoverLoading").style.display = "block";
+}
+function CloseCover(){
+	if(pages[y-1]>30){
+		WaitTime = pages[y-1]/30
+	}else{WaitTime = 1}
+	document.body.style.overflow = "visible"
+	document.getElementById("CoverLoading").style.display = "none";
+	setTimeout(function(){$('#the_over').css('display','block')},WaitTime*1000)
+	}
