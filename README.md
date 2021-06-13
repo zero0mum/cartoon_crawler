@@ -2,7 +2,14 @@
 
 #### 介绍
 写来玩的，看到的大佬点个watch, star还有博客上点个赞啥的鼓励一下我吧(๑•̀ㅂ•́)و✧
-[漫画爬虫阅读网页 预览地址：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
+
+漫画爬虫阅读网页 预览地址：
+
+[预览地址1.  https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
+
+[预览地址2.  https://zero0mum.github.io/web/](https://zero0mum.github.io/web/)
+
+
 
 [码云项目地址](https://gitee.com/mumu_zero/cartoon_crawler)
 
@@ -29,10 +36,11 @@
     ![mumu漫画爬虫](https://img-blog.csdnimg.cn/20200816122420888.gif#pic_center)
 
 漫画阅读网页所有功能展开后：
-![漫画爬虫网页所有功能](https://mumu_zero.gitee.io/assets/%E5%9B%BE/%E5%A4%A7%E6%A6%82.jpg)
+
+![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部展开.jpg)
 
 收起时：
-![正常](https://mumu_zero.gitee.io/assets/%E5%9B%BE/%E6%AD%A3%E5%B8%B8.jpg)
+![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部收起.jpg)
 
 漫画删除打包导入工具：
 
@@ -42,6 +50,10 @@
 python3.8.X
 
 依赖库：BeautifulSoup, tqdm, requests ,lxml, selenium, pydub, ffmpeg, simpleaudio
+
+- 网页使用boostrap+mdui，左下角小人使用的是stevenjoezhang 的[live2d-widget](https://github.com/stevenjoezhang/live2d-widget)
+- python GUI 编程使用pyside2
+- 网页放大镜工具：作者：Jafar Akhondali 的 [lightzoom](https://github.com/JafarAkhondali/lightzoom)
 
 
 #### 安装教程

@@ -2,7 +2,13 @@
 
 #### Description
 When you see it, click watch, star and like it on the blog to encourage me(๑•̀ㅂ•́)و✧
-[Cartoon crawler page preview address：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
+Cartoon crawler reading page preview address:
+
+[Preview address1. https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
+
+[preview address 2. https://zero0mum.github.io/web/](https://zero0mum.github.io/web/)
+
+
 
 [gitee project address](https://gitee.com/mumu_zero/cartoon_crawler)
 
@@ -29,10 +35,10 @@ The crawl process：
   ![mumu漫画爬虫](https://img-blog.csdnimg.cn/20200816122420888.gif#pic_center)
 
 Comic reading page after all features are deployed：
-![漫画爬虫网页所有功能](https://mumu_zero.gitee.io/assets/%E5%9B%BE/%E5%A4%A7%E6%A6%82.jpg)
+![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部展开.jpg)
 
 When you put it away：
-![正常](https://mumu_zero.gitee.io/assets/%E5%9B%BE/%E6%AD%A3%E5%B8%B8.jpg)
+![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部收起.jpg)
 
 delete, zip, import tool:
 
@@ -43,6 +49,10 @@ delete, zip, import tool:
 python3.8.X
 
 Dependent libraries: BeautifulSoup,  tqdm, requests ,lxml, selenium, pydub, ffmpeg, simpleaudio
+
+- web use boostrap + mdui, lower left SIMS use stevenjoezhang [live2d - widget] (https://github.com/stevenjoezhang/live2d-widget)
+- Python GUI programming using Pyside2
+- page magnifying glass tools: author: Jafar Akhondali of [lightzoom] (https://github.com/JafarAkhondali/lightzoom)
 
 #### Installation
 
