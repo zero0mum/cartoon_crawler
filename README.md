@@ -32,15 +32,19 @@
   6. 通过其中的**漫画打包工具**可将下载好的漫画每一章打包为一个zip压缩包，方便在comics++ 布卡漫画 tachiyomi等软件本地漫画功能中使用。
   7. 可通过本地网页阅读下载到本地的漫画
 
-爬取过程:
-    ![mumu漫画爬虫](https://img-blog.csdnimg.cn/20200816122420888.gif#pic_center)
+爬取过程:  ![mumu漫画爬虫](https://img-blog.csdnimg.cn/20200816122420888.gif#pic_center)
+
+
 
 漫画阅读网页所有功能展开后：
+![漫画爬虫功能全部展开](https://mumu_zero.gitee.io/others/漫画爬虫功能全部展开.jpg)
 
-![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部展开.jpg)
+
 
 收起时：
-![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部收起.jpg)
+![漫画爬虫功能全部收起](https://mumu_zero.gitee.io/others/%E6%BC%AB%E7%94%BB%E7%88%AC%E8%99%AB%E5%8A%9F%E8%83%BD%E5%85%A8%E9%83%A8%E6%94%B6%E8%B5%B7.jpg)
+
+
 
 漫画删除打包导入工具：
 

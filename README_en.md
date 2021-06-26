@@ -32,13 +32,19 @@ My email is mumuwyyx@163.com. You are welcome to comment.
 7. The web page can automatically record the progress of comics reading (stored through the browser localStorage)
 
 The crawl process：
-  ![mumu漫画爬虫](https://img-blog.csdnimg.cn/20200816122420888.gif#pic_center)
+![mumu漫画爬虫](https://img-blog.csdnimg.cn/20200816122420888.gif#pic_center)
+
+
 
 Comic reading page after all features are deployed：
-![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部展开.jpg)
+![Comic reading page after all features are deployed](https://mumu_zero.gitee.io/others/漫画爬虫功能全部展开.jpg)
+
+
 
 When you put it away：
-![](C:\Users\HASEE\Desktop\漫画爬虫csdn\漫画爬虫功能全部收起.jpg)
+![When you put it away](https://mumu_zero.gitee.io/others/%E6%BC%AB%E7%94%BB%E7%88%AC%E8%99%AB%E5%8A%9F%E8%83%BD%E5%85%A8%E9%83%A8%E6%94%B6%E8%B5%B7.jpg)
+
+
 
 delete, zip, import tool:
 
