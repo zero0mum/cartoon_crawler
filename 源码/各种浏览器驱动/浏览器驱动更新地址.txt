@@ -1,6 +1,6 @@
 
 谷歌Chrome
-http://chromedriver.storage.googleapis.com/index.html
+https://chromedriver.storage.googleapis.com/index.html
 火狐FireFox
 https://github.com/mozilla/geckodriver/releases
 微软Edge

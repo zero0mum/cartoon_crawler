@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import requests,time,os,shutil,sys,shutil,urllib,json,execjs
+import requests,time,os,sys,shutil,urllib,json,execjs
 from pydub import AudioSegment
 from pydub.playback import play
 from bs4 import BeautifulSoup
@@ -11,7 +11,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 caps = DesiredCapabilities().INTERNETEXPLORER
-
 options = webdriver.IeOptions()
 options.page_load_strategy = 'eager'#ie无图
 
@@ -95,7 +94,7 @@ title = """
 """
 print(title)
 print('建议先在浏览器内打开这几个漫画网站进行漫画的搜索选择，再进行爬取')
-webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】优酷漫画: https://www.ykmh.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】1234漫画：http://www.mh1234.com/','【4】Xmanhua(X漫画)：http://www.xmanhua.com/','【5】动漫之家','【6】MangaPanda：http://mangapanda.cc/']
+webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】优酷漫画: https://www.ykmh.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】1234漫画：https://www.zxkai.com/','【4】Xmanhua(X漫画)：http://www.xmanhua.com/','【5】动漫之家','【6】MangaPanda：http://mangapanda.cc/']
 for x in range(4):
   print(webcho[x])
 webchoice = int (input('请输入想使用的漫画网站的序号：'))
@@ -164,8 +163,8 @@ url_bn = "https://www.bnmanhua.com"
 url_bn1 = "https://www.bnmanhua.com/search.html"
 url_yk = "https://www.ykmh.com"
 url_yk1 = 'https://www.ykmh.com/search/?keywords='
-url_1234 = 'http://www.mh1234.com'
-url_12341 = 'https://www.mh1234.com/search/?keywords='
+url_1234 = 'https://www.zxkai.com'
+url_12341 = 'https://www.zxkai.com/search/?keywords='
 url_xm = 'http://www.xmanhua.com'
 url_xm1 = 'http://www.xmanhua.com/search?title='
 url_dm1 = 'https://www.dmzj.com/dynamic/o_search/index'
@@ -207,7 +206,7 @@ headers_wx = {
 headers_1234 = {
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,hu;q=0.5',
-    'Referer': 'http://www.mh1234.com/',
+    'Referer': 'https://www.zxkai.com/',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 
 def remove_file(path):
@@ -549,7 +548,7 @@ elif(webchoice==4):
   if(listchap==[]):
     print("该漫画已被下架！！，请前往原网页查看")
     restart_program()
-  create_file('C:\\Users\\HASEE\\Desktop\\漫画pc\\漫画爬虫\\1234res2.html',res2,"w")
+  # create_file('C:\\Users\\HASEE\\Desktop\\漫画pc\\漫画爬虫\\1234res2.html',res2,"w")
   for strchap in listchap:
     chapterName.append(strchap.select('div>h3')[0].get_text())#多章节选择章节名称获取
   # [s.extract() for s in soup1('i')]
@@ -1044,7 +1043,13 @@ else:
     var url = chapterImages;
     return url;
     """
-    images = bro.execute_script(js3)
+    try:
+      images = bro.execute_script(js3)
+    except:
+      time.sleep(3)
+      print("刷新")
+      bro.execute_script("location.reload()")
+
     while True:
       if images:
         ActionChains(bro).send_keys(Keys.ESCAPE).perform()
@@ -1056,12 +1061,18 @@ else:
         continue
     # images = str(images[0])
     # images = images.replace('\\','')
-    res3 = bro.page_source
-    soup2 = BeautifulSoup(res3,'lxml')
-    list3 = soup2.select('#images>img')
-    for str3 in list3:
-      image_src.append(str3['src'])
-    image_src=str(image_src[0])
+    try:
+      res3 = bro.page_source
+      soup2 = BeautifulSoup(res3,'lxml')
+      list3 = soup2.select('#images>img')
+      for str3 in list3:
+        image_src.append(str3['src'])
+      image_src=str(image_src[0])
+    except:
+      time.sleep(4)
+      print("刷新2")
+      bro.execute_script("location.reload()")
+      time.sleep(3)
     # print(image_src)
     # print(images)
     
