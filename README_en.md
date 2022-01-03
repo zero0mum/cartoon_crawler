@@ -15,6 +15,7 @@ Cartoon crawler reading page preview address:
 [github project address](https://github.com/zero0mum/cartoon_crawler)
 
 Please see the detailed introduction and help：
+[jianshu Article address](https://www.jianshu.com/p/41f5b7e4baa5)
 [CSDN blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 
 A Python crawler that crawls and downloads and import comics
@@ -68,7 +69,7 @@ The packaged exe file does not need to be installed, download the comic crawler.
 
 #### Instructions
 [Cartoon crawler page preview address：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
-Please see:[CSDN Blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
+Please see:    [jianshu Article address](https://www.jianshu.com/p/41f5b7e4baa5)     [CSDN Blog address](https://blog.csdn.net/zero_mumu/article/details/107852060)
 You can go to the comic website to find the comic you want to see and then open the crawler to crawl.
 Double click to open comic crawler.py
 ONE.

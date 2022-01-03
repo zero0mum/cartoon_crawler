@@ -16,6 +16,7 @@
 [github项目地址](https://github.com/zero0mum/cartoon_crawler)
 
 详细图文介绍和帮助请看：
+[简书文章地址](https://www.jianshu.com/p/41f5b7e4baa5)
 [CSDN博文地址](https://blog.csdn.net/zero_mumu/article/details/107852060)
 
 一个阅读，爬取,导入和下载还有打包漫画的python爬虫
@@ -67,7 +68,7 @@ python3.8.X
 
 #### 使用说明
 [漫画爬虫网页 预览地址：https://mumu_zero.gitee.io/](https://mumu_zero.gitee.io/)
-详细请看：[CSDN博文地址](https://blog.csdn.net/zero_mumu/article/details/107852060)
+详细请看：  [简书文章地址](https://www.jianshu.com/p/41f5b7e4baa5)           [CSDN博文地址](https://blog.csdn.net/zero_mumu/article/details/107852060)
 一.爬取
 可以先到漫画网站上寻找想看的漫画再来打开爬虫爬取。
 双击打开 漫画爬虫.py 或.exe

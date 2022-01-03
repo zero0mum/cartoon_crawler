@@ -1,4 +1,5 @@
-详细使用教程在博客：https://blog.csdn.net/zero_mumu/article/details/107852060
+详细使用教程在博客和简书：https://blog.csdn.net/zero_mumu/article/details/107852060
+[简书文章地址](https://www.jianshu.com/p/41f5b7e4baa5)
 
 github项目地址: https://github.com/zero0mum/cartoon_crawler
 码云项目地址：https://gitee.com/mumu_zero/cartoon_crawler

@@ -49,8 +49,8 @@ def wbd():
   # desired_capabilities = DesiredCapabilities.CHROME
   # desired_capabilities["pageLoadStrategy"] = "none"
   # chrome_options.add_argument('--headless')#无头模式
-  webs_driver = ['【1】IE浏览器','【2】谷歌Chrome','【3】旧版Edge']
-  for x in range(2):
+  webs_driver = ['【1】IE浏览器','【2】windows谷歌Chrome','【3】mac或linux上的谷歌浏览器']
+  for x in range(3):
     print(webs_driver[x])
   wc = int(input('请输入希望使用浏览器对应的序号：'))
   print('你选择的是'+webs_driver[wc-1]+'\n')
@@ -78,6 +78,9 @@ def wbd():
     wbd1.a = webdriver.Chrome(executable_path=filepath+r'\各种浏览器驱动\chromedriver.exe',chrome_options=chrome_options)
     print(wc1)
     # print('wutu')
+  elif(wc==3 and wc1==1):
+    #bro = webdriver.Chrome(filepath+r'\各种浏览器驱动\chromedriver.exe')
+    wbd1.a = webdriver.Chrome(executable_path=filepath+r'\各种浏览器驱动\chromedriver',chrome_options=chrome_options)
 
   # else:
   #   wbd1.a = webdriver.Edge(executable_path=filepath+r'\各种浏览器驱动\MicrosoftWebDriver.exe',options = optionse)
@@ -92,9 +95,22 @@ title = """
 ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝     ╚═╝ ╚═════╝ 
                                                                                  
 """
+
+r = requests.session()
+res_url = r.get('https://mumu_zero.gitee.io/others/sites.json')#获取网站列表
+res_url = json.loads(str(res_url.content.decode()).replace('\r\n',''))#json转字典
+url_bn = res_url['bainian'][0]['url_bn']
+url_bn1 = res_url['bainian'][1]['url_bn1']
+url_yk = res_url['youku'][0]['url_yk']
+url_yk1 = res_url['youku'][1]['url_yk1']
+url_1234 = res_url['1234'][0]['url_1234']
+url_12341 = res_url['1234'][1]['url_12341']
+url_gf = res_url['gufeng'][0]['url_gf']
+url_gf1 = res_url['gufeng'][1]['url_gf1']
+
 print(title)
 print('建议先在浏览器内打开这几个漫画网站进行漫画的搜索选择，再进行爬取')
-webcho = ['【1】百年漫画网: https://www.bnmanhua.com/page/all.html','【2】优酷漫画: https://www.ykmh.com/','【3】古风漫画网: https://www.gufengmh8.com/','【4】1234漫画：https://www.zxkai.com/','【4】Xmanhua(X漫画)：http://www.xmanhua.com/','【5】动漫之家','【6】MangaPanda：http://mangapanda.cc/']
+webcho = ['【1】'+ res_url['bainian'][2] +': '+url_bn,'【2】'+ res_url['youku'][2] +': '+url_yk,'【3】'+ res_url['gufeng'][2]+ ': '+url_gf,'【4】'+ res_url['1234'][2] +': '+url_1234,'【4】Xmanhua(X漫画): http://www.xmanhua.com/','【5】动漫之家','【6】MangaPanda: http://mangapanda.cc/']
 for x in range(4):
   print(webcho[x])
 webchoice = int (input('请输入想使用的漫画网站的序号：'))
@@ -159,17 +175,17 @@ else:
   wbd1.a.set_window_position(470,0)#位置
 
 
-url_bn = "https://www.bnmanhua.com"
-url_bn1 = "https://www.bnmanhua.com/search.html"
-url_yk = "https://www.ykmh.com"
-url_yk1 = 'https://www.ykmh.com/search/?keywords='
-url_1234 = 'https://www.zxkai.com'
-url_12341 = 'https://www.zxkai.com/search/?keywords='
-url_xm = 'http://www.xmanhua.com'
-url_xm1 = 'http://www.xmanhua.com/search?title='
-url_dm1 = 'https://www.dmzj.com/dynamic/o_search/index'
-url_mp1 = 'http://mangapanda.cc/search?s='
-url_gf1 = 'https://www.gufengmh8.com/search/?keywords='
+# url_bn = "https://www.bnmanhua.com"
+# url_bn1 = "https://www.bnman.net/search.html?keyword="
+# url_yk = "https://www.ykmh.com"
+# url_yk1 = 'https://www.ykmh.com/search/?keywords='
+# url_1234 = 'https://www.zxkai.com'
+# url_12341 = 'https://www.zxkai.com/search/?keywords='
+# url_xm = 'http://www.xmanhua.com'
+# url_xm1 = 'http://www.xmanhua.com/search?title='
+# url_dm1 = 'https://www.dmzj.com/dynamic/o_search/index'
+# url_mp1 = 'http://mangapanda.cc/search?s='
+# url_gf1 = 'https://www.gufengmh9.com/search/?keywords='
 
 headers_bn = {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -254,7 +270,7 @@ def create_filewb(path,msg):#图片内容写文件
 def first_chaperro():#起始章节数报错
   global i,j,chapter,filepath,names,web
   if (j>len(chapter)):
-    print('起始章节数输入错误！！,因该漫画收录不全,只收录了从 {}，{}...到 {} 的内容\n(比如网站只收集了123~500话的内容(缺失前123话),而你想爬取200话之后的所有内容,则应该输入200-123=77,即77作为起始章节数输入,而非200。)'.format(chapter[0],chapter[1],chapter[-1]))
+    print('起始章节数输入错误!!,因该漫画收录不全,只收录了从 {}，{}...到 {} 的内容\n(比如网站只收集了123~500话的内容(缺失前123话),而你想爬取200话之后的所有内容,则应该输入200-123=77,即77作为起始章节数输入,而非200。)'.format(chapter[0],chapter[1],chapter[-1]))
     remove_file(filepath+"\\"+names[i-2]+web)
     bro.quit()
     restart_program()
@@ -303,7 +319,7 @@ def DownLoad():
     count += int(pages_download[j])
     d+=1
   print("\n  下载的漫画保存在【{}】目录下".format(comic_download))
-  print(" 已下载完成，可以离线看漫画啦！！\n")
+  print(" 已下载完成，可以离线看漫画啦!!\n")
   song("下载完成.wav")
 def MultiStr_position(mu,zi):
   """查询子字符串在大字符串中的所有位置"""
@@ -510,6 +526,7 @@ else:
 
 Serial_number = i = int (input('请输入想看漫画的序号：'))
 h = hrefs[i-1]
+names[i-1] = names[i-1].strip()
 print('你选择的是 {}:{}\n'.format(names[i-1],h))
 speed = input("请输入期望爬取速度（默认为0.5，最快为0,建议默认,太快会报错,不输入直接回车则为默认速度）：")
 if speed == "":speed = 0.5
@@ -752,7 +769,7 @@ if(webchoice==1):
       i+=1
       j-=1
       
-      res3 = r.get(url_bn3,headers=headers2)
+      res3 = r.get(url_bn3)
       res3 = res3.text
       
       soup2 = BeautifulSoup(res3,'lxml')
