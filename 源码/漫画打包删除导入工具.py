@@ -171,6 +171,7 @@ data = eval(str(global_var_list['setting']))
 create_file(setting_path,json.dumps(global_var_list['setting'],ensure_ascii=False),"w")#默认路径写入json文件
 combinei()
 
+
 comic_name_lenth()
 class Comic:
 
@@ -183,6 +184,8 @@ class Comic:
         self.ui.open_import_folder.clicked.connect(self.open_import_folder)#打开导入文件夹
         self.ui.reset_folder.clicked.connect(self.reset_folder)
         self.ui.help.clicked.connect(self.help)#帮助
+        #self.ui.progressBar_2.setValue(0)#进度条归零
+        self.ui.progressBar_2.reset()#进度条初始化
         self.del_start()
         self.zip_start()
         read_json(setting_path,"setting")
@@ -422,6 +425,7 @@ class Comic:
             for j in range(img_lenth[i]):
                 img = self.dow_path +"\\"+ chap_name[i] + '\\' + str(j) + '.jpg'
                 self.files.append(img)
+                QApplication.processEvents()#防假死
             file2zip(zip_name,self.files)
             if zipdel_confirm == QMessageBox.Yes:
                 remove_file(self.dow_path +"\\"+ chap_name[i])
@@ -458,6 +462,11 @@ class Comic:
             global_var_list['setting']['current_import_src'] = filePath
             create_file(setting_path,json.dumps(global_var_list['setting'],ensure_ascii=False),"w")#目录写入json文件
         self.ui.tab4_label_currentsrc.setText('当前本地漫画导入文件夹路径为：' + global_var_list['setting']['current_import_src'])
+
+    def show_bardetials(self,content):#更新进度条下面的文本
+        self.ui.label_progressBar_2.setText(str(content))
+        #time.sleep(0.2)
+
     def comics_import(self):
         read_asjson(setting_path,'setting')
         current_import_src = global_var_jsonlist['setting']['current_import_src']#读取当前漫画导入文件夹路径
@@ -476,11 +485,18 @@ class Comic:
         print('2-----------------------------------------------------------------------\n')
         dirs_dict = {}
         # for x in range(len(dirs)):
-        for i in range(len(dirs)):
+
+        comics_len = len(dirs)
+        self.ui.progressBar_4.setRange(0,comics_len)#进度条范围
+        for i in range(comics_len):
+            self.ui.label_progressBar_3.setText('(当前任务：'+str(dirs[i]+')总进度：').replace(current_import_src+'/',''))#总进度条的文本
             json_write(setting_path,dirs[i],0)
             read_asjson(setting_path,'setting')
             # print()
             if global_var_jsonlist['setting'][dirs[i]]=='0':#判断是否导入过；文件目录：0（未导入）或1（已经导入过）
+                file_len = len(os.listdir(dirs[i]))
+                self.ui.progressBar_2.setRange(0,file_len-1)#进度条范围
+                y=0
                 for item in os.listdir(dirs[i]):
                     print(f'item2: {item}')
                     item =  dirs[i] +'/'+ item
@@ -488,17 +504,31 @@ class Comic:
                     if os.path.isfile(item):
                         print(f'file: {item}')
                         files2.append(item)
+                        y+=1
+                        self.ui.progressBar_2.setValue(y)#设进度条当前值
+                        QApplication.processEvents()#防假死
+                        self.show_bardetials(item)#进度条下面的文本
                     elif os.path.isdir(item):
                         dirs2.append(item)
                         print(f'dir: {item}')
+                        QApplication.processEvents()#防假死
                 dirs_dict[dirs[i]+'_files'] = files2
                 dirs_dict[dirs[i]+'_dir'] = dirs2
+                self.temp = dirs2
                 files2, dirs2 = [],[]
                 # print(dirs[i])
                 print('\n')
+            if(self.temp == []):
+                self.ui.progressBar_4.setValue(i+1)#设进度条当前值
+                QApplication.processEvents()#防假死
+                #self.barupdated_flag = False
+                #self.barupdated_count = i+1
         print(f"files2：{files2};  dirs2：{dirs2}")
         print('\n\n\n')
         print(dirs_dict)
+        #self.ui.progressBar_2.reset()
+        #time.sleep(3)
+        #self.ui.progressBar_2.setValue(0)#进度条归零
 
         print('3-----------------------------------------------------------------------\n')
 
@@ -509,12 +539,19 @@ class Comic:
                     # tem_dict = {}
                     files3, dirs3 = [],[]
                     for j in range(len(dirs_dict_dir)):
+                        file_len = len(os.listdir(dirs_dict_dir[j]))
+                        self.ui.progressBar_2.setRange(0,file_len-1)#进度条范围
+                        y=0
                         for item in os.listdir(dirs_dict_dir[j]):
+                            y+=1
                             item =  dirs_dict_dir[j] +'/'+ item
                             print(item)
                             if os.path.isfile(item):
                                 print(f'file: {item}')
                                 files3.append(item)
+                                self.ui.progressBar_2.setValue(y)#设进度条当前值
+                                QApplication.processEvents()#防假死
+                                self.show_bardetials(item)#进度条下面的文本
                             elif os.path.isdir(item):
                                 dirs3.append(item)
                                 print(f'dir: {item}')
@@ -522,7 +559,14 @@ class Comic:
                         dirs_dict[dirs_dict_dir[j]+'_files'] = files3
                         dirs_dict[dirs_dict_dir[j]+'_dir'] = dirs3
                         files3, dirs3 = [],[]
+
+                    self.ui.progressBar_4.setValue(i+1)#设进度条当前值
+                    QApplication.processEvents()#防假死
+
         print(dirs_dict)
+        self.ui.progressBar_2.reset()#进度条重置
+        #time.sleep(3)
+        #self.ui.progressBar_2.setValue(0)#进度条归零
 
         #json写入
 
@@ -583,6 +627,9 @@ class Comic:
                 for y in range(chapter_len):
                     if dirs_dict[dirs[x]+'_dir']:
                         cover_html = dirs_dict[dirs_dict[dirs[x]+'_dir'][0]+'_files'][0]#第2层第一张图做封面
+                        tem_index = cover_html.find(filepath.replace('\\','/'))
+                        if tem_index != -1:
+                            cover_html = cover_html.replace(filepath.replace('\\','/'),'')[1:]
 
                         for src_tem in dirs_dict[dirs_dict[dirs[x]+'_dir'][y]+'_files']:
                             src_tem = src_tem.replace(current_import_src,'')
@@ -595,6 +642,9 @@ class Comic:
                     print(f'len: {len(dirs_dict_dir)}')
                     if dirs_dict[dirs[x]+'_files']:
                         cover_html = dirs_dict[dirs[x]+'_files'][0]#第1层第一张图做封面
+                        tem_index = cover_html.find(filepath.replace('\\','/'))
+                        if tem_index != -1:
+                            cover_html = cover_html.replace(filepath.replace('\\','/'),'')[1:]
 
                         for src_tem in dirs_dict[dirs[x]+'_files']:
                             src_tem = src_tem.replace(current_import_src,'')
@@ -661,7 +711,9 @@ class Comic:
                 json_write(setting_path,dirs[x],1)
                 read_asjson(setting_path,'setting')
                 combinei()
+                #self.ui.progressBar_2.reset()
 
+        #self.ui.progressBar_2.reset()
         comic_name_lenth()
         self.Clear2()
         self.ui.listWidget_2.addItems(keys_data)#更新漫画列表

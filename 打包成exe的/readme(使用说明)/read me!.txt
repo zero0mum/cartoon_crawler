@@ -1,0 +1,17 @@
+详细使用教程在博客和简书：https://blog.csdn.net/zero_mumu/article/details/107852060
+[简书文章地址](https://www.jianshu.com/p/41f5b7e4baa5)
+
+欢迎来评论提意见
+
+github项目地址:https://github.com/zero0mum/cartoon_crawler
+码云项目地址：https://gitee.com/mumu_zero/cartoon_crawler
+我的邮箱：mumuwyyx@163.com欢迎你来评论，提意见。有问题可以发邮件问我
+
+
+爬取中若使用IE浏览器请在爬取前进入IE的 *设置>Internet选项>安全>安全中四项* 都勾选启动保护模式或全部关闭保护模式并应用
+
+并且将ie浏览器的缩放设置为100%
+
+
+浏览器驱动程序默认下载好的对应 浏览器版本号（如果和你的浏览器版本与默认不同请到浏览器驱动文件夹的下载地址中下载对应版本驱动替换该文件夹中驱动程序）：
+chromedriver.exe>谷歌Chrome 86.0.4240.183；IEDriverServer.exe>ie11浏览器

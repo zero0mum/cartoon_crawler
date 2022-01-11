@@ -5,6 +5,7 @@ echo 安装BeautifulSoup,tqdm,requests,lxml,selenium,pydub,ffmpeg,simpleaudio,pysi
 echo 返回信息：
 python -m pip install --upgrade pip
 pip3 install requests
+pip3 install PyExecJS 
 pip3 install beautifulsoup4
 pip3 install lxml
 pip3 install tqdm
