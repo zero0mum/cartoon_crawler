@@ -189,13 +189,13 @@ else:
 
 headers_bn = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Origin': 'https://www.bnmanhua.com',
-    'Referer': 'https://www.bnmanhua.com/',
+    'Origin': url_bn,
+    'Referer': url_bn,
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 
 headers_bn1 = {
     'Content-Type': 'text/html; charset=utf-8',
-    'Referer': 'https://www.bnmanhua.com/search.html',
+    'Referer': url_bn + '/search.html',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 headers_yk1 = {
     'Referer': 'https://www.ykmh.com/',
@@ -203,7 +203,7 @@ headers_yk1 = {
 headers_gf = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4371.0 Safari/537.36',
     'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
-    'referer': 'https://www.bnmanhua.com/comic/',
+    'referer': url_bn + '/comic/',
     'Connection': 'close',
     'Upgrade-Insecure-Requests': '1'
 }
@@ -217,7 +217,7 @@ headers_dm1 = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 headers_wx = {
     'Cookie': 'click-6780=1; PHPSESSID=0ne608c42rvd6n6s027iu2emmg; _csrf=BlCpgJEFPFc0wbQWnu-vzSIS8m0lmfqa; click-8346=1; popularity-8346=1',
-    'Referer': 'https://www.gufengmh8.com/',
+    'Referer': url_gf,
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
 headers_1234 = {
     'Accept-Encoding': 'gzip, deflate, br',
@@ -1031,7 +1031,7 @@ else:
   image_src=[]
   img_src=[]
   for x in tqdm(range(len(chapter)),ascii=True):
-    url_gf3 = 'https://www.gufengmh8.com'+hrefs1[j]
+    url_gf3 = url_gf +hrefs1[j]
     url_12343 = url_1234 + hrefs1[j]
     if(web == '(1234)'):
       url_mh = url_12343
