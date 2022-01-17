@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>504</width>
-    <height>288</height>
+    <width>503</width>
+    <height>359</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -90,7 +90,6 @@
            <widget class="QLabel" name="label_2">
             <property name="font">
              <font>
-              <family>AcadEref</family>
               <pointsize>20</pointsize>
              </font>
             </property>
@@ -231,7 +230,7 @@
         <string>本地漫画导入</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="0">
+        <item row="0" column="0" colspan="2">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QLabel" name="tab4_label_defaultsrc">
@@ -249,7 +248,7 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0">
+        <item row="1" column="0" colspan="2">
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0">
            <widget class="QPushButton" name="reset_folder">
@@ -295,14 +294,14 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
+        <item row="2" column="0" colspan="2">
          <widget class="QLabel" name="label_5">
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;tip：漫画如果是压缩包请先解压开变成文件夹(解压出的文件夹名称应为漫画的名称)，&lt;/p&gt;&lt;p&gt;解压后将需要导入的该漫画文件夹放入&amp;quot;漫画导入&amp;quot;这个文件夹内。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="3" column="0" colspan="2">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QLabel" name="label_8">
@@ -324,6 +323,38 @@
           </item>
          </layout>
         </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_progressBar_3">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(当前任务：)&lt;span style=&quot; font-weight:700;&quot;&gt;总进度：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QProgressBar" name="progressBar_4">
+          <property name="value">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QProgressBar" name="progressBar_2">
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_progressBar_2">
+            <property name="text">
+             <string>......</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -335,7 +366,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>504</width>
+     <width>503</width>
      <height>22</height>
     </rect>
    </property>
