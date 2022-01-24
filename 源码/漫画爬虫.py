@@ -101,6 +101,7 @@ res_url = r.get('https://mumu_zero.gitee.io/others/sites.json')#获取网站列�
 res_url = json.loads(str(res_url.content.decode()).replace('\r\n',''))#json转字典
 url_bn = res_url['bainian'][0]['url_bn']
 url_bn1 = res_url['bainian'][1]['url_bn1']
+img_domain = res_url['bainian'][3]['img_domain']
 url_yk = res_url['youku'][0]['url_yk']
 url_yk1 = res_url['youku'][1]['url_yk1']
 url_1234 = res_url['1234'][0]['url_1234']
@@ -540,7 +541,7 @@ if(webchoice==1):
   soup1=BeautifulSoup(res2,'lxml')
   cover_src = soup1.select('div.bpic>img')[0]['src']
   img_domain_index = cover_src.find('.com')
-  img_domain = cover_src[0:img_domain_index]+'.com'
+  #img_domain = cover_src[0:img_domain_index]+'.com'
   list2=soup1.select('ul.jslist01>li')
 elif(webchoice==2):
   h = hrefs[i-1]
