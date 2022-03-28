@@ -664,11 +664,13 @@ html = """
 
 if(webchoice==1):
   for str2 in list2:#获取漫画章节链接
-      chapter.append(str2.select('li>a')[0].get_text())
-      hrefs1.append(str2.select('li>a')[0]['href'])
+    chapter.append(str2.select('li>a')[0].get_text())
+    hrefs1.append(str2.select('li>a')[0]['href'])
   for j in range(len(hrefs1)):
     hrefs1[j] = url_bn +str(hrefs1[j])
   chapter.reverse()
+  del chapter[-1]
+  del hrefs1[0]
   first_chaperro()
 
 elif(webchoice==2):
@@ -775,12 +777,13 @@ if(webchoice==1):
       
       soup2 = BeautifulSoup(res3,'lxml')
       img_begin = res3.find('z_img')
-      img_end = res3.find('.jpg"]')
+      img_end = res3.find('"]')
       
-      img_src = res3[img_begin+9:img_end+4]
+      img_src = res3[img_begin+9:img_end]
       img_src = img_src.split('","')
-      for i in range(len(img_src)):
-        img_src[i]= img_domain +'/'+img_src[i]
+      if str(img_src).find('http') == -1:
+        for i in range(len(img_src)):
+          img_src[i]= img_domain +'/'+img_src[i]
       pages.append(len(img_src))
       create_file(pages_path,json.dumps(pagesjson_write(),ensure_ascii=False),"w")#保存漫画页数
 
