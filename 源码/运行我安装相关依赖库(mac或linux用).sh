@@ -10,7 +10,7 @@ pip3 install PyExecJS
 pip3 install beautifulsoup4
 pip3 install lxml
 pip3 install tqdm
-pip3 install selenium
+pip3 install selenium==4.2.0
 pip3 install pydub
 pip3 install ffmpeg
 pip3 install simpleaudio
