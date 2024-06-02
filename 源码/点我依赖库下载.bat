@@ -3,7 +3,7 @@ chcp 936
 Title 安装依赖库库by zero0_mumu
 echo 安装BeautifulSoup,tqdm,requests,lxml,selenium,pydub,ffmpeg,simpleaudio,pyside2
 echo 返回信息：
-python3 -m pip install --upgrade pip
+python -m pip install --upgrade pip
 pip3 install requests
 pip3 install PyExecJS 
 pip3 install beautifulsoup4
