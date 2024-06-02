@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import requests,time,os,sys,shutil,urllib,json,execjs
+import requests,time,os,sys,shutil,urllib,json,execjs,traceback
 from pydub import AudioSegment
 from pydub.playback import play
 from bs4 import BeautifulSoup
@@ -49,7 +49,7 @@ def wbd():
   # desired_capabilities = DesiredCapabilities.CHROME
   # desired_capabilities["pageLoadStrategy"] = "none"
   # chrome_options.add_argument('--headless')#无头模式
-  webs_driver = ['【1】IE浏览器','【2】windows谷歌Chrome','【3】mac或linux上的谷歌浏览器']
+  webs_driver = ['【1】IE浏览器(已并入edge，故不再支持)','【2】windows谷歌Chrome','【3】mac或linux上的谷歌浏览器']
   for x in range(3):
     print(webs_driver[x])
   wc = int(input('请输入希望使用浏览器对应的序号：'))
@@ -95,9 +95,16 @@ title = """
 ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝     ╚═╝ ╚═════╝ 
                                                                                  
 """
-
+print('拉取漫画网址中，请稍等...')
 r = requests.session()
-res_url = r.get('https://mumu_zero.gitee.io/others/sites.json')#获取网站列表
+# res_url = r.get('https://mumu_zero.gitee.io/others/sites.json')#获取网站列表,gitee平台网页托管服务已关闭
+try:
+  res_url = r.get('https://zero0mum.github.io/web/others/sites.json')#获取网站列表
+except:
+  traceback.print_exc()
+  input('报错信息如上，请按下任意键退出...')
+else:
+  print('拉取成功！')
 res_url = json.loads(str(res_url.content.decode()).replace('\r\n',''))#json转字典
 url_bn = res_url['bainian'][0]['url_bn']
 url_bn1 = res_url['bainian'][1]['url_bn1']
@@ -123,8 +130,8 @@ if(webchoice==1):
   web="(百年漫画)"
 elif(webchoice==2):
   pclass="+'.jpg'"
-  pclass1="https"
-  uclass="https"
+  pclass1="http"
+  uclass="http"
   web="(优酷漫画)"
   wc1=1
   wbd()

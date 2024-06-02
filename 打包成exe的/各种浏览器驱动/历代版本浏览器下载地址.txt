@@ -1,0 +1,8 @@
+浏览器版本与驱动的版本号必须基本对应
+
+例如这一对：
+    浏览器：https://www.chromedownloads.net/chrome64win/
+    驱动：https://chromedriver.storage.googleapis.com/index.html?path=107.0.5304.18/
+
+谷歌浏览器历史版本下载：
+https://www.chromedownloads.net/chrome64win/
